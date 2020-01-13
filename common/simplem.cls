@@ -150,8 +150,8 @@
 %----------------------------------------
 
 % Set chapter numbers style
-%\renewcommand{\thechapter}{\arabic{chapter}}
-%\addto\captionsfrench{\renewcommand{\chaptername}{}}
+\renewcommand{\thechapter}{\arabic{chapter}}
+\addto\captionsfrench{\renewcommand{\chaptername}{}}
 
 % Enable the custom headers and footers
 \pagestyle{fancy}

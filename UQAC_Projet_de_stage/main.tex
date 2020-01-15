@@ -1,0 +1,306 @@
+%!TEX program = lualatex
+%!TEX encoding = UTF-8 Unicode
+\documentclass[a4paper,11pt,twoside,french,report]{../common/simplem}
+\input{packages}
+\input{../common/utbm_uqac_covers}
+\input{../common/definitions}
+\input{settings}
+
+%----------------------------------------
+% Bibliography
+%----------------------------------------
+\addbibresource{../references/references.bib}
+%\nocite{*}
+
+%----------------------------------------
+% Glossary
+%----------------------------------------
+\makeglossaries
+\input{../common/glossary}
+
+%----------------------------------------
+% document
+%----------------------------------------
+\begin{document}
+	\makeutbmfrontcover{}
+	\makecopirightpage{
+		\begin{center}
+			\def\arraystretch{1.1}
+			\input{../tables/short/project_synoptic}
+			\\\hfill\\\hfill\\
+			\input{../tables/short/report_authors}
+			\\\hfill\\\hfill\\
+			\input{../tables/short/report_validators}
+		\end{center}
+	}
+	\tableofcontents{}
+	\listoffigures{}
+	\chapter*{Introduction}\addcontentsline{toc}{chapter}{Introduction}
+		\paragraph*{}
+			Le cursus à l'\gls{UTBM} est entrecoupé de deux périodes de stage de 6 mois durant les 3 ans du cycle ingénieur, après le Tronc Commun. La première, après un an en branche, est le ST40 intitulé ``Stage Assistant Ingénieur'' et la seconde, un an plus tard, est le ST50 intitulé ``Projet de fin d'études - Ingénieur débutant''.
+		\paragraph*{}
+			Cependant j'ai décidé de participer à un programme de double-diplôme avec le département d'informatique et de mathématique de \gls{UQAC}, ajoutant une année de cours à l'\gls{UQAC} et la réalisation d'un stage.
+			\begin{figure}[H]
+				\centering%
+				\resizebox{\textwidth}{!}{\import{../figures/}{cursus_utbm_uqac.tex}}%
+				\caption{Cursus à l'\acrshort{UTBM} avec l'\acrshort{UQAC}}%
+				\label{fig:cursus_utbm_uqac}%
+			\end{figure}
+		\paragraph*{}
+			Comme représenté sur la figure \ref{fig:cursus_utbm_uqac}, l'année de cours a eu lieu après mon semestre INFO4, sur l'année scolaire 2018/2019. Le stage, quant à lui, sera réalisé par le cour \gls{8INF859} avec le ST50, concerné par ce document.
+		\paragraph*{}
+			J'ai réalisé mon stage à l'\gls{IRIMAS}, sur le campus Illberg de l'\gls{UHA}, à Mulhouse, du 2 septembre 2019 au 7 février 2020 sous la supervision de mon maitre de stage, Laurent Moalic.
+		\paragraph*{}
+			L'\gls{IRIMAS} est l'unité de recherche EA 7499~\cite{RNSR_IRIMAS} de l'\gls{UHA}, c'est un institut interdisciplinaire qui rassemble tous les travaux de recherche liés aux disciplines des mathématiques, de l'informatique, de l'électronique, de l'électrotechnique, de l'automatique et du traitement du signal et de l'image à l'\gls{UHA}.
+		\paragraph*{}
+			Je commencerai par présenter l'\gls{UHA} et l'\gls{IRIMAS}, j'expliciterai ensuite le sujet et l'organisation du stage. Par la suite, dans le rapport de stage final, je développerai le travail réalisé durant le stage.
+	\chapter{Présentation de l'entreprise}
+		\section{L'\acrshort{UHA}}
+			\subsection{Composition}
+				\paragraph*{}
+					L'\gls{UHA} est une université française composée de 5 campus sur 2 villes~\cite{UHA_Organisation}, les campus Illberg, Collines et Fonderie à Mulhouse et les campus Biopôle et Grillenbreit à Colmar.
+				\paragraph*{}
+					Elle compte 4 facultés:
+					\begin{itemize}
+						\item La \gls{FLSH} à Mulhouse
+						\item La \gls{FSESJ} à Mulhouse
+						\item La \gls{FST} à Mulhouse
+						\item La \gls{FMA} à Colmar
+					\end{itemize}
+				\paragraph*{}
+					Ainsi que 2 écoles d'ingénieurs et 2 \gls{IUT}:
+					\begin{itemize}
+						\item L'\gls{ENSCMu}
+						\item L'\gls{ENSISA}
+						\item L'\gls{IUT} de Mulhouse
+						\item L'\gls{IUT} de Colmar
+					\end{itemize}
+				\paragraph*{}
+					De plus, plusieurs services de formation et certifications lui sont ratachés (voir annexe \ref{sec:uha_formation}).
+			\subsection{Formations}
+				\paragraph*{}
+					L'UHA compte, en 2019, 10 366 étudiants dont 286 doctorants répartis dans plus de 170 formations dans 4 domaines~\cite{UHA_Chiffre_cles}:
+					\begin{description}
+						\item[10\%] Arts, Lettres, Langues
+						\item[35\%] Droit, Économie, Gestion
+						\item[18\%] Sciences Humaines et Sociales
+						\item[37\%] Sciences, Technologie, Santé
+					\end{description}
+				\paragraph*{}
+					Les diplômes délivrés vont du \gls{DUT} au doctorat, en passant par la licence, la licence professionnelle, le master et le diplôme d'ingénieur.
+			\subsection{Recherche}
+				\paragraph*{}
+					L'\gls{UHA} comporte 16 laboratoires de recherche (voir annexe \ref{sec:uha_laboratories}) structurés en trois pôles:
+					\begin{itemize}
+						\item 6 pour le pôle Chimie, Physique, Matériaux et Environnement
+						\item 2 pour le pôle Sciences pour l'Ingénieur
+						\item 8 pour le pôle Sciences Humaines et Sociales
+					\end{itemize}
+				\paragraph*{}
+					Durant le stage j'ai rejoint l'\gls{IRIMAS} qui est l'un des 2 laboratoires du pôle Sciences pour l'Ingénieur.
+		\section{L'\acrshort{IRIMAS}}
+			\subsection{Organisation}
+				\paragraph*{}
+					``L'\gls{IRIMAS} résulte de la fusion au 1er janvier 2018 du \gls{LIMA2} et du laboratoire \gls{MIPS} de l'\gls{UHA}. Il regroupe l'ensemble des recherches de l'\gls{UHA} en Mathématiques, Informatique, Automatique, et Traitement du Signal et de l'Image.
+				\paragraph*{}
+					L’institut est organisé en trois départements:
+					\begin{itemize}
+						\item Mathématiques
+						\item Informatique
+						\item Automatique, Signal et Image
+					\end{itemize}
+					Il compte 75 enseignants-chercheurs permanents, une soixantaine de doctorants, une dizaine de post-docs et 5 ingénieurs/assistants-ingénieurs, avec une intense activité d’échanges académiques (plus de 80 séjours de recherche par an : stages, visiteurs scientifiques, chercheurs invités).''~\cite{UHA_IRIMAS}
+				\paragraph*{}
+					Les enseignants-chercheurs de l'\gls{IRIMAS} sont rattachés à 4 centres de formation de l'\gls{UHA}: \gls{ENSISA}, la \gls{FST}, \gls{IUT} de Mulhouse et \gls{IUT} de Colmar.
+			\subsection{Équipes de recherche}
+				\paragraph*{}
+					Les travaux de l'\gls{IRIMAS} couvrent différentes thématiques, en recherche fondamentale aussi bien que recherche appliquée, ces travaux sont réalisés par différentes équipes, réparties dans les 3 départements~\cite{UHA_IRIMAS}:
+					\begin{itemize}
+						\item Département Informatique:
+							\begin{itemize}
+								\item Équipe \gls{OMeGA}
+								\item Équipe \gls{MSD}
+								\item Équipe \gls{RT}
+							\end{itemize}
+						\item Département Mathématiques:
+							\begin{itemize}
+								\item Équipe Analyse
+								\item Équipe Algèbre
+							\end{itemize}
+						\item Département Automatique, Signal et Image:
+							\begin{itemize}
+								\item Équipe \gls{MIAM}
+								\item Équipe \gls{IMTI}
+								\item Équipe \gls{FOTI}
+							\end{itemize}
+					\end{itemize}
+					\begin{figure}[H]
+						\centering%
+						\includegraphics[width=1\textwidth]{irimas_organigramme}%
+						\caption{Organigramme de l'\acrshort{IRIMAS}~\cite{IRIMAS_Organigramme}}%
+						\label{fig:irimas_organigramme}%
+					\end{figure}
+				\paragraph*{}
+					La répartition ainsi que les directeurs de ces départements sont visibles sur la figure \ref{fig:irimas_organigramme}. Durant le stage j'ai rejoint l'équipe \gls{OMeGA} du département informatique.
+			\subsection{Équipe \acrshort{OMeGA}}
+				\paragraph*{}
+					Au sein du département informatique, l'équipe \gls{RT} est situé à Colmar tandis que les équipe \gls{OMeGA} et \gls{MSD} sont actuellement hébergées dans l'aile d'un des bâtiments de l'\gls{ENSISA} sur le campus Illberg à Mulhouse.
+				\paragraph*{}
+					L'équipe est sous la responsabilité de Lhassane Idoughar (qui dirige aussi le département informatique) et est composée d'une douzaine de chercheurs et enseignants-chercheurs et de 5 doctorants qui travaillent essentiellement sur les axes de recherche ``Optimisation par Métaheuristiques'' et ``Algorithmique et Modélisations''.
+				\paragraph*{}
+					Une métaheuristique est un ensemble de concepts pouvant être utilisés pour définir des méthodes heuristiques pouvant être appliquées à un large éventail de problèmes différents, souvent des problèmes d’optimisation difficile. En d'autres termes, une métaheuristique peut être considérée comme un cadre algorithmique général qui peut être appliqué à différents problèmes d'optimisation avec relativement peu de modifications pour les adapter à un problème spécifique.
+				\paragraph*{}
+					``Le premier groupe de travail s’intéresse à l’algorithmique pour l’intelligence artificielle en développant de nouveaux algorithmes hybrides (basés sur des métaheuristiques à base d’agents intégrant des méthodes d’apprentissage) pour résoudre des problèmes d'optimisation mono-objectif ou multi-objectif de natures continues, discrètes et combinatoires, avec la prise en compte de l’aspect dynamique dans certains cas. L’adaptation et l’implémentation de ces futurs algorithmes hybrides sur des clusters hétérogènes de machines GPU sont également étudiées.''~\cite{IRIMAS_OMeGA}
+				\paragraph*{}
+					``L’activité du second groupe s’inscrit dans le thème d’analyse de données visuelles et géométriques (images, vidéo, nuages de points, courbes, etc.). Dans le cadre de cette thématique, ils développent des algorithmes et des concepts pour résoudre des problèmes de nature géométrique qui apparaissent dans de nombreuses disciplines de l’informatique [\ldots] ainsi que des techniques d’extraction d’information dans des données visuelles pour répondre à des problématiques de visualisation et d’analyses de scènes.''~\cite{IRIMAS_OMeGA}
+				\paragraph*{}
+					Laurent Moalic, qui a proposé le sujet de ce stage (détaillé dans la section \ref{sec:sujet_stage}), est membre de l'équipe \gls{OMeGA}, le sujet proposé, ainsi que ces travaux en général, s’inscrivent dans l'axe Optimisation par Métaheuristiques du laboratoire.
+				\paragraph*{}
+					Un bureau avec poste informatique, proche des autres membres de l'équipe, m'a été attribué, il est partagé avec Dominique Schmitt, enseignant-chercheur sur l'axe Algorithmique et Modélisations.
+	\chapter{Présentation du stage}
+		\section{Démarches réalisées pour l’obtention du stage}
+			\paragraph*{}
+				Le sujet de stage, une fois ouvert à candidatures, a été proposé au service des stages de l'\gls{UTBM} qui l'a placé sur le Moodle de l'école. J'ai trouvé le sujet très intéressant mais le début du stage était prévu pour janvier ou février 2019. J'ai tout de même contacté Laurent Moalic pour ce sujet ou un sujet similaire mais pour septembre 2019.
+			\paragraph*{}
+				Un entretien par visioconférence a eu lieu afin de discuter du sujet, de mon profil et de mes motivations. Il a été décidé de repousser le sujet à septembre 2019 afin qu'il me soit possible de réaliser ce stage. Le sujet convenait pour le ST50 de l'\gls{UTBM} et le cour \gls{8INF859} de l'\gls{UQAC}.
+			\paragraph*{}
+				Pour la partie administrative, après de nombreux problèmes il fut décidé de faire valider la convention de stage \gls{UTBM} par le service juridique de l'\gls{UQAC} et de l'utiliser pour les deux écoles.
+		\section{Contexte du stage}\label{sec:sujet_stage}
+			\subsection{\acrshort{HEAD}}
+				\paragraph*{}
+					En \citeyear{Moalic2018} a été publié l'article \citetitle{Moalic2018}~\cite{Moalic2018} par \citeauthor{Moalic2018}, cet article propose l'utilisation de méthodes d'optimisation métaheuristiques hybrides sur le \gls{GVCP}.
+				\paragraph*{}
+					La coloration des sommets d'un graphe implique l'attribution d'une couleur à chaque sommet, de sorte que deux sommets adjacents (reliés par une arête) aient des couleurs différentes. Le \gls{GVCP} consiste à trouver le nombre minimal de couleurs, appelé nombre chromatique, requis pour colorer le graphe tout en respectant ces contraintes.
+				\paragraph*{}
+					L'hybridation utilisée dans l'article pour résoudre ce problème est de type mémétique, c'est-à-dire qu'elle résulte de l'hybridation entre un algorithme génétique et un algorithme de recherche locale.
+				\paragraph*{}
+					Les algorithmes génétiques sont des métaheuristiques inspirées du processus de sélection naturelle qui appartiennent à la classe plus large des algorithmes évolutifs. Les algorithmes génétiques sont couramment utilisés pour générer des solutions de haute qualité aux problèmes d'optimisation et de recherche en s'appuyant sur des opérateurs inspirés de la biologie telles que la mutation, le croisement et la sélection.
+				\paragraph*{}
+					Les recherches locales prennent une solution potentielle à un problème et regardent ses voisins (c'est-à-dire des solutions similaires à l'exception de détails mineurs) dans l'espoir de trouver une solution améliorée. Les méthodes de recherche locales ont tendance à rester bloquées dans des régions sous-optimales ou sur des plateaux où de nombreuses solutions s’apparentent.
+				\paragraph*{}
+					L'algorithme proposé, \gls{HEAD}, est basé sur \gls{HEA}~\cite{Galinier1999} et fonctionne avec une population de deux individus. De plus il intègre une nouvelle façon de gérer la diversité a la population avec des solutions ``élites''. L'hybridation est faite avec une recherche tabou adapté au \gls{GVCP}.
+				\paragraph*{}
+					Les recherches tabou sont des métaheuristiques utilisant des méthodes de recherche locales en assouplissant leur règle de base. À chaque étape, des mouvements de détérioration peuvent être acceptés si aucun mouvement d'amélioration n'est disponible (comme lorsque la recherche est bloquée dans un minimum local). De plus, des interdictions (désignées par le terme tabou) sont introduites pour décourager la recherche de revenir à des solutions précédemment consultées.
+				\paragraph*{}
+					Les expériences menées sur un ensemble d'instance \gls{GVCP} difficiles du \gls{DIMACS}, montrent que \gls{HEAD} produit de bon résultats. Les résultats obtenus par \gls{HEAD} laissent penser que ce type d'approche pourrait être appliqué avec succès à d'autres problèmes NP-complets.
+				\paragraph*{}
+					Les problèmes NP-complets représentent les problèmes les plus difficiles de NP (Nondeterministic Polynomial time) qui est une classe de complexité utilisée pour classifier les problèmes de décision. NP est l'ensemble des problèmes de décision pour lesquels chaque entrée du problème doit être associée à un ensemble de solutions de longueur polynomiale, dont la validité peut être testée rapidement (en temps polynomial).
+				\paragraph*{}
+					Si un problème NP-complet a un algorithme en temps polynomial, tous les problèmes de NP en ont. Bien qu'une solution à un problème NP-complet puisse être vérifiée en temps polynomial, il n'existe aucun moyen connu de trouver une solution en temps polynomial. C'est-à-dire que le temps requis pour résoudre le problème en utilisant n'importe quel algorithme connu augmente exponentiellement avec la taille du problème. Les problèmes NP-complets donc sont souvent traités en utilisant des méthodes heuristiques et des algorithmes d'approximation.
+			\subsection{\acrshort{SCP} et \acrshort{USCP}}
+				\paragraph*{}
+					Le \gls{SCP}, fait partit des 21 problèmes NP-complets de \citeauthor{Karp1972}~\cite{Karp1972}, il peut être énoncé comme suit:
+				\paragraph*{}
+					Étant donné un ensemble univers \(U = \{u_1, u_2, u_3, \dots, u_m\}\) et une famille \(S = \{s_1, s_2, \dots, s_n\}\) de sous-ensembles de \(U\) avec \(c_i\), coût du sous-ensemble \(s_i\), le problème consiste à trouver une sous-famille de \(S\) permettant de couvrir chaque élément de \(U\) au moins une fois avec un coût minimum. Un élément \(e\) de \(U\) est couvert par un sous-ensemble \(A\) si \(e \in A\).
+				\paragraph*{}
+					Dans le cas où tous les sous-ensembles \(s_i\) ont un coût identique, le problème est alors appelé \gls{USCP} ou \gls{UwSCP}, un exemple graphique d'instance d'\gls{USCP} est visible sur le figure \ref{fig:uscp_example}.
+				\begin{figure}[H]
+					\centering%
+					\includegraphics[width=0.65\linewidth]{uscp_example}%
+					\caption{Exemple d'instance du \acrshort{USCP} et solution optimale (ensembles grisés)~\cite{Mount2017}}%
+					\label{fig:uscp_example}%
+				\end{figure}
+				\paragraph*{}
+					En général les instances de \gls{SCP} sont définies par une matrice d'incidence \(A = \left(a_{i,j}\right)\) de taille \(m \times n\) avec
+					\[\forall i \in \{1,\ldots,m\},\ \forall j \in \{1,\ldots,n\},\ a_{i,j} = \left\{
+						\begin{array}{ll}
+							1 & \text{si } u_i \in s_j \\
+							0 & \text{sinon}
+						\end{array}
+					\right.\]
+					\(a_{i,j} = 1\) signifiant donc que le point \(u_i\) est couvert par le sous-ensemble \(s_j\), ainsi qu'un vecteur coût \(n\)-dimensionnel \(c = \left(c_j\right)\) avec \(\forall j \in N\), \(c_j\) le coût du sous-ensemble \(j\).
+				\paragraph*{}
+					Les solutions sont quant à elles définies par un vecteur \(n\)-dimensionnel \(x = \left(x_j\right)\) avec
+					\[\forall j \in \{1,\ldots,n\},\ x_j = \left\{
+						\begin{array}{ll}
+							1 & \text{si } u_i \text{ fait parti de la solution}\\
+							0 & \text{sinon}
+						\end{array}
+					\right.\]
+					le coût de la solution étant égal à
+					\[\sum_{j \in \{1,\ldots,n\}}{c_i x_i}\]
+					et la solution étant valide si
+					\[\forall i \in \{1,\ldots,m\}\ ,\sum_{j \in \{1,\ldots,n\}}{a_{ij}x_i} \ge 1\]
+				\paragraph*{}
+					Par exemple, l'instance suivante, définie par la matrice d'incidence \(A\) et le vecteur coût \(c\) a comme solution optimale le vecteur \(x\):
+					\[
+					\begin{blockarray}{ccccccccc}
+						& s_1 & s_2 & s_3 & s_4 & s_5 & s_6 & s_7 \\
+						\begin{block}{c(ccccccc)c}
+							    & 0 & 1 & 1 & 0 & 0 & 0 & 1 & u_1\\
+							    & 0 & 0 & 1 & 0 & 1 & 1 & 0 & u_2\\
+							A = & 1 & 1 & 0 & 1 & 0 & 1 & 0 & u_3\\
+							    & 0 & 0 & 0 & 0 & 1 & 1 & 1 & u_3\\
+							    & 1 & 0 & 1 & 0 & 0 & 0 & 1 & u_4\\
+						\end{block}
+						\\
+						\begin{block}{c(ccccccc)c}
+							c = & 3 & 1 & 2 & 4 & 1 & 2 & 1 &\\
+						\end{block}
+						\\
+						\begin{block}{c(ccccccc)c}
+							x = & 0 & 1 & 1 & 0 & 0 & 0 & 1 &\\
+						\end{block}
+					\end{blockarray}
+					\]
+				\paragraph*{}
+					Il est à noté que, bien que le \gls{USCP} soit un cas particulier du \gls{SCP}, du fait de l'information réduite de par l’absence de poids pour les sous-ensembles, il est généralement considéré que le \gls{USCP} est plus difficile à résoudre que le \gls{SCP}~\cite{Yelbay2015}.
+		\section{Objectifs du stage}
+			\paragraph*{}
+				L'objectif du stage est de développer des algorithmes hybrides avec une recherche poussée de performance pour le \gls{USCP}, la piste première a explorer étant d'utiliser les principes de \gls{HEAD} et de les adapter au \gls{USCP}.
+			\paragraph*{}
+				Le développement d'algorithmes méthaheuristique se faisant en se basant sur les travaux existant, il sera nécessaire d'analyser la littérature du problème afin d'identifier les recherches locales, opérateur de sélection, opérateurs de croisement et mutation efficaces pour le problème afin de les comparer et de sélectionner les plus adaptés pour notre algorithme.
+			\paragraph*{}
+				Les résultats obtenus par les autres méthodes des travaux existant serviront aussi de base de comparaison avec les résultats obtenus par notre algorithme pour évaluer sa performance.
+			\paragraph*{}
+				Le déroulement du stage dépendra énormément des recherches réalisées durant son déroulement et des résultats obtenus, les grandes étapes prévues actuellement sont:
+				\begin{itemize}
+					\item Identifier dans la littérature scientifique du domaine quels sont les opérateurs élémentaires efficaces pour le \gls{USCP},
+					\item Mettre en place des structures de données adaptées pour modéliser informatiquement le \gls{USCP},
+					\item Construire les algorithmes qui vont rechercher le meilleur optimum possible,
+					\item Analyser les résultats et construire une étude comparative afin de positionner les résultats obtenus par rapport aux autres approches de la littérature.
+				\end{itemize}
+		\section{Connaissances utiles}
+			\paragraph*{}
+				Mon premier contact avec l'optimisation a été le cour \gls{AG41} a l'\gls{UTBM} lors de mon semestre INFO2. J'ai par la suite suivit les cours \gls{8INF808}, \gls{8INF852} et \gls{8INF870} a l'\gls{UQAC} ou j'ai étudié les problèmes classiques de la recherche opérationnelle (par exemple le \gls{SAT} et le \gls{TSP}) ainsi que les méthodes de résolution exactes (simplex, branch-and-bound,\ldots) mais surtout les heuristiques et méthaheuristiques.
+			\paragraph*{}
+				J'ai donc déjà connaissance des algorithmes génétiques et recherches locales qui composent les algorithmes mémétiques mais j'ai aussi eu l'opportunité de les appliquer avec le projet du cours \gls{8INF870} qui consistait à choisir un problème, le présenter, trouver les instances de benchmark, et implémenter une méthode exacte et une méthode approchée de résolution.
+			\paragraph*{}
+				Avec un camarade, nous avions choisi le \gls{SCP} comme problème, qui est donc très proche du \gls{USCP}, pour lequel nous avons implémenté une recherche exhaustive, un branch-and-bound (simple, sans relaxation en programme linéaire), un recuit-simuléet un algorithme mémétique utilisant le recuit simulé comme recherche locale.~\cite{pinam452019}
+			\paragraph*{}
+				Certaines composantes logicielles de base pourront donc être réutilisées ainsi que les instances de benchmark que nous avons déjà répertoriées.
+			\paragraph*{}
+				Un doctorant du laboratoire travaille sur le \gls{OCP}, qui peut se résoudre par le \gls{USCP} et a réalisé une revue de la littérature \citetitle{Kritter2019}~\cite{Kritter2019} qui me sera très utile pour répertorier les autres approches de la littérature ainsi que leur résultats obtenus sur les instances de benchmark classiques.
+	\chapter*{Conclusion}\addcontentsline{toc}{chapter}{Conclusion}
+		\paragraph*{}
+			Le stage s'annonce très intéressant et a bien commencé, toutes les personnes de l'équipe, et de l'\gls{IRIMAS} en général, que j'ai rencontré m'ont bien accueillis et sont investies dans leur domaine de recherche.
+		\paragraph*{}
+			Une première analyse de la littérature montre que les approches en méthaheuristiques pour le \gls{USCP} sont nombreuses et variées. Certaines sont prometteuses pour servir de recherche locale dans une hybridation qui reprendrait les principes de \gls{HEAD}.
+		\paragraph*{}
+			Je suis content de travailler sur ce sujet et impatient de passer a la partie implémentation pour commencer à obtenir des résultats afin d'affiner les composantes de notre algorithme pour aller vers les meilleurs résultats possibles.
+	\printbibliography[heading=bibintoc]{}
+	\printglossary[type=\acronymtype,title=Lexique,toctitle=Lexique]{}
+	\chapter*{Annexes}\addcontentsline{toc}{chapter}{Annexes}\markboth{Annexes}{}
+		\setcounter{section}{0}
+		\renewcommand{\thesection}{\Alph{section}}
+		\renewcommand{\theHsection}{appendixsection.\Alph{section}}
+		\section{Centres de formations de l'\acrshort{UHA}}\label{sec:uha_formation}
+			\paragraph*{}
+				\input{../tables/short/uha_formation_centers_1}
+				\hfill\\
+			\paragraph*{}
+				\input{../tables/short/uha_formation_centers_2}
+				\hfill\\
+			\paragraph*{}
+				\input{../tables/short/uha_formation_centers_3}
+		\section{Laboratoies de l'\acrshort{UHA}}\label{sec:uha_laboratories}
+			\paragraph*{}
+				\input{../tables/short/uha_laboratories_1}
+				\hfill\\
+			\paragraph*{}
+				\input{../tables/short/uha_laboratories_2}
+				\hfill\\
+			\paragraph*{}
+				\input{../tables/short/uha_laboratories_3}
+	\makeutbmbackcover{}
+\end{document}

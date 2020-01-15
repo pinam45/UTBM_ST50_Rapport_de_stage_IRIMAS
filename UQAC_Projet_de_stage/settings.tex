@@ -1,0 +1,90 @@
+%!TEX root = ./main.tex
+%!TEX encoding = UTF-8 Unicode
+
+%----------------------------------------
+% Informations
+%----------------------------------------
+
+\title{Métaheuristiques Hybrides pour le problème de couverture par ensembles}
+\author{Maxime Pinard}
+\date{2019}
+
+%----------------------------------------
+% Covers configuration
+%----------------------------------------
+
+\setutbmfrontillustration{IRIMAS}
+\setutbmfrontillustrationwidth{0.9\paperwidth}
+\setutbmfrontillustrationyshift{-2cm}
+
+\setutbmtitle{Métaheuristiques Hybrides pour le problème de couverture par ensembles}
+\setutbmsubtitle{Projet de stage ST50 / 8INF859 - A2019}
+
+\setutbmstudent{Maxime Pinard}
+\setutbmstudentdepartment{Département Informatique}
+\setutbmstudentpathway{Filière Interaction Imagerie Réalité Virtuelle}
+\setuqacstudentdepartment{Département d'Informatique et de Mathématique}
+\setuqacstudentpathway{Maîtrise en Informatique Profil Professionnel}
+
+\setutbmcompany{Institut de Recherche en Informatique, Mathématiques, Automatique et Signal}
+\setutbmcompanyaddress{12 rue des Frères Lumière\\68 093 MULHOUSE Cedex}
+\setutbmcompanywebsite{\href{https://www.irimas.uha.fr/}{\color{utbm_cover_main_shadow_text}{https://www.irimas.uha.fr/}}}
+
+\setutbmcompanytutor{Laurent Moalic}
+\setutbmschooltutor{Fabrice Lauri}
+\setuqacschooltutor{Sara Séguin}
+
+\setutbmkeywords{
+	recherche \textendash{}	mathématiques \textendash{} informatique \textendash{} optimisation \textendash{} métaheuristique \textendash{} problème de couverture par ensembles
+}
+\setutbmabstract{
+	Le problème de « couverture par ensembles », également connu sous le nom de « set covering problem », fait partie des grands classiques de l’optimisation. Au sein de l’institut de recherche IRIMAS, nous nous intéressons notamment aux approches heuristiques permettant de résoudre de tels
+	problèmes.
+	\vspace{12pt}\\
+	Dans le cadre de ce stage, nous nous intéressons au développement de méthodes hybrides de type mémétique, mêlant recherche locale et algorithmes génétiques. Ce type d’hybridation s’est révélé particulièrement efficace pour résoudre des problèmes connus pour être très difficiles, appartenant à la famille des problèmes NP-complets. Dans le cadre de travaux menés conjointement avec l’ENAC de Toulouse, nous avons développé des algorithmes reposant sur des populations réduites à deux individus. Les résultats obtenus sur le problème bien connu de coloration de graphes nous laisse supposer que cette démarche pourrait se révéler particulièrement efficace sur d’autres types de problèmes, tels que le « set cover ».
+}
+
+%----------------------------------------
+% Figures
+%----------------------------------------
+
+% Common file
+\input{../figures/common}
+
+% Figures folder
+\graphicspath{{../figures/}}
+
+% Figures counting
+\counterwithout{figure}{chapter}
+
+%----------------------------------------
+% Tables
+%----------------------------------------
+
+% Common file
+\input{../tables/common}
+
+% Table counting
+\counterwithout{table}{chapter}
+
+%----------------------------------------
+% Plots
+%----------------------------------------
+
+%\pgfplotsset{
+%  table/search path={../plots},
+%}
+
+%----------------------------------------
+% Boxes
+%----------------------------------------
+
+\tcbuselibrary{most}
+\newtcolorbox{infobox}[2][]{
+	breakable,
+	colback=gray!5!,
+	colframe=black!75!white,
+	arc=0pt,
+	title=#2,
+	#1
+}

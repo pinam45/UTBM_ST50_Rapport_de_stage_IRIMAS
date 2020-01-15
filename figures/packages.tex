@@ -1,0 +1,28 @@
+%!TEX encoding = UTF-8 Unicode
+\usepackage{etoolbox}
+\usepackage{ifxetex}
+\usepackage{ifluatex}
+\usepackage[T1]{fontenc}
+\ifboolexpr{bool{xetex} or bool{luatex}}{%
+	\usepackage{fontspec}
+}{%
+	\usepackage[utf8]{inputenc}
+}
+\usepackage[table,svgnames]{xcolor}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{braket}
+
+\usepackage{pgf}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
+\usepackage{tikz}
+\usepackage{tikzpeople}
+\usepackage{pgf-umlsd}
+\usepackage{pgfgantt}
+
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multirow}

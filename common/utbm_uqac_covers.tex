@@ -1,0 +1,595 @@
+%!TEX encoding = UTF-8 Unicode
+
+\makeatletter
+
+%----------------------------------------
+% Required packages
+%----------------------------------------
+
+\usepackage{fontspec} % For Tahoma font
+\usepackage{xcolor}
+\usepackage{tikz}
+
+%----------------------------------------
+% Colors definitions
+%----------------------------------------
+
+\definecolor{utbm_cover_background}{RGB}{255,255,255}
+
+\definecolor{utbm_cover_univname}{RGB}{0,0,0}
+\definecolor{utbm_cover_univname_text}{RGB}{255,255,255}
+
+\definecolor{utbm_cover_title}{RGB}{125,92,139}
+\definecolor{utbm_cover_title_text}{RGB}{255,255,255}
+
+\definecolor{utbm_cover_subtitle}{RGB}{79,78,85}
+\definecolor{utbm_cover_subtitle_text}{RGB}{255,255,255}
+
+\definecolor{utbm_cover_main}{RGB}{217,217,87}
+\definecolor{utbm_cover_main_text}{RGB}{0,0,0}
+\definecolor{utbm_cover_main_shadow_text}{RGB}{153,153,153}
+
+%----------------------------------------
+% Font definition
+%----------------------------------------
+
+\newfontfamily\tahomafont{Tahoma}
+
+%----------------------------------------
+% Default values
+%----------------------------------------
+
+%-----
+% Default texts and images not related to the student or the company
+\newcommand{\@defaultutbmschoolname}{{\bfseries UNIVERSITÉ DE TECHNOLOGIE} DE BELFORT-MONTBÉLIARD}
+\newcommand{\@defaultuqacschoolname}{{\bfseries UNIVERSITÉ DU QUÉBEC} À CHICOUTIMI}
+\newcommand{\@defaultutbmcompanytutortext}{\iflanguage{french}{Tuteur en entreprise}{Company tutor}}
+\newcommand{\@defaultutbmschooltutortext}{\iflanguage{french}{Suiveur UTBM}{UTBM tutor}}
+\newcommand{\@defaultuqacschooltutortext}{\iflanguage{french}{Suiveur UQAC}{UQAC tutor}}
+\newcommand{\@defaultutbmkeywordstext}{\iflanguage{french}{Mots clefs}{Keywords}}
+\newcommand{\@defaultutbmabstracttext}{\iflanguage{french}{Résumé}{Abstract}}
+\newcommand{\@defaultutbmschoollogo}{utbm_logo}
+\newcommand{\@defaultuqacschoollogo}{uqac_logo}
+
+%-----
+% Default texts and images related to the student or the company
+\newcommand{\@defaultutbmfrontillustration}{utbm_default_illustration}
+\newcommand{\@defaultutbmfrontillustrationwidth}{width=\paperwidth}
+\newcommand{\@defaultutbmfrontillustrationyshift}{0pt}
+\newcommand{\@defaultutbmtitle}{\iflanguage{french}{Titre}{Title}}
+\newcommand{\@defaultutbmsubtitle}{\iflanguage{french}{Sous-titre}{Subtitle}}
+\newcommand{\@defaultutbmstudent}{\iflanguage{french}{Nom Étudiant}{Student name}}
+\newcommand{\@defaultutbmstudentdepartment}{\iflanguage{french}{Département UTBM}{UTBM department}}
+\newcommand{\@defaultuqacstudentdepartment}{\iflanguage{french}{Département UQAC}{UQAC department}}
+\newcommand{\@defaultutbmstudentpathway}{\iflanguage{french}{Filière UTBM}{UTBM pathway}}
+\newcommand{\@defaultuqacstudentpathway}{\iflanguage{french}{Filière UQAC}{UQAC pathway}}
+\newcommand{\@defaultutbmcompany}{\iflanguage{french}{Entreprise}{Company}}
+\newcommand{\@defaultutbmcompanyaddress}{\iflanguage{french}{Adresse}{Address}}
+\newcommand{\@defaultutbmcompanywebsite}{\iflanguage{french}{Site web}{Website}}
+\newcommand{\@defaultutbmcompanytutor}{\iflanguage{french}{Nom tuteur en entreprise}{Company tutor name}}
+\newcommand{\@defaultutbmschooltutor}{\iflanguage{french}{Nom suiveur UTBM}{UTBM tutor name}}
+\newcommand{\@defaultuqacschooltutor}{\iflanguage{french}{Nom suiveur UQAC}{UQAC tutor name}}
+\newcommand{\@defaultutbmkeywords}{\iflanguage{french}{Liste de mots clefs}{List of keywords}}
+\newcommand{\@defaultutbmabstract}{\iflanguage{french}{Texte du résumé}{Abstract text}}
+
+%----------------------------------------
+% Configuration commands
+%----------------------------------------
+% Commands to set the texts and images not related to the student or the company
+% Default configuration for English and French languages, use the commands for other languages
+
+%-----
+% Set the UTBM school name
+% \setutbmschoolname{name}
+\newcommand{\setutbmschoolname}[1]{\renewcommand{\@utbmschoolname}{#1}}
+\newcommand{\@utbmschoolname}{\@defaultutbmschoolname}
+
+%-----
+% Set the UQAC school name
+% \setuqacschoolname{name}
+\newcommand{\setuqacschoolname}[1]{\renewcommand{\@uqacschoolname}{#1}}
+\newcommand{\@uqacschoolname}{\@defaultuqacschoolname}
+
+%-----
+% Set the text for the company tutor
+% \setutbmcompanytutortext{text}
+\newcommand{\setutbmcompanytutortext}[1]{\renewcommand{\@utbmcompanytutortext}{#1}}
+\newcommand{\@utbmcompanytutortext}{\@defaultutbmcompanytutortext}
+
+%-----
+% Set the text for the UTBM school tutor
+% \setutbmschooltutortext{text}
+\newcommand{\setutbmschooltutortext}[1]{\renewcommand{\@utbmschooltutortext}{#1}}
+\newcommand{\@utbmschooltutortext}{\@defaultutbmschooltutortext}
+
+%-----
+% Set the text for the UQAC school tutor
+% \setuqacschooltutortext{text}
+\newcommand{\setuqacschooltutortext}[1]{\renewcommand{\@uqacschooltutortext}{#1}}
+\newcommand{\@uqacschooltutortext}{\@defaultuqacschooltutortext}
+
+%-----
+% Set the text for the keywords
+% \setutbmkeywordstext{text}
+\newcommand{\setutbmkeywordstext}[1]{\renewcommand{\@utbmkeywordstext}{#1}}
+\newcommand{\@utbmkeywordstext}{\@defaultutbmkeywordstext}
+
+%-----
+% Set the text for the abstract
+% \setutbmabstracttext{text}
+\newcommand{\setutbmabstracttext}[1]{\renewcommand{\@utbmabstracttext}{#1}}
+\newcommand{\@utbmabstracttext}{\@defaultutbmabstracttext}
+
+%-----
+% Set the UTBM school logo (the file name can be as in the \includegraphics command)
+% \setutbmschoollogo{filename}
+\newcommand{\setutbmschoollogo}[1]{\renewcommand{\@utbmschoollogo}{#1}}
+\newcommand{\@utbmschoollogo}{\@defaultutbmschoollogo}
+
+%-----
+% Set the UQAC school logo (the file name can be as in the \includegraphics command)
+% \setuqacschoollogo{filename}
+\newcommand{\setuqacschoollogo}[1]{\renewcommand{\@uqacschoollogo}{#1}}
+\newcommand{\@uqacschoollogo}{\@defaultuqacschoollogo}
+
+%----------------------------------------
+% Informations setting commands
+%----------------------------------------
+% Commands to set the texts and images related to the student or the company
+% Default configuration can be used to see where will be displayed each information
+% but the commands should be used to set the cover informations
+
+%-----
+% Set the illustration figure on the front page (the file name can be as in the \includegraphics command)
+% \setutbmfrontillustration{filename}
+\newcommand{\setutbmfrontillustration}[1]{\renewcommand{\@utbmfrontillustration}{#1}}
+\newcommand{\@utbmfrontillustration}{\@defaultutbmfrontillustration}
+
+%-----
+% Set the illustration figure options (options for the \includegraphics command)
+% \setutbmfrontillustrationwidth{options}
+\newcommand{\setutbmfrontillustrationwidth}[1]{\renewcommand{\@utbmfrontillustrationwidth}{#1}}
+\newcommand{\@utbmfrontillustrationwidth}{\@defaultutbmfrontillustrationwidth}
+
+%-----
+% Set the illustration figure y shift from the top of the page
+% \setutbmfrontillustrationyshift{yshift}
+\newcommand{\setutbmfrontillustrationyshift}[1]{\renewcommand{\@utbmfrontillustrationyshift}{#1}}
+\newcommand{\@utbmfrontillustrationyshift}{\@defaultutbmfrontillustrationyshift}
+
+%-----
+% Set the title
+% \setutbmtitle{title}
+\newcommand{\setutbmtitle}[1]{\renewcommand{\@utbmtitle}{#1}}
+\newcommand{\@utbmtitle}{\@defaultutbmtitle}
+
+%-----
+% Set the subtitle
+% \setutbmsubtitle{subtitle}
+\newcommand{\setutbmsubtitle}[1]{\renewcommand{\@utbmsubtitle}{#1}}
+\newcommand{\@utbmsubtitle}{\@defaultutbmsubtitle}
+
+%-----
+% Set the student
+% \setutbmstudent{name}
+\newcommand{\setutbmstudent}[1]{\renewcommand{\@utbmstudent}{#1}}
+\newcommand{\@utbmstudent}{\@defaultutbmstudent}
+
+%-----
+% Set the student UTBM department
+% \setutbmstudentdepartment{department}
+\newcommand{\setutbmstudentdepartment}[1]{\renewcommand{\@utbmstudentdepartment}{#1}}
+\newcommand{\@utbmstudentdepartment}{\@defaultutbmstudentdepartment}
+
+%-----
+% Set the student UQAC department
+% \setuqacstudentdepartment{department}
+\newcommand{\setuqacstudentdepartment}[1]{\renewcommand{\@uqacstudentdepartment}{#1}}
+\newcommand{\@uqacstudentdepartment}{\@defaultuqacstudentdepartment}
+
+%-----
+% Set the student UTBM pathway
+% \setutbmstudentpathway{pathway}
+\newcommand{\setutbmstudentpathway}[1]{\renewcommand{\@utbmstudentpathway}{#1}}
+\newcommand{\@utbmstudentpathway}{\@defaultutbmstudentpathway}
+
+%-----
+% Set the student UQAC pathway
+% \setuqacstudentpathway{pathway}
+\newcommand{\setuqacstudentpathway}[1]{\renewcommand{\@uqacstudentpathway}{#1}}
+\newcommand{\@uqacstudentpathway}{\@defaultuqacstudentpathway}
+
+%-----
+% Set the company
+% \setutbmcompany{name}
+\newcommand{\setutbmcompany}[1]{\renewcommand{\@utbmcompany}{#1}}
+\newcommand{\@utbmcompany}{\@defaultutbmcompany}
+
+%-----
+% Set the company address
+% \setutbmcompanyaddress{address}
+\newcommand{\setutbmcompanyaddress}[1]{\renewcommand{\@utbmcompanyaddress}{#1}}
+\newcommand{\@utbmcompanyaddress}{\@defaultutbmcompanyaddress}
+
+%-----
+% Set the company website
+% \setutbmcompanywebsite{website}
+\newcommand{\setutbmcompanywebsite}[1]{\renewcommand{\@utbmcompanywebsite}{#1}}
+\newcommand{\@utbmcompanywebsite}{\@defaultutbmcompanywebsite}
+
+%-----
+% Set the company tutor
+% \setutbmcompanytutor{tutor}
+\newcommand{\setutbmcompanytutor}[1]{\renewcommand{\@utbmcompanytutor}{#1}}
+\newcommand{\@utbmcompanytutor}{\@defaultutbmcompanytutor}
+
+%-----
+% Set the UTBM school tutor
+% \setutbmschooltutor{tutor}
+\newcommand{\setutbmschooltutor}[1]{\renewcommand{\@utbmschooltutor}{#1}}
+\newcommand{\@utbmschooltutor}{\@defaultutbmschooltutor}
+
+%-----
+% Set the UQAC school tutor
+% \setuqacschooltutor{tutor}
+\newcommand{\setuqacschooltutor}[1]{\renewcommand{\@uqacschooltutor}{#1}}
+\newcommand{\@uqacschooltutor}{\@defaultuqacschooltutor}
+
+%-----
+% Set the keywords
+% \setutbmkeywords{keywords}
+\newcommand{\setutbmkeywords}[1]{\renewcommand{\@utbmkeywords}{#1}}
+\newcommand{\@utbmkeywords}{\@defaultutbmkeywords}
+
+%-----
+% Set the abstract
+% \setutbmabstract{abstract}
+\newcommand{\setutbmabstract}[1]{\renewcommand{\@utbmabstract}{#1}}
+\newcommand{\@utbmabstract}{\@defaultutbmabstract}
+
+%----------------------------------------
+% Cover generation commands
+%----------------------------------------
+
+%-----
+% Make the front cover
+% \makeutbmfrontcover[shift]
+\newcommand{\makeutbmfrontcover}[1][(0,0)]{
+	\clearpage
+	\thispagestyle{empty}
+	\parindent0pt
+	\begin{tikzpicture}[remember picture,overlay]
+		\tikzset{
+			utbm text/.style={
+				text badly ragged,
+				inner xsep=1cm,
+				outer sep=0pt,
+				text width=\paperwidth-2cm,
+				anchor=north,
+			},
+			utbm rectangle/.style={
+				rectangle,
+				inner sep=0pt,
+				outer sep=0pt,
+				anchor=north,
+				minimum width=\paperwidth,
+			}
+		}
+
+		\node[
+			shift={#1},
+			inner sep=0pt,
+			anchor=north,
+			minimum width=\paperwidth,
+			minimum height=\paperheight,
+		]
+		(anchor) at (current page.north)
+		{};
+
+		\node[
+			utbm rectangle,
+			fill=utbm_cover_background,
+			minimum height=\paperheight,
+		]
+		(background) at (anchor.north)
+		{};
+
+		% Hide illustration if too hight
+		\node[
+			yshift=-8.6cm,
+			utbm rectangle,
+			fill=utbm_cover_background,
+			minimum height=\paperheight-8.6cm,
+		]
+		(background2) at (anchor.north)
+		{};
+
+		\node[
+			yshift=\@utbmfrontillustrationyshift,
+			inner sep=0pt,
+			anchor=north,
+		]
+		(illustration) at (anchor.north)
+		{\includegraphics[width=\@utbmfrontillustrationwidth]{\@utbmfrontillustration}};
+
+		\node[
+			yshift=-7.6cm,
+			utbm text,
+			fill=utbm_cover_univname,
+			text=utbm_cover_univname_text,
+			minimum height=0.8cm,
+		]
+		(schoolname) at (anchor.north)
+		{\tahomafont\fontsize{14.4}{17.2}\selectfont {\@utbmschoolname}\\{\@uqacschoolname}};
+
+		\node[utbm text,
+			fill=utbm_cover_title,
+			text=utbm_cover_title_text,
+			minimum height=2.8cm,
+		]
+		(title) at (schoolname.south)
+		{\tahomafont\fontsize{24}{29}\selectfont \bfseries \@utbmtitle};
+
+		\node[utbm text,
+			fill=utbm_cover_subtitle,
+			text=utbm_cover_subtitle_text,
+			minimum height=0.8cm,
+		]
+		(subtitle) at (title.south)
+		{\tahomafont\fontsize{12}{14}\selectfont \bfseries \@utbmsubtitle};
+
+		\node[
+			utbm rectangle,
+			fill=utbm_cover_main,
+			minimum height=13.65cm,
+		]
+		(information) at (subtitle.south)
+		{};
+
+		\node[
+			yshift=-1.3cm,
+			utbm text,
+			text=black,
+			minimum height=0.8cm,
+		]
+		(student) at (subtitle.south)
+		{\tahomafont\bfseries {\fontsize{18}{22}\selectfont \@utbmstudent}};
+
+		\node[
+			yshift=-2.4cm,
+			utbm text,
+			text=black,
+			minimum height=0.8cm,
+		]
+		(studentutbminfo) at (subtitle.south)
+		{\tahomafont\bfseries\fontsize{10}{12}\selectfont{\fontsize{12}{14}\selectfont UTBM}\\
+		\@utbmstudentdepartment\\
+		{\color{utbm_cover_main_shadow_text}\@utbmstudentpathway}};
+
+		\node[
+			yshift=-2.4cm,
+			xshift=10cm,
+			utbm text,
+			text=black,
+			minimum height=0.8cm,
+		]
+		(studentuqacinfo) at (subtitle.south)
+		{\tahomafont\bfseries\fontsize{10}{12}\selectfont{\fontsize{12}{14}\selectfont UQAC}\\
+		\@uqacstudentdepartment\\
+		{\color{utbm_cover_main_shadow_text}\@uqacstudentpathway}};
+
+		\node[
+			yshift=-6cm,
+			utbm text,
+			text=utbm_cover_main_text,
+			minimum height=0.8cm,
+		]
+		(company) at (subtitle.south)
+		{\tahomafont\bfseries {\fontsize{20}{24}\selectfont \@utbmcompany}\\\vspace{0.3cm}
+		{\fontsize{12}{14}\selectfont\color{utbm_cover_main_shadow_text} \@utbmcompanyaddress\\\vspace{0.1cm}
+		\@utbmcompanywebsite}};
+
+		\node[
+			yshift=-10.8cm,
+			utbm text,
+			text=utbm_cover_main_text,
+			minimum height=0.8cm,
+		]
+		(company_tutor) at (subtitle.south)
+		{\tahomafont {\fontsize{12}{14}\selectfont\color{utbm_cover_main_shadow_text} \@utbmcompanytutortext}\\
+		\vspace*{0.7mm}{\fontsize{14}{17}\selectfont\bfseries \@utbmcompanytutor}};
+
+		\node[
+			yshift=-10.8cm,
+			utbm text,
+			align=right,
+			text=utbm_cover_main_text,
+			minimum height=0.8cm,
+		]
+		(school_tutor) at (subtitle.south)
+		{\tahomafont {\fontsize{12}{14}\selectfont\color{utbm_cover_main_shadow_text} \@uqacschooltutortext}\\
+		\vspace*{0.7mm}{\fontsize{14}{17}\selectfont\bfseries \@uqacschooltutor}};
+
+		\node[
+			yshift=-8.8cm,
+			utbm text,
+			align=right,
+			text=utbm_cover_main_text,
+			minimum height=0.8cm,
+		]
+		(school_tutor) at (subtitle.south)
+		{\tahomafont {\fontsize{12}{14}\selectfont\color{utbm_cover_main_shadow_text} \@utbmschooltutortext}\\
+		\vspace*{0.7mm}{\fontsize{14}{17}\selectfont\bfseries \@utbmschooltutor}};
+
+		\node[
+			yshift=0.7cm,
+			xshift=-1cm,
+			inner sep=0pt,
+			anchor=south east,
+		]
+		(schoollogo) at (anchor.south east)
+		{\includegraphics[width=5.18cm]{\@utbmschoollogo}};
+
+		\node[
+			yshift=0.4cm,
+			xshift=1cm,
+			inner sep=0pt,
+			anchor=south west,
+		]
+		(schoollogo) at (anchor.south west)
+		{\includegraphics[width=4.5cm]{\@uqacschoollogo}};
+
+
+		% \node[
+		% 	rectangle,
+		% 	red,
+		% 	fill=red,
+		% 	inner sep=0pt,
+		% 	anchor=north,
+		% 	minimum width=\paperwidth,
+		% 	minimum height=\paperheight,
+		% ]
+		% (anchor) at (current page.north)
+		% {};
+	\end{tikzpicture}
+	\newpage{}
+}
+
+%-----
+% Make the back cover
+% \makeutbmbackcover[shift]
+\newcommand{\makeutbmbackcover}[1][(0,0)]{
+	\clearpage \ifodd\value{page}\hbox{}\newpage\fi
+	\thispagestyle{empty}
+	\parindent0pt
+	\begin{tikzpicture}[remember picture,overlay]
+		\tikzset{
+			utbm text/.style={
+				text badly ragged,
+				inner xsep=1cm,
+				outer sep=0pt,
+				text width=\paperwidth-2cm,
+			},
+			utbm rectangle/.style={
+				rectangle,
+				inner sep=0pt,
+				outer sep=0pt,
+				anchor=north,
+				minimum width=\paperwidth,
+			}
+		}
+
+		\node[
+			shift={#1},
+			inner sep=0pt,
+			anchor=north,
+			minimum width=\paperwidth,
+			minimum height=\paperheight,
+		]
+		(anchor) at (current page.north)
+		{};
+
+		\node[
+			utbm rectangle,
+			fill=utbm_cover_background,
+			minimum height=\paperheight,
+		]
+		(background) at (anchor.north)
+		{};
+
+		\node[
+			yshift=-8.4cm,
+			utbm rectangle,
+			fill=utbm_cover_subtitle,
+			minimum height=1cm,
+		]
+		(line) at (anchor.north)
+		{};
+
+		\node[
+			utbm rectangle,
+			fill=utbm_cover_main,
+			minimum height=17.25cm,
+		]
+		(information) at (line.south)
+		{};
+
+		\node[
+			yshift=-1.5cm,
+			utbm text,
+			text=utbm_cover_main_text,
+			anchor=north,
+			minimum height=0.8cm,
+		]
+		(keywords) at (anchor.north)
+		{\tahomafont\fontsize{12}{14}\selectfont {\bfseries \@utbmkeywordstext}\\
+		\hfil\\
+		\@utbmkeywords};
+
+		\node[
+			yshift=0.25cm,
+			utbm text,
+			text=utbm_cover_main_text,
+			anchor=south,
+			minimum height=0.8cm,
+		]
+		(student) at (line.north)
+		{\tahomafont\fontsize{14}{17}\selectfont\bfseries \@utbmstudent};
+
+		\node[
+			yshift=0.25cm,
+			utbm text,
+			align=right,
+			text=utbm_cover_main_text,
+			anchor=south,
+			minimum height=0.8cm,
+		]
+		(subtitle) at (line.north)
+		{\tahomafont\fontsize{14}{17}\selectfont\bfseries \@utbmsubtitle};
+
+		\node[
+			yshift=-1.2cm,
+			utbm text,
+			text justified,
+			text=utbm_cover_main_text,
+			anchor=north,
+			minimum height=0.8cm,
+		]
+		(abstract) at (information.north)
+		{\tahomafont\fontsize{12}{14}\selectfont {\bfseries \@utbmabstracttext}\\
+		\hfil\\
+		\@utbmabstract};
+
+		\node[
+			yshift=0.5cm,
+			utbm text,
+			text=utbm_cover_main_text,
+			anchor=south,
+			minimum height=0.8cm,
+		]
+		(company) at (information.south)
+		{\tahomafont\bfseries {\fontsize{20}{24}\selectfont \@utbmcompany}\\\vspace{0.3cm}
+		{\fontsize{12}{14}\selectfont\color{utbm_cover_main_shadow_text} \@utbmcompanyaddress\\\vspace{0.1cm}
+		\@utbmcompanywebsite}};
+
+		\node[
+			yshift=0.5cm,
+			xshift=-1cm,
+			inner sep=0pt,
+			anchor=south east,
+		]
+		(schoollogo) at (anchor.south east)
+		{\includegraphics[width=5.18cm]{\@utbmschoollogo}};
+
+		\node[
+			yshift=0.2cm,
+			xshift=1cm,
+			inner sep=0pt,
+			anchor=south west,
+		]
+		(schoollogo) at (anchor.south west)
+		{\includegraphics[width=4.5cm]{\@uqacschoollogo}};
+	\end{tikzpicture}
+}
+
+\makeatother

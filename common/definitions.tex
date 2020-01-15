@@ -1,9 +1,13 @@
 %!TEX encoding = UTF-8 Unicode
 
+% Print number with at least 2 digits
+\newcommand{\twodigits}[1]{\ifnum#1<10 0\fi\the#1}
+
+% Print email link
+\newcommand{\email}[1]{\href{mailto:#1}{#1}}
+
 % C++
 \newcommand{\Cpp}{\texorpdfstring{C\kern-0.05em\protect\raisebox{.35ex}{\textsmaller[2]{+\kern-0.05em+}}}{C++}}
 
 % Clear to the next left page
-\newcommand*{\cleartoleftpage}{
-  \clearpage \ifodd\value{page}\hbox{}\newpage\fi
-}
+\newcommand*{\cleartoleftpage}{\clearpage\ifodd\value{page}\hbox{}\newpage\fi}

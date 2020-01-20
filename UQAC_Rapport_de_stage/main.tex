@@ -1,0 +1,41 @@
+%!TEX program = lualatex
+%!TEX encoding = UTF-8 Unicode
+\PassOptionsToPackage{french}{babel}
+\PassOptionsToPackage{french}{translator}
+\documentclass[a4paper,11pt,twoside,french,report]{../common/simplem}
+\input{packages}
+\input{../common/utbm_uqac_covers}
+\input{../common/definitions}
+\input{settings}
+
+%----------------------------------------
+% Bibliography
+%----------------------------------------
+\addbibresource{../references/references.bib}
+%\nocite{*}
+
+%----------------------------------------
+% Glossary
+%----------------------------------------
+\makeglossaries
+\input{../common/glossary}
+
+%----------------------------------------
+% document
+%----------------------------------------
+\begin{document}
+	\makeutbmfrontcover{}
+	\makecopirightpage{
+		\begin{center}
+			\def\arraystretch{1.1}
+			\input{../tables/short/report_synoptic}
+			\\\hfill\\\hfill\\
+			\input{../tables/short/report_authors}
+			\\\hfill\\\hfill\\
+			\input{../tables/short/report_validators}
+		\end{center}
+	}
+	\tableofcontents{}
+	\listoffigures{}
+	\makeutbmbackcover{}
+\end{document}

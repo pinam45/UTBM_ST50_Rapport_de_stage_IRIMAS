@@ -1,0 +1,58 @@
+%!TEX root = ./main.tex
+%!TEX encoding = UTF-8 Unicode
+
+% Pro­gram­ming fa­cil­i­ties
+\usepackage{etoolbox}
+\usepackage{ifxetex}
+\usepackage{ifluatex}
+
+% Encoding
+\usepackage[T1]{fontenc}
+\ifboolexpr{bool{xetex} or bool{luatex}}{%
+	\usepackage{fontspec}
+}{%
+	\usepackage[utf8]{inputenc}
+}
+
+% Language
+\usepackage[french]{babel}
+\usepackage[french]{translator}
+
+% General purpose
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\usepackage{pdflscape}
+
+% Mathematics
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+\usepackage{amsthm}
+\usepackage{dsfont}
+\usepackage{braket}
+\usepackage{stmaryrd}
+
+% Tables
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{blkarray}
+
+% Figures
+\usepackage[mode=tex]{standalone}
+\usepackage{import}
+\usepackage{float}
+\usepackage[justification=centering]{caption}
+
+% PGF-TikZ
+\usepackage{pgf}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.16}
+\usepackage{tikz}
+\usepackage{tikzpeople}
+\usepackage{pgf-umlsd}
+\usepackage{pgfgantt}

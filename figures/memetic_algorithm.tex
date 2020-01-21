@@ -1,0 +1,221 @@
+%!TEX program = lualatex
+%!TEX encoding = UTF-8 Unicode
+\documentclass[11pt,class=book]{standalone}
+\input{packages}
+\input{common}
+
+\begin{document}
+	\pgfmathsetmacro\adist{30}%
+	\pgfmathsetmacro\bdist{60}%
+	\pgfmathsetmacro\cdist{(\adist+\bdist)/2}%
+	\pgfmathsetmacro\gdist{85}%
+	\pgfmathsetmacro\yshiftz{-100}%
+	\pgfmathsetmacro\yshifta{0}%
+	\pgfmathsetmacro\yshiftb{\yshifta+90}%
+	\pgfmathsetmacro\yshiftc{\yshiftb+90}%
+	\pgfmathsetmacro\yshiftd{\yshiftc+90}%
+	\pgfmathsetmacro\yshiftcd{(\yshiftc+\yshiftd)/2}%
+	\pgfmathsetmacro\yshifte{\yshiftd+90}%
+	\pgfmathsetmacro\yshiftf{\yshifte+90}%
+	\pgfmathsetmacro\yshiftg{\yshiftf+90}%
+	\pgfmathsetmacro\yshiftfg{(\yshiftf+\yshiftg)/2}%
+	\pgfmathsetmacro\yshifth{\yshiftg+90}%
+	\pgfmathsetmacro\yshiftlinea{\yshifta-20}%
+	\pgfmathsetmacro\yshiftlineb{\yshiftd-20}%
+	\pgfmathsetmacro\yshiftlinec{\yshiftg-20}%
+	\pgfmathsetmacro\yshifttitlea{(\yshiftlinea+\yshiftlineb)/2}%
+	\pgfmathsetmacro\yshifttitleb{(\yshiftlineb+\yshiftlinec)/2}%
+	\pgfmathsetmacro\yshiftlegend{60}%
+	\pgfmathsetmacro\legenddist{110}%
+	\pgfmathsetmacro\legendsep{20}%
+	\begin{tikzpicture}[
+		x=1pt,
+		y=1pt,
+		/utils/exec={\sffamily},
+		font=\fontsize{9pt}{9.5pt}\selectfont,
+		>={Triangle[length=4,width=3]},
+		decoration={snake,segment length=5,amplitude=0.7},
+	]
+		\tikzset{solution/.style={
+			%draw,
+			circle,
+			minimum size=20,
+			%inner sep=3,
+			%outer sep=3.4,
+			%text width=10,
+			text centered,
+			fill=Cgreen!50,
+		}}
+		\tikzset{weights/.style={
+			%draw,
+			rectangle,
+			minimum size=22,
+			%inner sep=5,
+			%outer sep=3.4,
+			%text width=10,
+			text centered,
+			fill=Cblue!50,
+		}}
+		\tikzset{stop/.style={
+			%draw,
+			diamond,
+			aspect=2.5,
+			minimum size=20,
+			inner sep=1,
+			%outer sep=3.4,
+			%text width=10,
+			text centered,
+			fill=Corange!50,
+		}}
+		\tikzset{rwls/.style={
+			%draw,
+			rectangle,
+			minimum width=60,
+			minimum height=20,
+			text centered,
+			fill=Cred!50,
+		}}
+		%---------------------------------
+		% Clip
+		\clip(\yshifta-25,-\bdist-62) rectangle (\yshiftf-20,+\bdist+30);
+
+		%---------------------------------
+		% Layer 0
+		\node[solution] (sa0) at (\yshiftz,\bdist) {$S_0$};
+		\node[solution] (sb0) at (\yshiftz,\adist) {$S_0$};
+		\node[stop] (l0) at (\yshiftz,0) {$L$};
+		\node[weights] (wa0) at (\yshiftz,-\adist) {$W_0$};
+		\node[weights] (wb0) at (\yshiftz,-\bdist) {$W_0$};
+
+		%---------------------------------
+		% Layer 1
+		\draw[dashed,gray,thick] (\yshiftlinea,\bdist+30) -- (\yshiftlinea,-\bdist-30);
+
+		\node[solution] (sa1) at (\yshifta,\bdist) {$S_1$};
+		\node[solution] (sb1) at (\yshifta,\adist) {$S_2$};
+		\node[weights] (wa1) at (\yshifta,-\adist) {$W_1$};
+		\node[weights] (wb1) at (\yshifta,-\bdist) {$W_2$};
+
+		\draw[->] (sa0) -- (sb1);
+		\draw[->] (sb0) -- (sa1);
+		\draw[->] (wa0) -- (wb1);
+		\draw[->] (wb0) -- (wa1);
+
+		%---------------------------------
+		% Layer 2
+		\node[rwls] (rwlsa1) at (\yshiftb,\cdist) {RWLS};
+		\node[rwls] (rwlsb1) at (\yshiftb,-\cdist) {RWLS};
+		\node[stop] (l1) at (\yshiftb,0) {$L$};
+
+		\draw[->] (sa1.east) -- ($(rwlsa1.west)+(0,4)$);
+		\draw[->] (wa1.east) -- ($(rwlsa1.west)-(0,4)$);
+		\draw[->] (sb1.east) -- ($(rwlsb1.west)+(0,4)$);
+		\draw[->] (wb1.east) -- ($(rwlsb1.west)-(0,4)$);
+		\draw[-{Triangle[length=3,width=2]},dotted] (l0) -- (l1);
+		\draw[->,dashed] (l1) -- (rwlsa1);
+		\draw[->,dashed] (l1) -- (rwlsb1);
+
+		%---------------------------------
+		% Layer 3
+		\node[solution] (sa2) at (\yshiftc,\bdist) {$S_1$};
+		\node[solution] (sb2) at (\yshiftc,\adist) {$S_2$};
+		\node[stop] (l2) at (\yshiftc,0) {$L$};
+		\node[weights] (wa2) at (\yshiftc,-\adist) {$W_1$};
+		\node[weights] (wb2) at (\yshiftc,-\bdist) {$W_2$};
+
+		\draw[->] ($(rwlsa1.east)+(0,4)$) -- (sa2.west);
+		\draw[->] ($(rwlsa1.east)-(0,4)$) -- (wa2.west);
+		\draw[->] ($(rwlsb1.east)+(0,4)$) -- (sb2.west);
+		\draw[->] ($(rwlsb1.east)-(0,4)$) -- (wb2.west);
+		\draw[-{Triangle[length=3,width=2]},dotted] (l1) -- (l2);
+		\draw[->,dashed] (rwlsa1.east) -- (l2);
+		\draw[->,dashed] (rwlsb1.east) -- (l2);
+
+		%---------------------------------
+		% Layer 4
+		\draw[dashed,gray,thick] (\yshiftlineb,\bdist+30) -- (\yshiftlineb,-\bdist-30);
+
+		\node[solution] (sa3) at (\yshiftd,\bdist) {$S_1$};
+		\node[solution] (sb3) at (\yshiftd,\adist) {$S_2$};
+		\node[stop] (l3) at (\yshiftc,0) {$L$};
+		\node[weights] (wa3) at (\yshiftd,-\adist) {$W_1$};
+		\node[weights] (wb3) at (\yshiftd,-\bdist) {$W_2$};
+
+		\draw[->] (sa2) -- (sb3);
+		\draw[->] (sb2) -- (sa3);
+		\draw[->] (wa2) -- (wb3);
+		\draw[->] (wb2) -- (wa3);
+		\node[fill=white,inner sep=2] (crossover) at (\yshiftcd,\cdist) {Crossover};
+		\node[fill=white,inner sep=2] (crossover) at (\yshiftcd,-\cdist) {WCrossover};
+
+		%---------------------------------
+		% Layer 5
+		\node[rwls] (rwlsa2) at (\yshifte,\cdist) {RWLS};
+		\node[rwls] (rwlsb2) at (\yshifte,-\cdist) {RWLS};
+		\node[stop] (l4) at (\yshifte,0) {$L$};
+
+		\draw[->] (sa3.east) -- ($(rwlsa2.west)+(0,4)$);
+		\draw[->] (wa3.east) -- ($(rwlsa2.west)-(0,4)$);
+		\draw[->] (sb3.east) -- ($(rwlsb2.west)+(0,4)$);
+		\draw[->] (wb3.east) -- ($(rwlsb2.west)-(0,4)$);
+		\draw[-{Triangle[length=3,width=2]},dotted] (l3) -- (l4);
+		\draw[->,dashed] (l4) -- (rwlsa2);
+		\draw[->,dashed] (l4) -- (rwlsb2);
+
+		%---------------------------------
+		% Layer 6
+		\node[solution] (sa4) at (\yshiftf,\bdist) {$S_1$};
+		\node[solution] (sb4) at (\yshiftf,\adist) {$S_2$};
+		\node[stop] (l5) at (\yshiftf,0) {$L$};
+		\node[weights] (wa4) at (\yshiftf,-\adist) {$W_1$};
+		\node[weights] (wb4) at (\yshiftf,-\bdist) {$W_2$};
+
+		\draw[->] ($(rwlsa2.east)+(0,4)$) -- (sa4.west);
+		\draw[->] ($(rwlsa2.east)-(0,4)$) -- (wa4.west);
+		\draw[->] ($(rwlsb2.east)+(0,4)$) -- (sb4.west);
+		\draw[->] ($(rwlsb2.east)-(0,4)$) -- (wb4.west);
+		\draw[-{Triangle[length=3,width=2]},dotted] (l4) -- (l5);
+		\draw[->,dashed] (rwlsa2.east) -- (l5);
+		\draw[->,dashed] (rwlsb2.east) -- (l5);
+
+		%---------------------------------
+		% Layer 7
+		\draw[dashed,gray,thick] (\yshiftg-20,\bdist+30) -- (\yshiftg-20,-\bdist-30);
+
+		\node[solution] (sa5) at (\yshiftg,\bdist) {$S_1$};
+		\node[solution] (sb5) at (\yshiftg,\adist) {$S_2$};
+		\node[weights] (wa5) at (\yshiftg,-\adist) {$W_1$};
+		\node[weights] (wb5) at (\yshiftg,-\bdist) {$W_2$};
+
+		\draw[->] (sa4) -- (sb5);
+		\draw[->] (sb4) -- (sa5);
+		\draw[->] (wa4) -- (wb5);
+		\draw[->] (wb4) -- (wa5);
+		\node[fill=white,inner sep=2] (crossover) at (\yshiftfg,\cdist) {Crossover};
+		\node[fill=white,inner sep=2] (crossover) at (\yshiftfg,-\cdist) {WCrossover};
+
+		%---------------------------------
+		% Layer 7
+		\node[stop] (l6) at (\yshifth,0) {$L$};
+		\draw[-{Triangle[length=3,width=2]},dotted] (l5) -- (l6);
+
+		%---------------------------------
+		% Titles
+		\node (title1) at (\yshifttitlea,\gdist) {Generation $n$};
+		\node (title2) at (\yshifttitleb,\gdist) {Generation $n+1$};
+		\node[anchor=west,xshift=-5] (title2ldots) at (title2.east) {.\,.\,.};
+
+		%---------------------------------
+		% Legend
+		\node[solution] (si) at (\yshiftlegend,-\legenddist) {$S_i$};
+		\node[anchor=west] (sit) at (si.east) {Solution $i$};
+
+		\node[weights,anchor=west,xshift=\legendsep] (wi) at (sit.east) {$W_i$};
+		\node[anchor=west] (wit) at (wi.east) {Weights $i$};
+
+		\node[stop,anchor=west,xshift=\legendsep] (li) at (wit.east) {$L$};
+		\node[anchor=west] (lit) at (li.east) {Limit (RWLS steps)};
+
+		\draw[gray] (\yshiftlegend-35,-\legenddist+15) -- (\yshiftlegend+300,-\legenddist+15);
+	\end{tikzpicture}%
+\end{document}%

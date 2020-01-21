@@ -1,0 +1,74 @@
+%!TEX program = lualatex
+\documentclass[11pt,class=book]{standalone}
+\input{packages}
+\input{common}
+
+\begin{document}
+	\begin{tikzpicture}[
+		x=1pt,
+		y=1pt,
+		%/utils/exec={\sffamily},
+		font=\fontsize{9pt}{9.5pt}\selectfont,
+		%>={Triangle[length=4,width=3]},
+		%decoration={snake,segment length=5,amplitude=0.7},
+	]
+		\begin{axis}[
+			%ybar,
+			width=13cm,
+			height=5cm,
+			%xmin=0, xmax=22,
+			ymin=0, ymax=220000,
+			enlarge x limits=0.025,
+			%bar width=1,
+			%axis lines=none,
+			%xtick=\empty,
+			%ytick=\empty,
+			ymajorgrids=true,
+			%yminorgrids=true,
+			xtick distance=1,
+			xtick=data,
+			%tick label style={font=\tiny},
+			xtick pos=left,
+			xlabel={Semaine},
+			ylabel={Utilisation (heures)},
+			%nodes near coords,
+			%symbolic x coords={1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23},
+			y tick label style={
+				/pgf/number format/.cd,
+				scaled y ticks = false,
+				set thousands separator={.},
+				fixed
+			},
+		]
+		\addplot[
+			ybar,
+			Cblue,
+			fill=Cblue
+		] coordinates {
+			(1, 0)
+			(2, 0)
+			(3, 0)
+			(4, 0)
+			(5, 0)
+			(6, 47789)
+			(7, 90261)
+			(8, 144885)
+			(9, 274)
+			(10, 63)
+			(11, 209978)
+			(12, 119145)
+			(13, 16704)
+			(14, 81971)
+			(15, 31917)
+			(16, 84555)
+			(17, 0)
+			(18, 0)
+			(19, 35992)
+			(20, 0)
+			(21, 0)
+			(22, 0)
+			(23, 0)
+		};
+		\end{axis}
+	\end{tikzpicture}
+\end{document}

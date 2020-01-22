@@ -164,6 +164,93 @@
 					``L’activité du second groupe s’inscrit dans le thème d’analyse de données visuelles et géométriques (images, vidéo, nuages de points, courbes, etc.). Dans le cadre de cette thématique, ils développent des algorithmes et des concepts pour résoudre des problèmes de nature géométrique qui apparaissent dans de nombreuses disciplines de l’informatique [\ldots] ainsi que des techniques d’extraction d’information dans des données visuelles pour répondre à des problématiques de visualisation et d’analyses de scènes.''~\cite{IRIMAS_OMeGA}
 				\paragraph*{}
 					Laurent Moalic, qui a proposé le sujet de ce stage (détaillé dans la partie \ref{sec:presentation_stage}), est membre de l'équipe \gls{OMeGA}, le sujet proposé, ainsi que ces travaux en général, s’inscrivent dans l'axe Optimisation par Métaheuristiques du laboratoire.
+	\chapter{Présentation du stage}\label{sec:presentation_stage}
+		\section{Contexte du stage}
+			\subsection{\acrshort{HEAD}}
+				\paragraph*{}
+					En \citeyear{Moalic2018} a été publié l'article \citetitle{Moalic2018}~\cite{Moalic2018} par \citeauthor{Moalic2018}, cet article propose l'utilisation de méthodes d'optimisation métaheuristiques hybrides sur le \gls{GVCP}.
+				\paragraph*{}
+					La coloration des sommets d'un graphe implique l'attribution d'une couleur à chaque sommet, de sorte que deux sommets adjacents (reliés par une arête) aient des couleurs différentes. Le \gls{GVCP} consiste à trouver le nombre minimal de couleurs, appelé nombre chromatique, requis pour colorer le graphe tout en respectant ces contraintes. La figure~\ref{fig:Petersen_graph_3-coloring} montre un exemple de solution a ce problème pour un graphe simple.
+					\begin{figure}[H]
+						\centering%
+						\includegraphics[width=0.25\textwidth]{Petersen_graph_3-coloring}%
+						\caption{Une solution optimale au \acrshort{GVCP} pour le graphe de Petersen en utilisant 3 couleurs~\cite{wiki:Graphe_de_Petersen}}%
+						\label{fig:Petersen_graph_3-coloring}%
+					\end{figure}
+				\paragraph*{}
+					L'hybridation utilisée dans l'article pour résoudre ce problème est de type mémétique, c'est-à-dire qu'elle résulte de l'hybridation entre un algorithme génétique et un algorithme de recherche locale.
+				\paragraph*{}
+					Les algorithmes génétiques sont des métaheuristiques inspirées du processus de sélection naturelle qui appartiennent à la classe plus large des algorithmes évolutifs. Les algorithmes génétiques sont couramment utilisés pour générer des solutions de haute qualité aux problèmes d'optimisation et de recherche en s'appuyant sur des opérateurs inspirés de la biologie telles que la mutation, le croisement et la sélection.
+				\paragraph*{}
+					Les recherches locales prennent une solution potentielle à un problème et regardent ses voisins (c'est-à-dire des solutions similaires à l'exception de détails mineurs) dans l'espoir de trouver une solution améliorée. Les méthodes de recherche locales ont tendance à rester bloquées dans des régions sous-optimales ou sur des plateaux où de nombreuses solutions s’apparentent.
+				\paragraph*{}
+					L'algorithme proposé, \gls{HEAD}, est basé sur \gls{HEA}~\cite{Galinier1999} et fonctionne avec une population de deux individus. De plus il intègre une nouvelle façon de gérer la diversité a la population avec des solutions ``élites''. L'hybridation est faite avec une \gls{RT} adapté au \gls{GVCP}.
+				\paragraph*{}
+					Les \gls{RT} sont des métaheuristiques utilisant des méthodes de recherche locales en assouplissant leur règle de base. À chaque étape, des mouvements de détérioration peuvent être acceptés si aucun mouvement d'amélioration n'est disponible (comme lorsque la recherche est bloquée dans un minimum local). De plus, des interdictions (désignées par le terme tabou) sont introduites pour décourager la recherche de revenir à des solutions précédemment consultées.
+				\paragraph*{}
+					Les expériences menées sur un ensemble d'instance \gls{GVCP} difficiles du \gls{DIMACS}, montrent que \gls{HEAD} produit de bon résultats. Les résultats obtenus par \gls{HEAD} laissent penser que ce type d'approche pourrait être appliqué avec succès à d'autres problèmes \acrshort{NP}-complets.
+				\paragraph*{}
+					Les problèmes \acrshort{NP}-complets représentent les problèmes les plus difficiles de \acrfull{NP} qui est une classe de complexité utilisée pour classifier les problèmes de décision. \acrshort{NP} est l'ensemble des problèmes de décision pour lesquels chaque entrée du problème doit être associée à un ensemble de solutions de longueur polynomiale, dont la validité peut être testée rapidement (en temps polynomial).
+				\paragraph*{}
+					Si un problème \acrshort{NP}-complet a un algorithme en temps polynomial, tous les problèmes de \acrshort{NP} en ont. Bien qu'une solution à un problème \acrshort{NP}-complet puisse être vérifiée en temps polynomial, il n'existe aucun moyen connu de trouver une solution en temps polynomial. C'est-à-dire que le temps requis pour résoudre le problème en utilisant n'importe quel algorithme connu augmente exponentiellement avec la taille du problème. Les problèmes \acrshort{NP}-complets donc sont souvent traités en utilisant des méthodes heuristiques et des algorithmes d'approximation.
+			\subsection{\acrshort{SCP} et \acrshort{USCP}}
+				\paragraph*{}
+					Le \gls{SCP}, fait partit des 21 problèmes \acrshort{NP}-complets de \citeauthor{Karp1972}~\cite{Karp1972}, il peut être énoncé comme suit:
+				\paragraph*{}
+					Étant donné un ensemble univers \(U = \{u_1, u_2, u_3, \dots, u_m\}\) et une famille \(S = \{s_1, s_2, \dots, s_n\}\) de sous-ensembles de \(U\) avec \(c_i\), coût du sous-ensemble \(s_i\), le problème consiste à trouver une sous-famille de \(S\) permettant de couvrir chaque élément de \(U\) au moins une fois avec un coût minimum. Un élément \(e\) de \(U\) est couvert par un sous-ensemble \(A\) si \(e \in A\).
+				\paragraph*{}
+					Dans le cas où tous les sous-ensembles \(s_i\) ont un coût identique, le problème est alors appelé \gls{USCP} ou \gls{UwSCP}, un exemple graphique d'instance d'\gls{USCP} est visible sur la figure \ref{fig:uscp_example}.
+				\begin{figure}[H]
+					\centering%
+					\includegraphics[width=0.65\linewidth]{uscp_example}%
+					\caption{Exemple d'instance du \acrshort{USCP} et solution optimale (ensembles grisés)~\cite{Mount2017}}%
+					\label{fig:uscp_example}%
+				\end{figure}
+				\paragraph*{}
+					En général les instances de \gls{SCP} sont définies par une matrice d'incidence \(A = \left(a_{i,j}\right)\) de taille \(m \times n\) avec
+					\[\forall i \in \{1,\ldots,m\},\ \forall j \in \{1,\ldots,n\},\ a_{i,j} = \left\{
+						\begin{array}{ll}
+							1 & \text{si } u_i \in s_j \\
+							0 & \text{sinon}
+						\end{array}
+					\right.\]
+					\(a_{i,j} = 1\) signifiant donc que le point \(u_i\) est couvert par le sous-ensemble \(s_j\), ainsi qu'un vecteur coût \(n\)-dimensionnel \(c = \left(c_j\right)\) avec \(\forall j \in N\), \(c_j\) le coût du sous-ensemble \(j\).
+				\paragraph*{}
+					Les solutions sont quant à elles définies par un vecteur \(n\)-dimensionnel \(x = \left(x_j\right)\) avec
+					\[\forall j \in \{1,\ldots,n\},\ x_j = \left\{
+						\begin{array}{ll}
+							1 & \text{si } u_i \text{ fait parti de la solution}\\
+							0 & \text{sinon}
+						\end{array}
+					\right.\]
+					le coût de la solution étant égal à
+					\[\sum_{j \in \{1,\ldots,n\}}{c_j x_j}\]
+					et la solution étant valide si
+					\[\forall i \in \{1,\ldots,m\}\ ,\sum_{j \in \{1,\ldots,n\}}{a_{ij}x_j} \ge 1\]
+				\paragraph*{}
+					Par exemple, l'instance suivante, définie par la matrice d'incidence \(A\) et le vecteur coût \(c\) a comme solution optimale le vecteur \(x\):
+					\[
+					\begin{blockarray}{ccccccccc}
+						& s_1 & s_2 & s_3 & s_4 & s_5 & s_6 & s_7\\
+						\begin{block}{c(ccccccc)c}
+							    & 0 & 1 & 1 & 0 & 0 & 0 & 1 & u_1\\
+							    & 0 & 0 & 1 & 0 & 1 & 1 & 0 & u_2\\
+							A = & 1 & 1 & 0 & 1 & 0 & 1 & 0 & u_3\\
+							    & 0 & 0 & 0 & 0 & 1 & 1 & 1 & u_3\\
+							    & 1 & 0 & 1 & 0 & 0 & 0 & 1 & u_4\\
+						\end{block}
+						\\
+						\begin{block}{c(ccccccc)c}
+							c = & 3 & 1 & 2 & 4 & 1 & 2 & 1 &\\
+						\end{block}
+						\\
+						\begin{block}{c(ccccccc)c}
+							x = & 0 & 1 & 1 & 0 & 0 & 0 & 1 &\\
+						\end{block}
+					\end{blockarray}
+					\]
+				\paragraph*{}
+					Il est à noté que, bien que le \gls{USCP} soit un cas particulier du \gls{SCP}, du fait de l'information réduite de par l’absence de poids pour les sous-ensembles, il est généralement considéré que le \gls{USCP} est plus difficile à résoudre que le \gls{SCP}~\cite{Yelbay2015}.
 	\printbibliography[heading=bibintoc]{}
 	\printglossary[type=\acronymtype,nogroupskip=true,title=Lexique,toctitle=Lexique]{}
 	\chapter*{Annexes}\addcontentsline{toc}{chapter}{Annexes}\markboth{Annexes}{}

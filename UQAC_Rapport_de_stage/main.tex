@@ -251,6 +251,18 @@
 					\]
 				\paragraph*{}
 					Il est à noté que, bien que le \gls{USCP} soit un cas particulier du \gls{SCP}, du fait de l'information réduite de par l’absence de poids pour les sous-ensembles, il est généralement considéré que le \gls{USCP} est plus difficile à résoudre que le \gls{SCP}~\cite{Yelbay2015}.
+		\section{Objectifs du stage}
+			\subsection{Objectif initial}
+				\paragraph*{}
+					L'objectif du stage est de développer des algorithmes hybrides avec une recherche poussée de performance pour le \gls{USCP}, la piste première à explorer étant d'utiliser les principes de \gls{HEAD} et de les adapter au \gls{USCP}.
+				\paragraph*{}
+					Le développement d'algorithmes méthaheuristique se faisant en se basant sur les travaux existant, il sera nécessaire d'analyser la littérature du problème afin d'identifier les recherches locales, opérateur de sélection, opérateurs de croisement et mutation efficaces pour le problème afin de les comparer et de sélectionner les plus adaptés pour notre algorithme.
+				\paragraph*{}
+					Pour réaliser ces comparaison et afin d'évaluer la performance de notre algorithme, il sera nécessaire d'identifier les instances de benchmark classiques de la littérature ainsi que les résultats obtenus par les méthodes les plus efficaces connues afin de ce comparer à ces dernières.
+				\paragraph*{}
+					Une fois toutes ces recherches réalisées, le développement pourra commencer, dans un premier temps il faudra implémenter les structures et algorithmes de base lié au \gls{SCP}, puis il faudra implémenter la recherche locale que nous utiliserons dans notre hybridation et enfin implémenter l'algorithme en lui même.
+				\paragraph*{}
+					Après cela viendra la phase de réglage ou il faudra alterner entre benchmarks, optimisation logicielle et variation des paramètres et composants de l'algorithme afin optimiser son efficacité. Une fois les réglages terminé, une étude comparative de la performance de l'algorithme sera réalisé.
 	\printbibliography[heading=bibintoc]{}
 	\printglossary[type=\acronymtype,nogroupskip=true,title=Lexique,toctitle=Lexique]{}
 	\chapter*{Annexes}\addcontentsline{toc}{chapter}{Annexes}\markboth{Annexes}{}

@@ -305,5 +305,36 @@
 				\caption{Plan du campus Illberg de l'\acrshort{UHA}~\cite{UHA_Plan_acces}}%
 				\label{fig:UHA_plan_campus_Illberg}%
 			\end{figure}
+		\newpage\section{Versions des programmes utilisés}\label{sec:programs_versions}
+			\paragraph*{Sur plusieurs machines/environnements}
+				\begin{center}
+					\begin{tabular}{lccc}
+						& HPC (Linux) & Local (Linux) & Local (Windows)\\
+						\midrule
+						git & 1.8.3.1 & 2.25.0 & TODO\\
+						CMake & 3.12.2 & 3.15.4 & TODO\\
+						Make & 3.82 & 4.2.1 & TODO\\
+						Ninja & --- & 1.9.0 & TODO\\
+						gcc & 9.2 & 9.2.1 & TODO\\
+						clang & --- & 8.0.1 & TODO\\
+						rsync & 3.0.9 & 3.1.3 & ---\\
+					\end{tabular}
+				\end{center}
+			\paragraph*{Sur la machine locale (Linux)}
+				\begin{itemize}
+					\item CLion 2019.3.2
+					\item Sublime Text Build 3211
+					\item clang-format 8.0.1
+					\item clang-tidy 8.0.1
+				\end{itemize}
+			\paragraph*{Sur la machine locale (Windows)}
+				\begin{itemize}
+					\item MSVC TODO
+				\end{itemize}
+			\paragraph*{Sur le cluster \gls{HPC} du méso-centre de Strasbourg}
+				\begin{itemize}
+					\item Slurm 15.08.13
+					\item Modules 3.2.10
+				\end{itemize}
 	\makeutbmbackcover{}
 \end{document}

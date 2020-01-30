@@ -295,6 +295,25 @@
 						\item[UTBM\_ST50\_Rapport\_de\_stage\_IRIMAS] contient les rapport et présentations demandées par l'\gls{UTBM} et l'\gls{UQAC}, notamment les rapports de stage
 					\end{description}
 					Chacun de ses dépôt a pour \textit{remote} un dépôt GitHub privé afin de toujours avoir une sauvegarde en cas d'accident.
+			\subsection{Cluster \acrshort{HPC}}
+				\paragraph*{}
+					Le méso-centre de l'Université de Strasbourg se situe parmi les 4 centres de calcul régionaux les plus puissants en France. Il est opéré par le pôle \gls{HPC} de la Direction du numérique de l’Université de Strasbourg~\cite{UNISTRA_Calcul_scientifique}. Au cour de la 6ème semaine du stage j'ai obtenu l’accès à la partition ``public'' au cluster \gls{HPC} du service de calcul scientifique du méso-centre de Strasbourg.
+				\paragraph*{}
+					Les ressources de calcul du \gls{HPC} auquel j'ai eu accès sont composées de 1.3Po (1\,266\,700Go) de stockage, 9\,968 cœurs de calcul, environ 47To (47\,818Go) de mémoire vive, le tout réparti sur 467 nœuds de calcul. Parmi les nœuds, on compte notamment:
+					\begin{itemize}
+						\item 56 noeuds Intel Xeon Nehalem/Westmere à 24Go de RAM, financés par mutualisation
+						\item 145 noeuds Intel Xeon Sandy-Bridge à 16 coeurs et 64Go de RAM, financés par l'\gls{Equip@meso} avec le soutien du conseil scientifique de l'Université de Strasbourg
+						\item 150 noeuds Intel Sandy et Ivy Bridge, Westmere de 16 ou 24 cœurs et de 64 à 128Go de RAM, financés par mutualisation
+					\end{itemize}
+					Tous les processeurs sont d'architecture x86\_64, et les nœuds de login et de calculs utilisent \textit{Scientific Linux} 7.5\footnote{Équivalent RedHat même version, voir \url{http://www.scientificlinux.org/}}.
+				\paragraph*{}
+					Le cluster \gls{HPC} a servit à réaliser l'ensemble des benchmarks du projet, ces benchmarks demandant énormément d'heures de calcul (voir sec \ref{sec:analyse_stage_travail}), il n'aurais pas été possible d'avoir des données aussi conséquentes sur lesquelles travailler sans cet accès au méso-centre.
+				\paragraph*{}
+					Après que l'équipe en charge du méso-centre ai installé notre clé ssh sur le noeud de login, l'accès au cluster \gls{HPC} se fait en ssh. L'utilisation des noeuds de calcul se fait par l'intermédiaire de \textit{Slurm Workload Manager} qui gère les différent noeuds, partitions de calcul, groupes d'utilisateurs, \ldots{} et gère la répartitions des taches (appelées job) par un système de priorités et de files d'attentes.
+				\paragraph*{}
+					Différents programmes sont mis a disposition sur le cluster par l'intermédiaire de \textit{GNU Modules} qui permet de les charger. Les deux modules utilisé durant le stage sont \texttt{cmake/cmake-3.12.2} et \texttt{gcc/gcc-9} pour la compilation des programmes.
+				\paragraph*{}
+					Le code des programmes développés est récupéré sur le cluster avec \textit{git} par l'intermédiaire des dépôts privés sur Github tandis que les résultats de l’exécution du \solver{} pour les différents benchmarks sont téléchargés du cluster avec \textit{rsync}.
 	\printbibliography[heading=bibintoc]{}
 	\printglossary[type=\acronymtype,nogroupskip=true,title=Lexique,toctitle=Lexique]{}
 	\chapter*{Annexes}\addcontentsline{toc}{chapter}{Annexes}\markboth{Annexes}{}

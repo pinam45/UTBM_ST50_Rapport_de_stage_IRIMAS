@@ -272,6 +272,29 @@
 					Enfin, le dernier objectif qui fut ajouté est d'utiliser l'algorithme développé au cour du stage afin de résoudre des instances de \gls{GVCP} à partir de solutions sous-optimales qui sont générées de façon très rapide par l'algorithme de Laurent.
 				\paragraph*{}
 					Ces nouveaux objectif ayant été ajouté durant le stage, ils nécessitent de déjà connaitre ce qui à été réalisé durant le stage avant leur ajout, ils seront donc explicité plus en détail avec le travail réalisé durant le stage dans la section \ref{sec:work}.
+		\section{Organisation du stage}
+			\subsection{Environnement de travail}
+				\paragraph*{}
+					Un bureau avec poste informatique, proche des autres membres de l'équipe, m'a été attribué, il est partagé avec Dominique Schmitt, enseignant-chercheur sur l'axe Algorithmique et Modélisations de l'équipe \gls{OMeGA}. Dans la même zone du bâtiment se trouve les bureaux de Laurent Moalic, Mathieu Brévilliers et Julien Lepagnot avec qui j'ai le plus travaillé sur la partie recherche du stage.
+				\paragraph*{}
+					La nature du stage le permettant (pas de problèmes de confidentialité), j'ai décider de travailler sur mon ordinateur personnel, ce dernier est assez bien équipé pour développer et tester en local le \solver{} (programme ou sera implémenter les différents algorithmes de résolution). Il est équipé d'un Intel Core i7-4710MQ (Quad-Core 2.5 GHz / 3.5 GHz Turbo - cache 6 Mo) avec 16 Go de mémoire vive DDR3L. Le \solver{} développé n'utilise pas le GPU et ne nécessite que peut d'espace disque.
+				\paragraph*{}
+					Les programmes ont majoritairement été développé sur Linux, plus précisément la distribution Debian unstable (connu aussi sous le nom de code Sid), qui est très adapté au développement logiciel car renfermant les paquets les plus récents qui viennent d'être introduits dans le système Debian (voir annexe \ref{sec:programs_versions} pour les versions des différents programmes utilisés).
+				\paragraph*{}
+					Le programmes ont été développés en \Cpp{}17\footnote{Révision de 2017 du \href{https://www.iso.org/standard/68564.html}{standard ISO/IEC 14882}}, conçu pour fonctionner sur Linux et Windows et pour embarquer toutes leur dépendances afin d’être autonome. Ils utilisent \textit{CMake} comme build-system et \textit{Make} ou \textit{Ninja} comme sous-système et sont compilables en utilisant \textit{gcc} et \textit{clang} sous Linux et \textit{Microsoft Visual \Cpp{} compiler} sous Windows. Le support de plusieurs plateformes d'exécution et compilateurs n'était pas nécessaire pour ce projet mais facilement atteignable, j'ai donc décidé de le prendre en compte pour que mon travail soit le plus facile possible à utiliser et reprendre.
+				\paragraph*{}
+					Le développement c'est fait sur Linux en utilisant l'\gls{IDE} \textit{CLion} tandis que la vérification de la compilation et compatibilité Windows c'est fait avec l'\gls{IDE} \textit{Microsoft Visual Studio}. La rédaction des différent scripts de lancement des benchmarks ont été rédigés avec l'éditeur \textit{Sublime Text}.
+				\paragraph*{}
+					Le code du projet est formaté en utilisant \textit{clang-format} avec un style personnalisé et est fréquemment analysé avec l'analyseur statique \textit{clang-tidy} afin d'éviter au maximum les erreurs de code du à une inattention ou une faute de frappe.
+				\paragraph*{}
+					Le code, les données et les documents du projet ont été versionné avec \textit{git} dans 4 dépôts:
+					\begin{description}
+						\item[USCP] contient le code et les ressources des différent programmes développés
+						\item[USCP\_instances] contient les instances de benchmark utilisées ainsi que de la documentation sur ces dernières
+						\item[USCP\_results] contient les résultats des différent benchmarks réalisés ainsi que de la documentation sur ces derniers
+						\item[UTBM\_ST50\_Rapport\_de\_stage\_IRIMAS] contient les rapport et présentations demandées par l'\gls{UTBM} et l'\gls{UQAC}, notamment les rapports de stage
+					\end{description}
+					Chacun de ses dépôt a pour \textit{remote} un dépôt GitHub privé afin de toujours avoir une sauvegarde en cas d'accident.
 	\printbibliography[heading=bibintoc]{}
 	\printglossary[type=\acronymtype,nogroupskip=true,title=Lexique,toctitle=Lexique]{}
 	\chapter*{Annexes}\addcontentsline{toc}{chapter}{Annexes}\markboth{Annexes}{}

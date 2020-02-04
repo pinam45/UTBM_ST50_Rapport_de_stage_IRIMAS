@@ -271,7 +271,7 @@
 				\paragraph*{}
 					Enfin, le dernier objectif qui fut ajouté est d'utiliser l'algorithme développé au cour du stage afin de résoudre des instances de \gls{GVCP} à partir de solutions sous-optimales qui sont générées de façon très rapide par l'algorithme de Laurent.
 				\paragraph*{}
-					Ces nouveaux objectif ayant été ajouté durant le stage, ils nécessitent de déjà connaitre ce qui à été réalisé durant le stage avant leur ajout, ils seront donc explicité plus en détail avec le travail réalisé durant le stage dans la section \ref{sec:work}.
+					Ces nouveaux objectif ayant été ajouté durant le stage (voir section \ref{sec:planning} pour les dates), ils nécessitent de déjà connaitre ce qui à été réalisé durant le stage avant leur ajout, ils seront donc explicité plus en détail avec le travail réalisé durant le stage dans la section \ref{sec:work}.
 		\section{Organisation du stage}
 			\subsection{Environnement de travail}
 				\paragraph*{}
@@ -314,6 +314,53 @@
 					Différents programmes sont mis a disposition sur le cluster par l'intermédiaire de \textit{GNU Modules} qui permet de les charger. Les deux modules utilisé durant le stage sont \texttt{cmake/cmake-3.12.2} et \texttt{gcc/gcc-9} pour la compilation des programmes.
 				\paragraph*{}
 					Le code des programmes développés est récupéré sur le cluster avec \textit{git} par l'intermédiaire des dépôts privés sur Github tandis que les résultats de l’exécution du \solver{} pour les différents benchmarks sont téléchargés du cluster avec \textit{rsync}.
+			\subsection{Déroulement du stage}\label{sec:planning}
+				\begin{landscape}
+					\begin{figure}[H]
+						\centering%
+						\hspace*{-0.5cm}
+						\resizebox{1.1\paperwidth}{!}{\import{../figures/}{planning.tex}}%
+						\caption{Planning détaillé du stage}%
+						\label{fig:planning}%
+					\end{figure}
+				\end{landscape}
+				\paragraph*{}
+					Le déroulement général du stage est visible sur la figure \ref{fig:planning} qui représente les grandes périodes du stage, les évènements importants qui ont influencé le stage et la répartition de mon temps entre les activités principales:
+					\begin{itemize}
+						\item La lecture d'articles scientifique et de documentation: la review de la littérature initiale, la documentation des librairies utilisées pour le développement des programmes, la documentation pour l'utilisation du cluster \gls{HPC},\ldots
+						\item La programmation du \solver{}: les éléments de base lié au \gls{USCP}, le parsage et la réduction des instances, l'algorithme \gls{RWLS}, l'algorithme Mémétique\ldots
+						\item La programmation du \printer{}: la lecture des données générées par le \solver{}, la traitement des données, la réalisation de statistiques, la génération de tables et de documents,\ldots
+						\item La rédaction: documentation pour les programmes et les instances et les benchmark, les différentes soumissions aux conférences,\ldots
+					\end{itemize}
+				\paragraph*{}
+					Le stage a commencé par une review de la littérature (détaillée dans la section \ref{sec:review_litterature}) en partant d'articles déjà repérés par Matthieu et de l'article \citetitle{Kritter2019} de \citeauthor{Kritter2019} publié en \citeyear{Kritter2019}, le \gls{OCP} dont traite l'article se réduisant au \gls{USCP}, l'article passe en revu toutes les méthodes efficaces pour résoudre le \gls{SCP} et le \gls{USCP}.
+				\paragraph*{}
+					Cette review de la littérature mena, au cour de la 2\textsuperscript{ème} semaine de stage, au choix de \gls{RWLS} comme recherche locale pour notre algorithme mémétique. Après la première implémentation de \gls{RWLS} (voir section \ref{sec:impl_RWLS}) et ma demande d'accès au cluster \gls{HPC}, au cour de la 6\textsuperscript{ème} semaine de stage, j'ai décider de séparer le code en 3 cibles (1 librairie et 2 programmes):
+					\begin{itemize}
+						\item \common{}: Librairie qui contient les structures de données nécessaire à la manipulation, la lecture et l'écriture des instances du \gls{USCP}, contient aussi les informations relatives aux instances de banchmark classique du \gls{USCP} ainsi que des fonctions et classes utilitaires (formatage, logging,\ldots)
+						\item \solver{}: Programme en ligne de commande pour la résolution du \gls{USCP}, il implémente différentes méthodes de résolution (greedy, \gls{RWLS}, algorithme Mémétique). Il prend en entrée les instances à résoudre, les méthodes à utiliser et les paramètres de ces méthodes. Il génère des rapports d'exécution contenant les informations relative aux résolutions réalisées (solution trouvée, durée et étapes de résolution effectué au moment ou la solution a été trouvée,\ldots)
+						\item \printer{}: Programme en ligne de commande pour le traitement des rapports d'exécution du \solver{}, il prend en entrée les dossiers/fichiers contenant les rapports d'exécution et génère des documents \LaTeX{} contenant des tables présentant les résultats obtenus par chaque méthode de résolution par instance, des statistiques sur les résultats obtenus, des comparaison des résultats d'une même méthode avec différent paramètres,\ldots
+					\end{itemize}
+				\paragraph*{}
+					Toujours durant la 6\textsuperscript{ème} semaine j'ai obtenu l'accès au méso-centre, je me suis donc renseigné sur l'utilisation de ce dernier et j'ai commencé à banchmarker mon implémentation de \gls{RWLS} sur le cluster \gls{HPC}. Jusqu’à la 8\textsuperscript{ème} semaine j'ai travaillé sur mon implémentation de \gls{RWLS} pour être strictement conforme à sa description dans~\cite{Gao2015}. En parallèle j'ai développé le \printer{} en fonction des besoins de traitement des benchmarks réalisés.
+				\paragraph*{}
+					Durant la 9\textsuperscript{ème} semaine du stage à eu lieu la conférence \acrshort{EA2019} qui est la ``\acrlong{EA2019}''~\cite{EA2019}. La conférence a eu lieu dans les locaux de la \gls{FST}, sur le site de l'\gls{UHA}, les 29 et 30 octobre 2019. J'ai assisté à la conférence les deux jours et ce fut très intéressant.
+				\paragraph*{}
+					À la 10\textsuperscript{ème} semaine du stage j'ai commencé la conception et l'implémentation de l'algorithme Mémétique (voir section \ref{sec:memetic_algorithm}), en parallèle de cela je réalisait des benchmarks, sur le cluster \gls{HPC}, des différentes évolutions de l'algorithme. La 1\textsuperscript{ère} version de ce dernier a rapidement donné de bon résultats et amélioré une \gls{BKS}, à la 11\textsuperscript{ème} semaine il été décidé de soumettre à la conférence \acrshort{ROADEF2020}.
+				\paragraph*{}
+					Au cour de la 12\textsuperscript{ème} semaine j'ai rédigé la majorité de la soumission et j'ai implémenté la 2\textsuperscript{ème} version de l'algorithme qui ajoute le croisement des poids. Les résultats du benchmark de cette deuxième version étant meilleurs et améliorant encore d'autres \gls{BKS}, c'est cette version de l'algorithme qui a été présenté dans la soumission \acrshort{ROADEF2020} qui à été déposé au cour de la 13\textsuperscript{ème} semaine.
+				\paragraph*{}
+					À partir de la 14\textsuperscript{ème} semaine j'ai commencé à essayer différentes idées de modifications de l'algorithme Mémétique ainsi que différent opérateurs de croisement des solutions et des poids de \gls{RWLS}. Durant la 15\textsuperscript{ème} semaine j'identifie que le nombre d'étapes de \gls{RWLS} le plus efficace pour notre algorithme diffère énormément entre les instances et j’introduis le système d'évolution dynamique du nombre d'étapes de \gls{RWLS}.
+				\paragraph*{}
+					La 3\textsuperscript{ème} version de l'algorithme étant très performante et améliorant 6 \gls{BKS}, durant le 16\textsuperscript{ème} semaine il a été décider de soumettre a la conférence \acrshort{LION14}. Le site de l'\gls{UHA} est fermé durant la 17\textsuperscript{ème} et 18\textsuperscript{ème} semaines pour les vacances de fin d'année, durant ces vacances je rédige la première version de la soumission pour \acrshort{LION14}.
+				\paragraph*{}
+					A la rentrée, durant la 19\textsuperscript{ème} et 20\textsuperscript{ème}, je finis d'implémenter et de tester le système d'évolution dynamique du nombre d'étapes de \gls{RWLS} et j'optimise la réduction des instances mais je ne peut pas réaliser de benchmark car le cluster \gls{HPC} est hors service à cause du déménagement du méso-centre. J'applique les modifications demandé par les reviewer pour la soumission de \acrshort{ROADEF2020} et j'améliore la soumission pour \acrshort{LION14}.
+				\paragraph*{}
+					Durant la 21\textsuperscript{ème} semaine, je règle les derniers détails de l'algorithme Mémétique et je réalise plusieurs optimisations afin de pouvoir réaliser un benchmark de l'algorithme Mémétique sur les instances \instance{RAIL} avec un paramètre de durée raisonnable.
+				\paragraph*{}
+					Durant la 22\textsuperscript{ème} semaine, Matthieu et Laurent reprennent la soumission de \acrshort{LION14}, l'améliorent et me demandent de faire des modifications dans les schémas et algorithmes, je réalise aussi les derniers benchmarks pour les tableaux de résultats de la version finale de l'article. Les résultats soumis améliorent 8 \gls{BKS} et apportent une \gls{BKS} à une instance (\instance{STS2187}) encore non traitée dans la littérature. J'implémente aussi le support des instances issues du \gls{GVCP}, je benchmark l'algorithme sur des instances générées à partir de solutions du \gls{GVCP} données par Laurent. Je réalise des statistiques d'utilisation de \textit{git} et du cluster \gls{HPC} pour en faire des figures pour les rapports de stage.
+				\paragraph*{}
+					La 23\textsuperscript{ème}, et dernière, semaine du stage est dédié à la rédaction des différents rapports demandés par l'\gls{UTBM} et l'\gls{UQAC} ainsi que la réalisation de benchmarks finaux de la dernière version du \solver{}.
 	\printbibliography[heading=bibintoc]{}
 	\printglossary[type=\acronymtype,nogroupskip=true,title=Lexique,toctitle=Lexique]{}
 	\chapter*{Annexes}\addcontentsline{toc}{chapter}{Annexes}\markboth{Annexes}{}

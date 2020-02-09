@@ -428,6 +428,41 @@
 					Les opérations \textbf{retirer} et \textbf{ajouter} doivent aussi mettre a jour le score de tout les sous-ensembles voisins du sous-ensemble ajouté ou retiré, car le score est lié à l'unicité de la couverture des points et changer les sous-ensembles composant la solution va inévitablement avoir des répercutions sur les scores des sous-ensembles. Comme dit précédemment, à chaque étape de \gls{RWLS} le poids des éléments non couverts augmente de 1, bien que cela ne soit pas présent dans les algorithmes de \cite{Gao2015}, il faut aussi mettre a jour le score de tout les sous-ensembles qui couvrent ces élément afin que leur score reste conforme a la définition du score.
 				\paragraph*{}
 					Cette exposition simplifiée du fonctionnement de \gls{RWLS} est incomplète par rapport à \cite{Gao2015} mais, je pense, suffisante pour aborder la suite de ce rapport et les explications du travail réalisé durant ce stage.
+			\subsection{Instances de benchmark}
+				\paragraph*{}
+					Au total, 98 instances de benchmark sont été identifiées, 96 sont classiquement utilisées dans la littérature pour évaluer l'efficacité des méthodes de résolution du \gls{SCP} et du \gls{USCP} et 2 (\instance{STS1215} et \instance{STS2187}) sont moins utilisées, mais sont dans la continuité d'un set d'instances classiques. 87 de ces instances proviennent de OR-Library~\cite{Beasley1990b} et 11 des \gls{STS}~\cite{Fulkerson1974}. Pour traiter les instances pondérées comme instances de \gls{USCP}, il suffit d'ignorer les poids des colonnes de l'instance.
+				\paragraph*{}
+					La table~\ref{tab:instances_orlibrary_random} contient le détail des 70 instances de OR-Library générées aléatoirement\footnote{En utilisant le thème de \citeauthor{Balas1980}~\cite{Balas1980}}, les ensembles \instance{4} à \instance{6} proviennent de~\cite{Balas1980}, les ensembles \instance{A} à \instance{E} de~\cite{Beasley1987} et les ensembles \instance{NRE} à \instance{NRH} de~\cite{Beasley1990a}. Les optima de certaines de ces instances sont connus dans un contexte non-unicost mais pas lorsque traité en unicost, l'exception étant les instances de l'ensemble \instance{E} qui sont unicost mais triviales à résoudre.
+				\begin{table}[H]
+					\centering
+					\caption{Ensembles d'instances aléatoires de OR-Library}
+					\label{tab:instances_orlibrary_random}
+					\input{../tables/short/instances_orlibrary_random}
+				\end{table}
+				\paragraph*{}
+					La table~\ref{tab:instances_orlibrary_combinatorial} contient les détails des 10 instances de OR-Library issues de problèmes combinatoire provenant de~\cite{Grossman1997}. Les 6 instances \instance{CYC} pour le problème de minimisation du nombre d'arêtes nécessaires pour réaliser tous les 4-cycles dans un hypercube et les 4 instances \instance{CLR} pour la minimisation du nombre de quadruplets tel qu'au moins l'un d'eux soit monochromatique quelle que soit la 2-coloration d'un ensemble donné.
+				\begin{table}[H]
+					\centering
+					\caption{Instances issues de problèmes combinatoires de OR-Library}
+					\label{tab:instances_orlibrary_combinatorial}
+					\input{../tables/short/instances_orlibrary_combinatorial}
+				\end{table}
+				\paragraph*{}
+					La table~\ref{tab:instances_orlibrary_rail} contient les détails des 7 instances à très grande échelle de OR-Library issues de la programmation des équipages pour la compagnie ferroviaire italienne~\cite{Caprara2000}. Ces instances sont presque unicost, chaque colonne couvre au plus 12 lignes et a un coût de 1 ou 2.
+				\begin{table}[H]
+					\centering
+					\caption{Instances issues de programmation d'équipages de OR-Library}
+					\label{tab:instances_orlibrary_rail}
+					\input{../tables/short/instances_orlibrary_rail}
+				\end{table}
+				\paragraph*{}
+					La table~\ref{tab:instances_sts} contient les détails des 11 instances de issues des \gls{STS} provenant de~\cite{Fulkerson1974}. Ces instances se construisent a partir de l'instance de taille précédente en commençant avec \instance{STS9}, elle ont une structure régulière avec chaque ligne couverte par exactement 3 colonnes. Les instances \instance{STS9} à \instance{STS729} sont très fréquemment utilisées, \cite{Gao2015} est le premier article a utiliser \instance{STS1215}, on peut aussi noter qu'il n'utilise pas les instances de \instance{STS9} à \instance{STS135} car ces dernières sont très faciles à résoudre. Pour nos benchmarks nous avons commencé avec les instances classiques et sur fin du stage ont été ajoutés les instances \instance{STS1215} et \instance{STS2187}.
+				\begin{table}[H]
+					\centering
+					\caption{Instances issues des \acrshort{STS}}
+					\label{tab:instances_sts}
+					\input{../tables/short/instances_sts}
+				\end{table}
 	\printbibliography[heading=bibintoc]{}
 	\printglossary[type=\acronymtype,nogroupskip=true,title=Lexique,toctitle=Lexique]{}
 	\chapter*{Annexes}\addcontentsline{toc}{chapter}{Annexes}\markboth{Annexes}{}

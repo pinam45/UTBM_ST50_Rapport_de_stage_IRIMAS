@@ -528,5 +528,40 @@
 					\item Slurm 15.08.13
 					\item Modules 3.2.10
 				\end{itemize}
+		\newpage\section{Paramètres du \solver{}}\label{sec:solver_parameters}
+			Extrait de la sortie de la commande \texttt{solver --help}:
+			\begin{Verbatim}[frame=single]
+      --help                    Print help
+      --version                 Print version
+  -i, --instances NAME          Instances to process
+      --instance_type orlibrary|orlibrary_rail|sts|gvcp
+                                Type of the instance to process
+      --instance_path PATH      Path of the instance to process
+      --instance_name NAME      Name of the instance to process
+  -o, --output_prefix PREFIX    Output file prefix (default: solver_out_)
+  -r, --repetitions N           Repetitions number (default: 1)
+      --greedy                  Solve with greedy algorithm (no repetition as
+                                it is determinist)
+      --rwls                    Improve with RWLS algorithm (start with a
+                                greedy)
+      --rwls_steps N            RWLS steps limit (default:
+                                18446744073709551615)
+      --rwls_time N             RWLS time (seconds) limit (default:
+                                18446744073709551615)
+      --memetic                 Solve with memetic algorithm
+      --memetic_cumulative_rwls_steps N
+                                Memetic cumulative RWLS steps limit (default:
+                                18446744073709551615)
+      --memetic_cumulative_rwls_time N
+                                Memetic cumulative RWLS time (seconds) limit
+                                (default: 18446744073709551615)
+      --memetic_time N          Memetic time limit (default:
+                                18446744073709551615)
+      --memetic_crossover OPERATOR
+                                Memetic crossover operator (default: default)
+      --memetic_wcrossover OPERATOR
+                                Memetic RWLS weights crossover operator
+                                (default: default)
+			\end{Verbatim}
 	\makeutbmbackcover{}
 \end{document}

@@ -485,6 +485,29 @@
 					Les données générées par le \solver{} sont au format JSON plutôt que binaire afin que les données ne soit pas uniquement lisibles avec le \printer{} mais qu'il soit facile de les charger depuis un autre programme pour en faire un traitement différent du \printer{}. La librairie utilisé pour la sérialisation et dé-sérialisation en JSON est \textit{json}\footnote{\url{https://github.com/nlohmann/json}, ``JSON for Modern C++''}.
 				\paragraph*{}
 					Pour ce qui est de la lecture des instances, les différentes sources les fournissent dans des fichiers texte, les instances de OR-Library sont toutes au même format à l'exception des instances \instance{RAIL} et les instances \instance{STS} ont elles aussi leur format spécifique. Les parseurs pour ces formats que j'ai nommés \textit{orlibrary}, \textit{orlibrary\_rail} et \textit{sts} ont été implémenté en premier, et vers la fin du stage a été ajouté le parseur pour le format \textit{gvcp} des instances issues des résultats sur le \gls{GVCP} de Laurent.
+			\subsection{Réduction des instances}\label{sec:reduction}
+				\paragraph*{}
+					Les instances de \gls{USCP} peuvent être réduites, c'est a dire simplifiées en diminuant le nombre de colonnes ou de ligne de l'instance tout en ne changeant pas la structure de l'instance et ses solutions optimales. \citeauthor{Beasley1987} dans son article \citetitle{Beasley1987}~\cite{Beasley1987}, définit 2 réductions possibles sur les matrices des instances:
+				\paragraph*{Column domination\\}
+					Si une colonne est un sous-ensemble d'une autre colonne (toutes les lignes qu'elle couvre sont couvertes par une autre colonne), on dit que cette colonne est dominée par l'autre. Comme le problème est unicost, les colonnes dominées peuvent être supprimée de l'instance, elles n'ajoutent rien par rapport aux colonnes qui les dominent.
+				\paragraph*{Column inclusion\\}
+					Si une colonne est la seule a couvrir une ligne, il est obligatoire d'inclure cette colonne dans la solution pour qu'elle soit valide, ainsi la colonne peut être inclue par défaut, rendant la ligne toujours couverte et permettant de supprimer la colonne et la ligne de l'instance.
+				\paragraph*{}
+					A cause de la première stratégie tabou utilisant le flag \textit{canAddToSolution}, \gls{RWLS} ne peut pas traiter d'instance ou une colonne serait la seule a couvrir une ligne car, lorsque cette dernière serait retirée de la solution, aucune colonne couvrant cette ligne ne serait sélectionnable. Pour remédier à ça, il est obligatoire d'appliquer la réduction \textit{column inclusion}.
+				\paragraph*{}
+					Bien que seul \textit{column inclusion} était nécessaire au bon fonctionnement de \gls{RWLS}, j'ai décidé d'implémenter les deux réductions, car si il est possible de réduire la taille d'une instance sans avoir d'impact sur les solutions, cela permettra de résoudre l'instance plus rapidement, or la performance est une composante très importante d'un solveur.
+				\paragraph*{}
+					Cependant, la suppression des sous-ensembles dominés peut conduire à des points couverts par une seule colonne et la suppression des lignes couvertes par des colonnes inclues peut conduire à des colonnes dominées. Le \solver{} applique donc alternativement les deux réductions en commençant par \textit{column domination} jusqu'à ce qu'il ne soit plus possible de réduire l'instance.
+				\paragraph*{}
+					Après avoir implémenté les réductions dans le \solver{}, un test de réduction a été lancé sur toutes les instances de benchmark présentées précédemment. Parmi les 98 instances, seules les 7 instances \instance{RAIL} se trouvent être réductibles, ce n'est pas surprenant car ce sont des instances de problèmes réels. De plus certaines instances comme les instances aléatoires de OR-Library ont été généré avec un thème de génération ne créant que des instances non réductibles.
+				\paragraph*{}
+					La table~\ref{tab:rail_reductions} présente l'effet des réductions appliquées aux instances \instance{RAIL}, les colonnes dominées et les lignes couvertes sont simplement supprimées de l'instance, tandis que les colonnes inclues sont supprimées mais sont prisent en compte dans l'évaluation finale des solution car elles font obligatoirement partie de toutes les solutions valides.
+				\begin{table}[H]
+					\centering
+					\caption{Réduction appliquée aux instances \instance{RAIL}}
+					\label{tab:rail_reductions}
+					\input{../tables/short/rail_reductions}
+				\end{table}
 	\printbibliography[heading=bibintoc]{}
 	\printglossary[type=\acronymtype,nogroupskip=true,title=Lexique,toctitle=Lexique]{}
 	\chapter*{Annexes}\addcontentsline{toc}{chapter}{Annexes}\markboth{Annexes}{}

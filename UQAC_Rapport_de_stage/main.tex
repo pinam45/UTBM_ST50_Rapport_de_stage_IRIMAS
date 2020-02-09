@@ -43,7 +43,8 @@
 		\paragraph*{}
 			Je remercie aussi \textbf{la direction de l'UHA} et \textbf{Lhassane Idoumghar}, directeur du département informatique et de l'équipe \acrshort{OMeGA} pour m'avoir permis de rejoindre leur personnel durant ces quelques mois. Enfin, je remercie \textbf{Mireille Jacquot} du Service des Stages de l'\acrshort{UTBM} et \textbf{Justine Lévesque}, agente de stage à l'\acrshort{UQAC} pour la gestion de mon dossier.
 	\tableofcontents{}
-	\listoffigures{}
+	%\listoffigures{}
+	%\listoftables{}
 	\chapter*{Introduction}\addcontentsline{toc}{chapter}{Introduction}
 		\paragraph*{}
 			Le cursus à l'\gls{UTBM} est entrecoupé de deux périodes de stage de 6 mois durant les 3 ans du cycle ingénieur, après le Tronc Commun. La première, après un an en branche, est le ST40 intitulé ``Stage Assistant Ingénieur'' et la seconde, un an plus tard, est le ST50 intitulé ``Projet de fin d'études - Ingénieur débutant''.
@@ -389,6 +390,44 @@
 					Cet article présente un algorithme génétique pour résoudre le \gls{SCP} avec une application au problèmes d'assignation d'équipages. L'algorithme utilise une représentation binaire, la sélection des parents se fait par roulette sur les rangs, le croisement se fait avec le \gls{UX} et une réparation, la mutation se fait en ajoutant ou supprimant un sous-ensemble en fonction de la densité de la meilleure solution puis réparant la solution.
 				\paragraph*{\citetitle{Beasley1987} de \citeauthor{Beasley1987} (\citeyear{Beasley1987})~\cite{Beasley1987}\\}
 					Cet article présente un algorithme pour résoudre le \gls{SCP} mais aussi plusieurs procédures de réduction pour les instances de \gls{SCP} facilement adaptables au \gls{USCP} dont les deux majeures sont \textit{column domination} et \textit{column inclusion}. Ces procédures seront détaillées dans la section \ref{sec:reduction}.
+			\subsection{\acrshort{RWLS}}\label{sec:RWLS}
+				\paragraph*{}
+					\gls{RWLS} est la recherche locale choisie pour notre hybridation, c'est un algorithme heuristique qui repose principalement sur un schéma de pondération qui met à jour les poids des éléments non couverts pour empêcher la convergence vers les optima locaux. Le schéma de pondération guide l'algorithme en utilisant 2 concepts, le poids pour les éléments et le score pour les sous-ensembles.
+				\paragraph*{}
+					Le poids d'un élément représente la difficulté à couvrir cet élément, il est initialisé à 1 et augmenté de 1 pour chaque étape de l'algorithme ou l'élément laissé non couvert.
+				\paragraph*{}
+					Le score d'un sous-ensemble représente l'utilité du sous-ensemble dans la solution pour couvrir les éléments difficilement couvrables de l'instance. Si le sous-ensemble fait partie de la solution, son poids est l'opposé de la somme des poids des éléments qu'il est le seul à couvrir dans la solution. S'il ne fait pas partie de la solution, son poids est la somme des poids des éléments qu'il serait le seul à couvrir s'il était ajouté à la solution.
+				\paragraph*{}
+					Ainsi, les sous-ensembles qui font partie de la solution ont des scores négatifs, les sous-ensembles ne faisant pas partie de la solution ont des scores positifs et les sous-ensembles inutiles pour la solution ont des scores nuls. Ce qui signifie que le sous-ensemble inclut dans la solution avec le meilleur score est le moins utile a la solution et que le sous-ensemble non-inclut dans la solution avec le meilleur score serait le plus utile à ajouter à la solution.
+				\paragraph*{}
+					\gls{RWLS} commence par générer une solution greedy, puis fonctionne par étapes de manière itérative, les étapes peuvent se découper en sous-étapes comme suit:
+					\begin{enumerate}[label=(\arabic*)]
+						\item\customlabel{it:RWLS1}{(1)}\tikzremember{RWLS1}tant que la solution est valide:
+							\begin{enumerate}[label=(\alph*)]
+								\item\customlabel{it:RWLS1a}{(1.a)}\tikzremember{RWLS1a}enregistrer la solution comme la meilleure rencontrée jusqu'à présent
+								\item\customlabel{it:RWLS1b}{(1.b)}\tikzremember{RWLS1b}\textbf{retirer} le sous-ensemble avec le meilleur score de la solution
+							\end{enumerate}
+						\item\customlabel{it:RWLS2}{(2)}\tikzremember{RWLS2}\textbf{retirer} le sous-ensemble avec le meilleur score de la solution
+						\item\customlabel{it:RWLS3}{(3)}\tikzremember{RWLS3}sélectionner aléatoirement un élément non-couvert
+						\item\customlabel{it:RWLS4}{(4)}\tikzremember{RWLS4}\textbf{ajouter} le sous-ensemble avec le meilleur score couvrant cet élément (les stratégies tabou empêchant de boucler)
+						\item\customlabel{it:RWLS5}{(5)}\tikzremember{RWLS5}rendre le sous ensemble ajouté tabou et incrémenter le nombre d'étapes
+					\end{enumerate}
+					\begin{tikzpicture}[remember picture,overlay,x=1pt,y=1pt]
+						\draw[->,>=Latex,dashed] ($(RWLS5)+(-25,0)$) -- ++(-12.5,0) |- ($(RWLS1)+(-25,0)$);
+						\draw[->,>=Latex,dashed] ($(RWLS1b)+(-25,0)$) -| ($(RWLS1)+(-12.5,-7.5)$);
+					\end{tikzpicture}
+				\paragraph*{}
+					\gls{RWLS} réalise cette boucle jusqu'à ce que la limite d'étapes soit atteinte, le nombre d'étapes est le seul critère d’arrêt mais il peut être remplacé par une limite de temps. \gls{RWLS} travaille avec une solution non valide qui compte 1 sous-ensemble de moins que la meilleure rencontrée, pour cela la sous-étape \ref{it:RWLS1} commence par retirer des sous-ensembles jusqu’à atteindre une solution non valide. Si la meilleure solution trouvée est composé de \(k\) sous-ensembles, alors \gls{RWLS} descendra à \(k - 1\) sous-ensembles avec la sous-étape \ref{it:RWLS1}, puis commencera à changer des sous-ensembles avec les sous-étapes \ref{it:RWLS2} et \ref{it:RWLS4} jusqu’à obtenir une solution valide a \(k - 1\) sous-ensembles qui deviendra la nouvelle meilleur solution en rebouclant sur la sous-étape \ref{it:RWLS1}. L'algorithme repose donc sur une alternance de 2 opérations, \textbf{retirer} aux sous-étapes \ref{it:RWLS1b} et \ref{it:RWLS2} et \textbf{ajouter} à la sous-étape \ref{it:RWLS4}.
+				\paragraph*{}
+					\gls{RWLS} utilise un concept de voisinage, dans \cite{Gao2015} il est définit que le voisinage d'un sous-ensemble est l'ensemble des sous-ensembles dont l'intersection de la couverture avec le sous-ensemble considéré n'est pas vide. Dit autrement, tous les sous-ensemble dont la couverture a 1 point ou plus en commun sont voisins.
+				\paragraph*{}
+					La première stratégie tabou de l'algorithme est mise en oeuvre avec un flag \textit{canAddToSolution} associé à chaque sous-ensemble qui indique si ce dernier peut être ajouté à la solution. Tout les flags sont initialisé à \textit{true}, l'opération \textbf{retirer} passe le flag du sous-ensemble retiré à \textit{false} et les 2 opération (\textbf{retirer} et \textbf{ajouter}) passent les flags de tout les voisins à \textit{true}. Ce système évite qu'un sous-ensemble soit retiré puis ajouté de nouveau juste après, un sous-ensemble retiré doit attendre l'ajout ou le retrait d'un de ses voisins pour pouvoir de nouveau être ajouté.
+				\paragraph*{}
+					La deuxième stratégie tabou de \gls{RWLS} est une liste \gls{FIFO} de taille 2 de sous-ensembles interdis, la sous-étape \ref{it:RWLS5} ajoute à la liste le sous-ensemble ajouté à la solution durant l'étape, en retirant d'abord un élément si la liste est pleine. La liste étant \gls{FIFO} de taille 2, chaque élément ajouté est interdit à la sélection pour l'opération \textbf{retirer} pendant 2 étapes.
+				\paragraph*{}
+					Les opérations \textbf{retirer} et \textbf{ajouter} doivent aussi mettre a jour le score de tout les sous-ensembles voisins du sous-ensemble ajouté ou retiré, car le score est lié à l'unicité de la couverture des points et changer les sous-ensembles composant la solution va inévitablement avoir des répercutions sur les scores des sous-ensembles. Comme dit précédemment, à chaque étape de \gls{RWLS} le poids des éléments non couverts augmente de 1, bien que cela ne soit pas présent dans les algorithmes de \cite{Gao2015}, il faut aussi mettre a jour le score de tout les sous-ensembles qui couvrent ces élément afin que leur score reste conforme a la définition du score.
+				\paragraph*{}
+					Cette exposition simplifiée du fonctionnement de \gls{RWLS} est incomplète par rapport à \cite{Gao2015} mais, je pense, suffisante pour aborder la suite de ce rapport et les explications du travail réalisé durant ce stage.
 	\printbibliography[heading=bibintoc]{}
 	\printglossary[type=\acronymtype,nogroupskip=true,title=Lexique,toctitle=Lexique]{}
 	\chapter*{Annexes}\addcontentsline{toc}{chapter}{Annexes}\markboth{Annexes}{}

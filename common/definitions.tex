@@ -14,3 +14,11 @@
 
 % Clear to the next left page
 \newcommand*{\cleartoleftpage}{\clearpage\ifodd\value{page}\hbox{}\newpage\fi}
+
+% Create 0-width tikz node inline
+\newcommand{\tikzremember}[1]{\makebox[0pt][c]{\tikz[remember picture]\node(#1){};}}
+
+% Custom label
+\makeatletter
+\newcommand{\customlabel}[2]{\def\@currentlabel{#2}\label{#1}}
+\makeatother

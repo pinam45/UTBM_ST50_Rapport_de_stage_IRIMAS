@@ -463,6 +463,28 @@
 					\label{tab:instances_sts}
 					\input{../tables/short/instances_sts}
 				\end{table}
+		\section{Implémentation de \acrshort{RWLS}}\label{sec:impl_RWLS}
+			\subsection{Base du \solver{}}
+				\paragraph*{}
+					La performance a été au centre de la conception du \solver{} et a guidé de nombreux choix de design et d'implémentation. Par exemple, il a été décidé d'utiliser la représentation binaire pour prendre avantage des processeurs modernes (post-2013) dont sont équipé la majorité des ordinateurs et notamment les nœuds de calcul du cluster \gls{HPC}. En effet, les processeurs modernes sont équipés d'instructions \gls{SIMD}, on peut notamment penser à l'AVX512 sur les processeurs Intel qui permet de réaliser des opérations sur 512 bits simultanément.
+				\paragraph*{}
+					Le \solver{} stocke donc la matrice d'incidence \(A\) ainsi que le vecteur solution \(x\) sur les bits de types primitifs \Cpp{} afin de pouvoir leur appliquer des opérations simultanément. Pour cela, le \solver{} utilise la librairie \textit{dynamic\_bitset}\footnote{\url{https://github.com/pinam45/dynamic_bitset}, ``\Cpp{}17 header-only dynamic bitset'' (librairie open-source que j'ai implémentée en 2019, avant le stage)}, permettant d'utiliser un bitset dynamique (dont la taille n'est pas connue à la compilation) et d'appliquer toutes les opérations booléennes de façon optimisée en tirant avantage des instructions \gls{SIMD} du processeur, si elles sont présentes.
+				\paragraph*{}
+					Avec une telle représentation, la vérification de la validité d'une solution peut se faire efficacement en réalisant une opération booléenne \textit{OR} sur tous les bitsets \(S_i\) pour lesquels \(x_i\) est à \(1\) et en vérifiant que le bitset résultant de cette opération a tous ses bits à \(1\), la figure \ref{fig:binary_representation_solution_check} représente cette opération. Il y aurais bien d'autre optimisations résultant de cette implémentation utilisant des bitsets qui pourrait être présentées mais ce n'est pas l'objectif de ce rapport.
+				\begin{figure}[H]
+					\centering%
+					\resizebox{\textwidth}{!}{\includestandalone{../figures/binary_representation_solution_check}}%
+					\caption{Vérification de la validité d'une solution en représentation binaire}%
+					\label{fig:binary_representation_solution_check}%
+				\end{figure}
+				\paragraph*{}
+					Le \solver{} a été conçut comme un programme en ligne de commande pour faciliter son utilisation sur les serveurs de calculs tels que le cluster \gls{HPC} du méso-centre. Les paramètres supportés par le \solver{} sont listé dans l'annexe \ref{sec:solver_parameters}, ils permettent de préciser les instances à résoudre, les algorithmes à utiliser et leurs paramètres. La gestion des paramètres de ligne de commande a été implémenté en utilisant la librairie \textit{cxxopts}\footnote{\url{https://github.com/jarro2783/cxxopts}, ``Lightweight \Cpp{} command line option parser''}.
+				\paragraph*{}
+					Le \solver{} utilise un système de logs conçut en utilisant la librairie \textit{spdlog}\footnote{\url{https://github.com/gabime/spdlog}, ``Fast C++ logging library''}, les logs indiquent le déroulement général du programme ainsi que les erreurs comme un fichier d'instance non-accessible ou une instance qui ne possède pas de solution. Les logs sont affichés dans la console pour un retour direct lors du débogage et sont stocké dans 3 fichiers rotatifs de 5 Mo pour les exécutions distantes telles que lors des benchmarks réalisés sur le cluster \gls{HPC}.
+				\paragraph*{}
+					Les données générées par le \solver{} sont au format JSON plutôt que binaire afin que les données ne soit pas uniquement lisibles avec le \printer{} mais qu'il soit facile de les charger depuis un autre programme pour en faire un traitement différent du \printer{}. La librairie utilisé pour la sérialisation et dé-sérialisation en JSON est \textit{json}\footnote{\url{https://github.com/nlohmann/json}, ``JSON for Modern C++''}.
+				\paragraph*{}
+					Pour ce qui est de la lecture des instances, les différentes sources les fournissent dans des fichiers texte, les instances de OR-Library sont toutes au même format à l'exception des instances \instance{RAIL} et les instances \instance{STS} ont elles aussi leur format spécifique. Les parseurs pour ces formats que j'ai nommés \textit{orlibrary}, \textit{orlibrary\_rail} et \textit{sts} ont été implémenté en premier, et vers la fin du stage a été ajouté le parseur pour le format \textit{gvcp} des instances issues des résultats sur le \gls{GVCP} de Laurent.
 	\printbibliography[heading=bibintoc]{}
 	\printglossary[type=\acronymtype,nogroupskip=true,title=Lexique,toctitle=Lexique]{}
 	\chapter*{Annexes}\addcontentsline{toc}{chapter}{Annexes}\markboth{Annexes}{}

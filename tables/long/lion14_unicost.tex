@@ -1,0 +1,47 @@
+{
+\rowcolors{1}{gray!10}{white}
+\footnotesize
+\begin{longtable}{@{\extracolsep{0pt}}lrrr{c}rrr{c}rrr}
+	\hiderowcolors
+	\caption{Meilleures solutions trouvées par \gls{RWLS} et \gls{MASC} sur les instances unicost}\label{tab:lion14_unicost}\\
+	\toprule
+	\multirow{2}{*}{\raisebox{-\heavyrulewidth}{Inst.}} & \multirow{2}{*}{\raisebox{-\heavyrulewidth}{Rows}} & \multirow{2}{*}{\raisebox{-\heavyrulewidth}{Columns}} & \multirow{2}{*}{\raisebox{-\heavyrulewidth}{BKS}} && \multicolumn{3}{l}{RWLS} && \multicolumn{3}{l}{MASC}\\
+	\cmidrule{6-8}\cmidrule{10-12}
+	 & & & && Best & \multicolumn{1}{c}{\#Best} & \multicolumn{1}{c}{Time(s)} && Best & \multicolumn{1}{c}{\#Best} & \multicolumn{1}{c}{Time(s)}\\
+	\midrule
+	\endfirsthead
+	\caption{Meilleures solutions trouvées par \gls{RWLS} et \gls{MASC} sur les instances unicost (suite)}\\
+	\toprule
+	\multirow{2}{*}{\raisebox{-\heavyrulewidth}{Inst.}} & \multirow{2}{*}{\raisebox{-\heavyrulewidth}{Rows}} & \multirow{2}{*}{\raisebox{-\heavyrulewidth}{Columns}} & \multirow{2}{*}{\raisebox{-\heavyrulewidth}{BKS}} && \multicolumn{3}{l}{RWLS} && \multicolumn{3}{l}{MASC}\\
+	\cmidrule{6-8}\cmidrule{10-12}
+	 & & & && Best & \multicolumn{1}{c}{\#Best} & \multicolumn{1}{c}{Time(s)} && Best & \multicolumn{1}{c}{\#Best} & \multicolumn{1}{c}{Time(s)}\\
+	\midrule
+	\endhead
+	\bottomrule
+	\endfoot
+	\showrowcolors
+	CLR10 & 511 & 210 & 25 && \textbf{25} & 10 & 0.01 && \textbf{25} & 10 & 0.07 \\
+	CLR11 & 1\,023 & 330 & 23 && \textbf{23} & 10 & 0.08 && \textbf{23} & 10 & 0.07 \\
+	CLR12 & 2\,047 & 495 & 23 && \textbf{23} & 10 & 0.38 && \textbf{23} & 10 & 0.12 \\
+	CLR13 & 4\,095 & 715 & 23 && \textbf{23} & 10 & 3.89 && \textbf{23} & 10 & 1.07 \\
+	%
+	CYC6 & 240 & 192 & 60  && \textbf{60} & 10 & 0.00 && \textbf{60} & 10 & 0.19 \\
+	CYC7 & 672 & 448 & 144 && \textbf{144} & 10 & 0.02 && \textbf{144} & 10 & 0.33 \\
+	CYC8 & 1\,792 & 1\,024 & 342 && \textbf{342} & 10 & 0.30 && \textbf{342} & 10 & 1.44 \\
+	CYC9 & 4\,608 & 2\,304 & 772 && \textbf{772} & 2 & 266.70 && \textbf{772} & 6 & 103.95 \\
+	CYC10 & 11\,520 & 5\,120 & 1\,798 && \textbf{1\,798} & 7 & 663.73 && \textbf{1\,792*} & 8 & 267.99 \\
+	CYC11 & 28\,160 & 11\,264 & 3\,968 && \textbf{3\,968} & 1 & 520.69 && \textbf{3\,968} & 1 & 275.82 \\
+	%
+	STS9 & 12 & 9 & 5 && --- & --- & --- && \textbf{5} & 10 & 0.05 \\
+	STS15 & 35 & 15 & 9 && --- & --- & --- && \textbf{9} & 10 & 0.04 \\
+	STS27 & 117 & 27 & 18 && --- & --- & --- && \textbf{18} & 10 & 0.06 \\
+	STS45 & 330 & 45 & 30 && --- & --- & --- && \textbf{30} & 10 & 0.17 \\
+	STS81 & 1\,080 & 81 & 61 && --- & --- & --- && \textbf{61} & 10 & 0.04 \\
+	STS135 & 3\,015 & 135 & 103 && --- & --- & --- && \textbf{103} & 10 & 2.81 \\
+	STS243 & 9\,801 & 243 & 198 && \textbf{198} & 10 & 0.09 && \textbf{198} & 10 & 0.25 \\
+	STS405 & 27\,270 & 405 & 335 && \textbf{335} & 5 & 321.26 && \textbf{335} & 10 & 41.40 \\
+	STS729 & 88\,452 & 729 & 617 && \textbf{617} & 10 & 23.26 && \textbf{617} & 10 & 10.59 \\
+	STS1215 & 245\,835 & 1\,215 & 1\,063 && \textbf{1\,063} & 1 & 886.25 && \textbf{1\,063} & 1 & 1971.41 \\
+	STS2187 & 796\,797 & 2\,187 & --- && --- & --- & --- && \textbf{1\,963*} & 10 & 1883.39 \\
+\end{longtable}
+}

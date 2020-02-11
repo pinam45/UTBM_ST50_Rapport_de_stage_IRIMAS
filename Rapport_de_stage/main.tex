@@ -612,6 +612,25 @@
 					Un benchmark complet de l'algorithme a été lancé sur le cluster \gls{HPC} en faisant varier le Crossover et le WCrossover, les résultats ne donnent pas un couple de croisement qui soit le plus efficace pour toutes les instances, la meilleure combinaison change en fonction des instances.
 				\paragraph*{}
 					Le couple de croisement finalement choisit pour cette version de l'algorithme, et qui a servit pour la soumission à la \acrshort{ROADEF2020}, est \textit{greedy\_merge}/\textit{average}, bien qu'il ne soit pas toujours le plus efficace en terme de nombre d'étapes totales de \gls{RWLS} nécessaires pour atteindre les \gls{BKS}, c'est celui qui est le plus stable sur les instances dont la \gls{BKS} est amélioré, la \gls{BKS} de l'instance \instance{CYC10} est ainsi amélioré à 1972 par environ 10\% des répétitions avec cette configuration.
+			\subsection{Évolution dynamique du nombre d'étapes de \acrshort{RWLS}}
+				\paragraph*{}
+					Après plusieurs benchmarks de différentes variations de l'algorithme, il devient assez clair que la valeur choisie initialement de 150\,000 étapes par génération pour toutes les instances n'est pas optimale pour notre algorithme. J'ai donc essayé avec plus ou moins d'étapes par générations ou encore de choisir le nombre d'étapes en fonction de la taille de l'instance avant d'arriver à la troisième version de l'algorithme représenté sur la figure \ref{fig:memetic_algorithm_v3}.
+				\begin{figure}[H]
+					\centering%
+					\resizebox{\textwidth}{!}{\import{../figures/}{memetic_algorithm_v3.tex}}%
+					\caption{Fonctionnement global de la troisième version de l'algorithme mémétique: \acrshort{MASC}}%
+					\label{fig:memetic_algorithm_v3}%
+				\end{figure}
+				\paragraph*{}
+					Cette version, nommée \gls{MASC}, fait évoluer dynamiquement la limite d'étapes de \gls{RWLS} à chaque génération pour mieux correspondre aux besoins de \gls{RWLS} pour l'instance courante en essayant d'être suffisant pour améliorer la solution, mais sans perdre de temps à stagner. La limite initiale est la somme du nombre de sous-ensembles et du nombre d'éléments de l'instance. Cette limite est ensuite mise à jour en fonction du nombre d'étapes auxquelles RWLS a trouvé la meilleure solution au cours des 10 dernières générations. La façon exacte dont le nombre maximum d'étapes change est détaillée dans l'algorithme~\ref{alg:masc}.
+				\paragraph*{}
+					Dans cette version de l'algorithme mémétique, un problème peut apparaître si, pour une certaine paire de solutions, l'opérateur de croisement ne dégrade pas la solution, car \gls{RWLS} pourrait ne pas améliorer les solution et laisser inchangées les solutions, mais aussi les poids pour cette génération, induisant une stagnation. Un autre problème apparait si le croisement est coincé dans une partie de l'espace de solution qui mène toujours \gls{RWLS} à la même solution dans le nombre limité d'étapes.
+				\paragraph*{}
+					Pour éviter cela, comme détaillé dans l'algorithme~\ref{alg:masc}, \gls{MASC} contient des mécanismes conditionnels anti-stagnation qui remplacent les solutions par des solutions aléatoires si \gls{RWLS} n'a pas réussi à améliorer une solution ou si les deux solutions sont identiques. Une autre raison pour que \gls{RWLS} n'améliore pas une solution peut être qu'il n'y a pas assez d'étapes pour le faire. C'est pourquoi la limite d'étapes de la prochaine génération est doublée si \gls{RWLS} n'a pas réussi à améliorer une solution. Ces mécanismes permettent d'empêcher l'algorithme de stagner sans perdre l'information construite jusque la puisque, dans tout les cas, les poids sont conservés et ce sont eux qui guident majoritairement \gls{RWLS}.
+				\paragraph*{}
+					\input{../algorithms/masc.tex}
+				\paragraph*{}
+					Plusieurs benchmarks ont mené à cette implémentation finale, ils ont aussi permis de choisir le couple d'opérateurs \textit{subproblem\_rwls}/\textit{max} sur les mêmes critères que pour la version précédente de l'algorithme. Cette configuration a servit pour la soumission à \acrshort{LION14}.
 	\printbibliography[heading=bibintoc]{}
 	\printglossary[type=\acronymtype,nogroupskip=true,title=Lexique,toctitle=Lexique]{}
 	\chapter*{Annexes}\addcontentsline{toc}{chapter}{Annexes}\markboth{Annexes}{}

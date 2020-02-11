@@ -1,0 +1,165 @@
+%!TEX program = lualatex
+%!TEX encoding = UTF-8 Unicode
+\documentclass[11pt,class=book]{standalone}
+\input{packages}
+\input{common}
+
+\begin{document}
+	\pgfmathsetmacro\adist{0}%
+	\pgfmathsetmacro\bdist{30}%
+	\pgfmathsetmacro\cdist{(\adist+\bdist)/2}%
+	\pgfmathsetmacro\gdist{60}%
+	\pgfmathsetmacro\yshiftz{-100}%
+	\pgfmathsetmacro\yshifta{0}%
+	\pgfmathsetmacro\yshiftb{\yshifta+90}%
+	\pgfmathsetmacro\yshiftc{\yshiftb+90}%
+	\pgfmathsetmacro\yshiftd{\yshiftc+90}%
+	\pgfmathsetmacro\yshiftcd{(\yshiftc+\yshiftd)/2}%
+	\pgfmathsetmacro\yshifte{\yshiftd+90}%
+	\pgfmathsetmacro\yshiftf{\yshifte+90}%
+	\pgfmathsetmacro\yshiftg{\yshiftf+90}%
+	\pgfmathsetmacro\yshiftfg{(\yshiftf+\yshiftg)/2}%
+	\pgfmathsetmacro\yshifth{\yshiftg+90}%
+	\pgfmathsetmacro\yshiftlinea{\yshifta-20}%
+	\pgfmathsetmacro\yshiftlineb{\yshiftd-20}%
+	\pgfmathsetmacro\yshiftlinec{\yshiftg-20}%
+	\pgfmathsetmacro\yshifttitlea{(\yshiftlinea+\yshiftlineb)/2}%
+	\pgfmathsetmacro\yshifttitleb{(\yshiftlineb+\yshiftlinec)/2}%
+	\pgfmathsetmacro\yshiftlegend{60}%
+	\pgfmathsetmacro\yshiftlegendelements{110}%
+	\pgfmathsetmacro\legenddist{42}%
+	\pgfmathsetmacro\legendsep{20}%
+	\begin{tikzpicture}[
+		x=1pt,
+		y=1pt,
+		/utils/exec={\sffamily},
+		font=\fontsize{9pt}{9.5pt}\selectfont,
+		>={Triangle[length=4,width=3]},
+		decoration={snake,segment length=5,amplitude=0.7},
+	]
+		\tikzset{solution/.style={
+			%draw,
+			circle,
+			minimum size=20,
+			%inner sep=3,
+			%outer sep=3.4,
+			%text width=10,
+			text centered,
+			fill=Cgreen!50,
+		}}
+		\tikzset{weights/.style={
+			%draw,
+			rectangle,
+			minimum size=22,
+			%inner sep=5,
+			%outer sep=3.4,
+			%text width=10,
+			text centered,
+			fill=Cblue!50,
+		}}
+		\tikzset{stop/.style={
+			%draw,
+			diamond,
+			aspect=2.5,
+			minimum size=20,
+			inner sep=1,
+			%outer sep=3.4,
+			%text width=10,
+			text centered,
+			fill=Corange!50,
+		}}
+		\tikzset{rwls/.style={
+			%draw,
+			rectangle,
+			minimum width=60,
+			minimum height=20,
+			text centered,
+			fill=Cred!50,
+		}}
+		%---------------------------------
+		% Clip
+		\clip(\yshifta-25,\adist-55) rectangle (\yshiftf-20,+\bdist+35);
+
+		%---------------------------------
+		% Layer 0
+		\node[solution] (sa0) at (\yshiftz,\bdist) {$S_0$};
+		\node[solution] (sb0) at (\yshiftz,\adist) {$S_0$};
+
+		%---------------------------------
+		% Layer 1
+		\draw[dashed,gray,thick] (\yshiftlinea,\bdist+35) -- (\yshiftlinea,\adist-22.5);
+
+		\node[solution] (sa1) at (\yshifta,\bdist) {$S_1$};
+		\node[solution] (sb1) at (\yshifta,\adist) {$S_2$};
+
+		\draw[->] (sa0) -- (sb1);
+		\draw[->] (sb0) -- (sa1);
+
+		%---------------------------------
+		% Layer 2
+		\node[rwls] (rwlsa1) at (\yshiftb,\bdist) {RWLS};
+		\node[rwls] (rwlsb1) at (\yshiftb,\adist) {RWLS};
+
+		\draw[->] (sa1.east) -- (rwlsa1.west);
+		\draw[->] (sb1.east) -- (rwlsb1.west);
+
+		%---------------------------------
+		% Layer 3
+		\node[solution] (sa2) at (\yshiftc,\bdist) {$S_1$};
+		\node[solution] (sb2) at (\yshiftc,\adist) {$S_2$};
+
+		\draw[->] (rwlsa1.east) -- (sa2.west);
+		\draw[->] (rwlsb1.east) -- (sb2.west);
+
+		%---------------------------------
+		% Layer 4
+		\draw[dashed,gray,thick] (\yshiftlineb,\bdist+35) -- (\yshiftlineb,\adist-22.5);
+
+		\node[solution] (sa3) at (\yshiftd,\bdist) {$S_1$};
+		\node[solution] (sb3) at (\yshiftd,\adist) {$S_2$};
+
+		\draw[->] (sa2) -- (sb3);
+		\draw[->] (sb2) -- (sa3);
+		\node[fill=white,inner sep=2] (crossover) at (\yshiftcd,\cdist) {Crossover};
+
+		%---------------------------------
+		% Layer 5
+		\node[rwls] (rwlsa2) at (\yshifte,\bdist) {RWLS};
+		\node[rwls] (rwlsb2) at (\yshifte,\adist) {RWLS};
+
+		\draw[->] (sa3.east) -- (rwlsa2.west);
+		\draw[->] (sb3.east) -- (rwlsb2.west);
+
+		%---------------------------------
+		% Layer 6
+		\node[solution] (sa4) at (\yshiftf,\bdist) {$S_1$};
+		\node[solution] (sb4) at (\yshiftf,\adist) {$S_2$};
+
+		\draw[->] (rwlsa2.east) -- (sa4.west);
+		\draw[->] (rwlsb2.east) -- (sb4.west);
+
+		%---------------------------------
+		% Layer 7
+		\draw[dashed,gray,thick] (\yshiftg-20,\bdist+35) -- (\yshiftg-20,\adist-22.5);
+
+		\node[solution] (sa5) at (\yshiftg,\bdist) {$S_1$};
+		\node[solution] (sb5) at (\yshiftg,\adist) {$S_2$};
+
+		\draw[->] (sa4) -- (sb5);
+		\draw[->] (sb4) -- (sa5);
+		\node[fill=white,inner sep=2] (crossover) at (\yshiftfg,\cdist) {Crossover};
+
+		%---------------------------------
+		% Titles
+		\node (title1) at (\yshifttitlea,\gdist) {Generation $n$};
+		\node (title2) at (\yshifttitleb,\gdist) {Generation $n+1$};
+		\node[anchor=west,xshift=-5] (title2ldots) at (title2.east) {.\,.\,.};
+
+		%---------------------------------
+		% Legend
+		\node[solution] (si) at (\yshiftlegend + \yshiftlegendelements,-\legenddist) {$S_i$};
+		\node[anchor=west] (sit) at (si.east) {Solution $i$};
+
+		\draw[gray] (\yshiftlegend-35,-\legenddist+15) -- (\yshiftlegend+300,-\legenddist+15);
+	\end{tikzpicture}%
+\end{document}%

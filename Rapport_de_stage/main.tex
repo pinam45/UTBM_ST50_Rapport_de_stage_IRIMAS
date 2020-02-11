@@ -679,6 +679,36 @@
 				Avec un camarade, nous avions choisi le \gls{SCP} comme problème, qui est donc très proche du \gls{USCP}, pour lequel nous avons implémenté une recherche exhaustive, un branch-and-bound (simple, sans relaxation en programme linéaire), un recuit-simulé et un algorithme mémétique utilisant le recuit simulé comme recherche locale.~\cite{pinam452019}
 			\paragraph*{}
 				C'est aussi durant ce projet que j'ai majoritairement développé la librairie \textit{dynamic\_bitset}\footnote{\url{https://github.com/pinam45/dynamic_bitset}} qui est particulièrement utile pour travailler avec le \gls{SCP} et le \gls{USCP}.
+		\section{Travail réalisé}\label{sec:analyse_stage_travail}
+			\paragraph*{}
+				Le travail réalisé est un travail de recherche, ce que j'aurais laissé concrètement à l'\gls{IRIMAS} après mon départ est donc le code des programmes développés, les instances de benchmark, les résultats des benchmarks et les soumissions aux conférences, à cela ont peut aussi ajouter ce rapport de stage. Ces productions sont réparties sur les 4 dépôts \textit{git} présenté dans la section \ref{sec:organisation_stage}. La figure \ref{fig:git_commits} représente le nombre de commits par semaine sur ces dépôts sur l'ensemble du stage.
+			\begin{figure}[H]
+				\centering%
+				\resizebox{\textwidth}{!}{\import{../figures/}{git_commits.tex}}%
+				\caption{Nombre de commits par semaine sur les différent dépôt \textit{git} du stage}%
+				\label{fig:git_commits}%
+			\end{figure}
+			\paragraph*{}
+				Il n'y a pas de corrélation complète entre les lignes de code ou même le temps passé sur un projet et le nombre de commits, malgré cela on peut voir la baisse d'activité de la 9\textsuperscript{ème} semaine avec la conférence \acrshort{EA2019} ainsi que de l'absence de commit durant la fermeture de l'\gls{UHA} la 17\textsuperscript{ème} et 18\textsuperscript{ème}. La majorité des commits ont été réalisés sur le dépôt \textit{USCP} qui contient le code du projet ainsi que quelques document \LaTeX{} décrivant par exemple les instances supportées par le \solver{}. La figure \ref{fig:USCP_repository_files_stats} représente la répartition du contenu de ce dépôt à la fin du stage.
+			\begin{figure}[H]
+				\centering%
+				\resizebox{0.9\textwidth}{!}{\import{../figures/}{USCP_repository_files_stats.tex}}%
+				\caption{Répartition du contenu du dépôt \textit{USCP} par type de fichier}%
+				\label{fig:USCP_repository_files_stats}%
+			\end{figure}
+			\paragraph*{}
+				Comme ont pouvais s'y attendre, les fichiers \textit{.cpp} et \textit{.hpp/.tpp} de l'implémentation en \Cpp{} de la librairie commune, du \printer{} et du \solver{} représentent la majorité du contenu du dépôt. On voit aussi apparaître les fichiers \textit{.tex} des templates du \printer{}, les fichiers \textit{.cmake} de configuration du projet, les fichiers \textit{.cmd} de génération des projets Visual Studio, les fichiers \textit{.sh} de téléchargement des instances et le fichier \textit{.md} qui est le \textit{README} du dépôt avec toutes les instruction de compilation et d'utilisation des programmes.
+			\paragraph*{}
+				Le dépôt \textit{USCP\_results} quant à lui contient plus de 105\,000 fichiers pour un total de presque 20 Go, pour chaque benchmark il contient l'entièreté des rapport d'exécution du \solver{}, les scripts utilisés pour lancer le benchmark sur le cluster \gls{HPC}, les documents générés par le \printer{} pour les rapports d'exécution et un \textit{README} qui explique la raison du benchmark, les paramètres et les résultats de ce dernier. Tout ces benchmarks n'aurais pas pu être réalisés sans l'accès au méso-centre, la figure \ref{fig:hpc_usage} montre le nombre d'heures de calcul utilisées par semaine sur le cluster \gls{HPC}.
+			\begin{figure}[H]
+				\centering%
+				\resizebox{\textwidth}{!}{\import{../figures/}{hpc_usage.tex}}%
+				\caption{Heures de calcul utilisées sur le cluster \acrshort{HPC} du méso-centre par semaine}%
+				\label{fig:hpc_usage}%
+				%total 2020-02-07: 1193322h
+			\end{figure}
+			\paragraph*{}
+				Au total 1\,193\,322 heures de calcul ont été utilisées pour réaliser des benchmarks sur le cluster durant le stage, cela prend en compte le nombre de nœuds utilisés simultanément ainsi que le nombre de threads utilisé par nœuds.
 	\printbibliography[heading=bibintoc]{}
 	\printglossary[type=\acronymtype,nogroupskip=true,title=Lexique,toctitle=Lexique]{}
 	\chapter*{Annexes}\addcontentsline{toc}{chapter}{Annexes}\markboth{Annexes}{}

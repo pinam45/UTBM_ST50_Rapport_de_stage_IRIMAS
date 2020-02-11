@@ -167,7 +167,7 @@
 					Laurent Moalic, qui a proposé le sujet de ce stage (détaillé dans la partie \ref{sec:presentation_stage}), est membre de l'équipe \gls{OMeGA}, le sujet proposé, ainsi que ces travaux en général, s'inscrivent dans l'axe Optimisation par Métaheuristiques du laboratoire.
 	\chapter{Présentation du stage}\label{sec:presentation_stage}
 		\section{Contexte du stage}
-			\subsection{\acrshort{HEAD}}
+			\subsection{\acrshort{HEAD}}\label{sec:head}
 				\paragraph*{}
 					En \citeyear{Moalic2018} a été publié l'article \citetitle{Moalic2018}~\cite{Moalic2018} par \citeauthor{Moalic2018}, cet article propose l'utilisation de méthodes d'optimisation métaheuristiques hybrides sur le \gls{GVCP}.
 				\paragraph*{}
@@ -550,6 +550,39 @@
 					Il n'y a rien d'anormal à ce que mon implémentation soit plus performante que celle de \cite{Gao2015}, par contre elle ne devrais par trouver de meilleurs résultats, car la limite en nombre d'étapes a été utilisée afin que les résultats ne dépendent pas de l'implémentation mais uniquement de l'algorithme. Je parle ici uniquement des meilleurs résultats trouvé avec une fréquence conséquente, c'est-à-dire pour les instances \instance{NRG.1} et \instance{NRG.2}, car pour les autres, dans \cite{Gao2015} le nombre de répétitions était simplement trop faible pour laisser apparaitre ces résultats.
 				\paragraph*{}
 					Malgré l'absence de comparaison possible pour les instances \instance{RAIL}, on peut confirmer l'efficacité de \gls{RWLS} et la véracité des résultats obtenus dans \cite{Gao2015}, le choix de \gls{RWLS} comme recherche locale pour notre algorithme mémétique est donc validé. De plus ces premiers benchmarks on permis d'identifier l'instance \instance{CYC10} comme celle avec la plus grande marge d'amélioration. En effet le \gls{USCP} est un problème classique déjà très éprouvé par les chercheurs et, pour la majorité des instances, la \gls{BKS} est soupçonnée d'être optimale.
+		\section{Développement de l'algorithme mémétique}\label{sec:memetic_algorithm}
+			\subsection{Implémentation initiale}
+				\paragraph*{}
+					Pour implémenter la première version de l'algorithme mémétique, l'implémentation de \gls{RWLS} a été légèrement modifié pour ne plus commencer avec une solution greedy mais que la solution initiale soit un paramètre de l'algorithme.
+				\paragraph*{}
+					L'algorithme mémétique est inspiré de \gls{HEAD} (présenté dans la section \ref{sec:head}), il reprend notamment l'idée d'une population de seulement deux individus. La première version de algorithme est représentée sur la figure \ref{fig:memetic_algorithm_v1}, cette version est plutôt simple, la plus-value par rapport à \gls{RWLS} étant le croisement des solutions qui devrait améliorer l'exploration de l'espace des solutions par l'algorithme.
+				\begin{figure}[H]
+					\centering%
+					\resizebox{\textwidth}{!}{\import{../figures/}{memetic_algorithm_v1.tex}}%
+					\caption{Fonctionnement global de la première version de l'algorithme mémétique}%
+					\label{fig:memetic_algorithm_v1}%
+				\end{figure}
+				\paragraph*{}
+					L'idée est que \gls{RWLS} réalise la partie exploitation de notre algorithme tandis que le croisement réalisera la partie exploration. Plusieurs croisements on été implémentés et testés avec cette version de l'algorithme:
+					\begin{itemize}
+						\item \textbf{identity}: retourne le premier parent pour le premier enfant et le second parent pour le second enfant, revient à ne pas croiser les solutions
+						\item \textbf{merge}: retourne une solution avec les sous-ensembles des deux parents
+						\item \textbf{greedy\_merge}: retourne une solution générée en prenant alternativement des sous-ensembles du premier et du deuxième parent de manière greedy jusqu'a obtenir une solution valide
+						\item \textbf{subproblem\_random}: retourne une solution générée en lançant une résolution aléatoire sur le sous-problème composé des sous-ensembles des deux parents
+						\item \textbf{subproblem\_greedy}: retourne une solution générée en lançant une résolution greedy sur le sous-problème composé des sous-ensembles des deux parents
+					\end{itemize}
+				\paragraph*{}
+					Pour cette version, l'opérateur \textit{greedy\_merge} avait été identifié comme le plus efficace mais par la suite d'autre opérateurs, non testés avec cette version, ont été implémentés:
+					\begin{itemize}
+						\item \textbf{extended\_subproblem\_random}: retourne une solution générée en lançant une résolution aléatoire sur le sous-problème composé des sous-ensembles des deux parents et d'une solution aléatoire
+						\item \textbf{extended\_subproblem\_greedy}: retourne une solution générée en lançant une résolution greedy sur le sous-problème composé des sous-ensembles des deux parents et d'une solution aléatoire
+						\item \textbf{subproblem\_rwls}: retourne une solution générée en lançant \gls{RWLS} sur le sous-problème composé des sous-ensembles des deux parents
+						\item \textbf{extended\_subproblem\_rwls}: retourne une solution générée en lançant RWLS sur le sous-problème composé des sous-ensembles des deux parents et d'une solution aléatoire
+					\end{itemize}
+				\paragraph*{}
+					L'algorithme a donc comme paramètre l'opérateur de croisement à utiliser mais aussi le nombre d'étapes de \gls{RWLS} à réaliser par génération. Afin de pouvoir comparer notre algorithme au fil de son développement à \gls{RWLS}, la limite totale du nombre d'étapes de \gls{RWLS} a été fixé aux valeurs présentées dans la section \ref{sec:impl_RWLS}. Pour ce qui est du nombre d'étapes à utiliser par génération, plusieurs benchmarks avec différent opérateurs de croisement on mené à 150\,000 étapes comme choix initial.
+				\paragraph*{}
+					Un benchmark complet de l'algorithme a été lancé sur le cluster \gls{HPC} avec l'opérateur de croisement \textit{greedy\_merge}, les résultats ont montrés une amélioration sur le nombre d'étapes nécessaires pour atteindre les \gls{BKS} par rapport à \gls{RWLS} ainsi que l'amélioration fréquente de la \gls{BKS} de l'instance \instance{CYC10} à 1974.
 	\printbibliography[heading=bibintoc]{}
 	\printglossary[type=\acronymtype,nogroupskip=true,title=Lexique,toctitle=Lexique]{}
 	\chapter*{Annexes}\addcontentsline{toc}{chapter}{Annexes}\markboth{Annexes}{}

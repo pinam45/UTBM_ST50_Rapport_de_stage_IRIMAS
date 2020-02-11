@@ -1,0 +1,74 @@
+\begin{algorithm}[H]
+	\caption{Pseudo-code de \acrshort{MASC}}\label{alg:masc}
+	\DontPrintSemicolon
+	\SetKwInput{Input}{input}
+	\SetKwInput{Output}{output}
+	\SetKw{In}{in}
+	\SetKw{And}{and}
+	\SetKw{Or}{or}
+	\SetKwData{sl}{cumulative\_step\_limit}
+	\SetKwData{cs}{cumulative\_steps}
+	\SetKwData{wa}{weights$_1$}
+	\SetKwData{wb}{weights$_2$}
+	\SetKwData{wtmp}{weights$_{tmp}$}
+	\SetKwData{pa}{solution$_1$}
+	\SetKwData{pb}{solution$_2$}
+	\SetKwData{ptmp}{solution$_{tmp}$}
+	\SetKwData{la}{steps$_1$}
+	\SetKwData{lb}{steps$_2$}
+	\SetKwData{l}{step\_limit}
+	\SetKwData{bs}{base\_steps}
+	\SetKwData{ds}{dynamic\_steps}
+	\SetKwFunction{RWLS}{RWLS}
+	\SetKwFunction{RS}{RandomSolve}
+	\SetKwFunction{GS}{GreedySolve}
+	\SetKwFunction{SC}{SolutionCrossover}
+	\SetKwFunction{WC}{WeightCrossover}
+	\SetKwFunction{Init}{Init}
+	\SetKwFunction{Average}{Average}
+	\SetKwFunction{Push}{PushBack}
+	\SetKwFunction{Pop}{PopFront}
+	\SetKwInOut{Input}{input}
+	\SetKwInOut{Output}{output}
+
+	\Input{\sl}
+	\Output{\textit{The best solution encountered}}
+	\BlankLine{}
+	\bs $\leftarrow$ \textit{number of columns + number of rows of the instance}\;
+	\l $\leftarrow$ $\bs$\;
+	\ds $\leftarrow$ $[\bs,...,\bs]$\;
+	(\pa, \pb) $\leftarrow$ \GS{}\;
+	(\wa, \wb) $\leftarrow$ $[1,...,1]$\;
+	\cs $\leftarrow$ $0$\;
+	\BlankLine{}
+	\While{\cs $\le$ \sl}
+	{
+		(\pa, \wa, \la) $\leftarrow$ \RWLS{\pa, \wa, \l}\;
+		(\pb, \wb, \lb) $\leftarrow$ \RWLS{\pb, \wb, \l}\;
+		\cs $\leftarrow$ $\cs + 2 \times \l$\;
+		\BlankLine{}
+		\uIf{$\la = 0$ \Or $\lb = 0$}
+		{
+			(\pa, \pb) $\leftarrow$ \RS{}\;
+			\l $\leftarrow$ $2 \times \l$\;
+		}
+		\Else
+		{
+			\If{$\pa = \pb$}
+			{
+				(\pa, \pb) $\leftarrow$ \RS{}\;
+			}
+			\Push{\ds, $\la + \lb$}\;
+			\Pop{\ds}\;
+			\l $\leftarrow$ $\bs + \Average{\ds}$\;
+		}
+		\BlankLine{}
+		\ptmp $\leftarrow$ \pa\;
+		\pa $\leftarrow$ \SC{\pa, \pb}\;
+		\pb $\leftarrow$ \SC{\pb, \ptmp}\;
+		\BlankLine{}
+		\wtmp $\leftarrow$ \wa\;
+		\wa $\leftarrow$ \WC{\wa, \wb}\;
+		\wb $\leftarrow$ \WC{\wb, \wtmp}\;
+	}
+\end{algorithm}

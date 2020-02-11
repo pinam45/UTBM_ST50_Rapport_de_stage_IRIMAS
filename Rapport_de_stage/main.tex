@@ -273,7 +273,7 @@
 					Enfin, le dernier objectif qui fut ajouté est d'utiliser l'algorithme développé au cours du stage afin de résoudre des instances de \gls{GVCP} à partir de solutions sous-optimales qui sont générées de façon très rapide par l'algorithme de Laurent.
 				\paragraph*{}
 					Ces nouveaux objectif ayant été ajouté durant le stage (voir section \ref{sec:planning} pour les dates), ils nécessitent de déjà connaitre ce qui à été réalisé durant le stage avant leur ajout, ils seront donc explicité plus en détail avec le travail réalisé durant le stage dans la section \ref{sec:work}.
-		\section{Organisation du stage}
+		\section{Organisation du stage}\label{sec:organisation_stage}
 			\subsection{Environnement de travail}
 				\paragraph*{}
 					Un bureau avec poste informatique, proche des autres membres de l'équipe, m'a été attribué, il est partagé avec Dominique Schmitt, enseignant-chercheur sur l'axe Algorithmique et Modélisations de l'équipe \gls{OMeGA}. Dans la même zone du bâtiment se trouve les bureaux de Laurent Moalic, Mathieu Brévilliers et Julien Lepagnot avec qui j'ai le plus travaillé sur la partie recherche du stage.
@@ -648,7 +648,7 @@
 				\paragraph*{}
 					Un benchmark complet de l'algorithme avec 100 répétitions a été lancé sur le cluster \gls{HPC}, le tableau de résultats est visible dans l'annexe \ref{sec:result_masc_solver}. L'algorithme est très efficace et permet d'améliorer un dizaine de \gls{BKS}, notamment la \gls{BKS} de l'instance \instance{CYC10} à 1972 dans 60\% des répétitions. L'algorithme performe raisonnablement sur les instances \instance{RAIL} mais n'atteint pas les \gls{BKS} que les algorithmes spécialisé dans les très grandes instances comme 3NFL~\cite{Yagiura2006} atteignent.
 				\paragraph*{}
-					Les résultats plutôt intéressant de l'algorithme mémétique on mené à 2 soumissions à des conférences, la première à la \acrshort{ROADEF2020} qui est une conférence nationale française organisée tout les ans par la \gls{ROADEF}, elle a pour but de participer à la formation des jeunes chercheurs et de favoriser les échanges et les collaborations entre chercheurs académiques et industriels évoluant dans la discipline. La conférence aura lieu a Montpellier du 19 au 21 février 2020, les soumissions sont des résumés de 2 pages.
+					Les résultats plutôt intéressant de l'algorithme mémétique on mené à 2 soumissions à des conférences, ces soumissions sont le résultat de la collaboration avec Laurent, Matthieu et Julien qui sont des chercheurs expérimenté et savent comment présenter des résultats de recherche pour des conférences. La première fut envoyée à \acrshort{ROADEF2020} qui est une conférence nationale française organisée tout les ans par la \gls{ROADEF}, elle a pour but de participer à la formation des jeunes chercheurs et de favoriser les échanges et les collaborations entre chercheurs académiques et industriels évoluant dans la discipline. La conférence aura lieu a Montpellier du 19 au 21 février 2020, les soumissions sont des résumés de 2 pages.
 				\paragraph*{}
 					La soumission que nous avons envoyé présente la deuxième version de l'algorithme mémétique, et est assez succincte de par la limite de 2 pages. La soumission a été envoyé le 29/11/2019, elle a été acceptée, les remarques des reviewers ont été prises en compte et la version finale a été envoyée le 08/01/2020.
 				\paragraph*{}
@@ -667,6 +667,18 @@
 					\input{../tables/long/lion14_rail}
 				\paragraph*{}
 					La table \ref{tab:lion14_rail} présente les résultats pour les instances \instance{RAIL}, comme expliqué précédemment, dans \cite{Gao2015} seul \gls{RWLS}-R à été soumis a un benchmark sur ces instances. La table présente donc les résultats de \gls{MASC} avec ceux de \gls{RWLS}-R mais les deux algorithmes ne reposent pas sur les mêmes techniques de résolution. \gls{RWLS}-R a été lancé avec une limite de 100 secondes pour les 3 premières instances et 1\,000 secondes sur les 4 suivantes. \gls{MASC} n'a pas été conçut pour de si grandes instances, une limite de 10\,000 secondes a du être utilisé pour laisser le temps à l'algorithme de réaliser plusieurs générations et d'enclencher le mécanisme d'évolution dynamique des étapes de \gls{RWLS}. On vois que les résultats de \gls{MASC} sont derrière ceux de \gls{RWLS}-R qui a été conçut pour ces instances, malgré qu'il n'atteigne pas les \gls{BKS} des plus grandes.
+	\chapter{Analyse du stage}
+		\section{Préparation du stage}
+			\paragraph*{}
+				Je suis depuis longtemps passionné par l'informatique, notamment la programmation (surtout en \Cpp{}), ainsi que par l'optimisation logicielle, cela c'est trouvé particulièrement utile durant le stage car la performance de l'implémentation joue sur l'utilité du programme pour tester les algorithmes implémentés (bien que le cluster \gls{HPC} fasse gagner énormément de temps) mais aussi directement sur les résultats finaux si la seule mesure de performance est le temps.
+			\paragraph*{}
+				Mon premier contact avec l'optimisation a été le cour \gls{AG41} à l'\gls{UTBM} lors de mon semestre INFO2. J'ai par la suite suivit les cours \gls{8INF808}, \gls{8INF852} et \gls{8INF870} à l'\gls{UQAC} ou j'ai étudié les problèmes classiques de la recherche opérationnelle (par exemple le \gls{SAT} et le \gls{TSP}) ainsi que les méthodes de résolution exactes (simplex, branch-and-bound,\ldots) mais surtout les heuristiques et métaheuristiques.
+			\paragraph*{}
+				J'avais donc déjà connaissance des algorithmes génétiques et des recherches locales qui composent les algorithmes mémétiques mais j'ai aussi eu l'opportunité d'appliquer ces connaissances avec le projet du cours \gls{8INF870} qui consistait à choisir un problème, le présenter, trouver les instances de benchmark et implémenter une méthode exacte et une méthode approchée de résolution.
+			\paragraph*{}
+				Avec un camarade, nous avions choisi le \gls{SCP} comme problème, qui est donc très proche du \gls{USCP}, pour lequel nous avons implémenté une recherche exhaustive, un branch-and-bound (simple, sans relaxation en programme linéaire), un recuit-simulé et un algorithme mémétique utilisant le recuit simulé comme recherche locale.~\cite{pinam452019}
+			\paragraph*{}
+				C'est aussi durant ce projet que j'ai majoritairement développé la librairie \textit{dynamic\_bitset}\footnote{\url{https://github.com/pinam45/dynamic_bitset}} qui est particulièrement utile pour travailler avec le \gls{SCP} et le \gls{USCP}.
 	\printbibliography[heading=bibintoc]{}
 	\printglossary[type=\acronymtype,nogroupskip=true,title=Lexique,toctitle=Lexique]{}
 	\chapter*{Annexes}\addcontentsline{toc}{chapter}{Annexes}\markboth{Annexes}{}

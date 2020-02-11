@@ -583,6 +583,35 @@
 					L'algorithme a donc comme paramètre l'opérateur de croisement à utiliser mais aussi le nombre d'étapes de \gls{RWLS} à réaliser par génération. Afin de pouvoir comparer notre algorithme au fil de son développement à \gls{RWLS}, la limite totale du nombre d'étapes de \gls{RWLS} a été fixé aux valeurs présentées dans la section \ref{sec:impl_RWLS}. Pour ce qui est du nombre d'étapes à utiliser par génération, plusieurs benchmarks avec différent opérateurs de croisement on mené à 150\,000 étapes comme choix initial.
 				\paragraph*{}
 					Un benchmark complet de l'algorithme a été lancé sur le cluster \gls{HPC} avec l'opérateur de croisement \textit{greedy\_merge}, les résultats ont montrés une amélioration sur le nombre d'étapes nécessaires pour atteindre les \gls{BKS} par rapport à \gls{RWLS} ainsi que l'amélioration fréquente de la \gls{BKS} de l'instance \instance{CYC10} à 1974.
+			\subsection{Croisement des poids}
+				\paragraph*{}
+					Après la première version de l'algorithme mémétique, afin analyser les solutions trouvées par \gls{RWLS}, j'ai implémenté dans le \printer{} la génération de tableaux de statistiques comme celui de l'annexe \ref{sec:rwls_stats}. J'ai aussi ajouté les poids de \gls{RWLS}, au moment ou la solution finale est trouvée, aux rapports d'exécution du \solver{} et la capacité de générer des graphiques de répartition des poids à partir de ces informations au \printer{}. Ces nouveaux outils et quelques tests ont menés à la deuxième version de l'algorithme représenté sur le figure \ref{fig:memetic_algorithm_v2}.
+				\begin{figure}[H]
+					\centering%
+					\resizebox{\textwidth}{!}{\import{../figures/}{memetic_algorithm_v2.tex}}%
+					\caption{Fonctionnement global de la deuxième version de l'algorithme mémétique}%
+					\label{fig:memetic_algorithm_v2}%
+				\end{figure}
+				\paragraph*{}
+					Les poids de \gls{RWLS} guidant bien plus l'algorithme que la solution initiale, les poids ont été ajouté comme une deuxième population qui évolue avec les solutions et qui sont croisés à chaque génération. Pour rendre ça possible, l'implémentation de \gls{RWLS} a été modifiée pour que les poids initiaux ne soit plus égaux a 1 mais que l'algorithme prenne un vecteur de poids initiaux en paramètre.
+				\paragraph*{}
+					À partir de ce moment le croisement sur les solutions a été appelé Crossover et celui sur les poids WCrossover (pour Weights Crossover), plusieurs WCrossovers ont été implémentés:
+					\begin{itemize}
+						\item \textbf{reset}: retourne un vecteur dont tous les poids sont égaux à 1, revient à se comporter comme la première version de l'algorithme
+						\item \textbf{keep}: renvoie un vecteur avec les poids du premier parent pour le premier enfant et les poids du deuxième parent pour le deuxième enfant, revient a ne pas croiser les poids
+						\item \textbf{average}: retourne un vecteur dans lequel chaque poids est la moyenne des poids correspondants chez les parents
+						\item \textbf{mix\_random}: retourne un vecteur dans lequel chaque poids est pris au hasard sur l'un des parents
+						\item \textbf{add}: retourne un vecteur dans lequel chaque poids est la somme des poids correspondants dans les parents
+						\item \textbf{difference}: retourne un vecteur dans lequel chaque poids est la valeur absolue de la différence des poids correspondants chez les parents
+						\item \textbf{max}: retourne un vecteur dans lequel chaque poids est le maximum des poids correspondants chez les parents
+						\item \textbf{min}: retourne un vecteur dans lequel chaque poids est le minimum des poids correspondants chez les parents
+						\item \textbf{minmax}: retourne un vecteur dans lequel chaque poids est le minimum des poids correspondants chez les parents pour le premier enfant, et chaque poids est le maximum des poids correspondants chez les parents pour le deuxième enfant
+						\item \textbf{shuffle}: renvoie un vecteur avec les poids du premier parent mélangés pour le premier enfant et les poids du deuxième parent mélangés pour le deuxième enfant
+					\end{itemize}
+				\paragraph*{}
+					Un benchmark complet de l'algorithme a été lancé sur le cluster \gls{HPC} en faisant varier le Crossover et le WCrossover, les résultats ne donnent pas un couple de croisement qui soit le plus efficace pour toutes les instances, la meilleure combinaison change en fonction des instances.
+				\paragraph*{}
+					Le couple de croisement finalement choisit pour cette version de l'algorithme, et qui a servit pour la soumission à la \acrshort{ROADEF2020}, est \textit{greedy\_merge}/\textit{average}, bien qu'il ne soit pas toujours le plus efficace en terme de nombre d'étapes totales de \gls{RWLS} nécessaires pour atteindre les \gls{BKS}, c'est celui qui est le plus stable sur les instances dont la \gls{BKS} est amélioré, la \gls{BKS} de l'instance \instance{CYC10} est ainsi amélioré à 1972 par environ 10\% des répétitions avec cette configuration.
 	\printbibliography[heading=bibintoc]{}
 	\printglossary[type=\acronymtype,nogroupskip=true,title=Lexique,toctitle=Lexique]{}
 	\chapter*{Annexes}\addcontentsline{toc}{chapter}{Annexes}\markboth{Annexes}{}

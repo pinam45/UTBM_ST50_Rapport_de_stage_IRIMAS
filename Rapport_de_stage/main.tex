@@ -631,6 +631,19 @@
 					\input{../algorithms/masc.tex}
 				\paragraph*{}
 					Plusieurs benchmarks ont mené à cette implémentation finale, ils ont aussi permis de choisir le couple d'opérateurs \textit{subproblem\_rwls}/\textit{max} sur les mêmes critères que pour la version précédente de l'algorithme. Cette configuration a servit pour la soumission à \acrshort{LION14}.
+			\subsection{Optimisation}
+				\paragraph*{}
+					L'algorithme mémétique est implémenté comme une classe qui prend en paramètres de template le Crossover et le WCrossover à utiliser, cela permet qu'une fois l'algorithme lancé il n'y ait plus de branches conditionnelles sur les croisements à utiliser qui cassent le pipeline du processeur. Cela est possible car \Cpp{} possèdes des vrai templates comparé par exemple aux \textit{generics} de Java, cela signifie que le compilateur va créer un code indépendant pour toutes les combinaisons de croisement qui apparaissent en paramètres de template de la classe de l'algorithme mémétique dans le code du programme.
+				\paragraph*{}
+					Avec les 9 Crossover et 10 WCrossover, cela fait donc 90 classes qui seront générées pour l'algorithme mémétique, cela augmente un peut la taille de l'exécutable mais ce dernier reste à moins de 2 Mo, ce qui est raisonnable. Le fait que chaque classe soit spécialisé pour un couple de croisement permet au compilateur de bien mieux optimiser le code en réalisant un maximum d'inlining. Cette quantité plus importante de code généré par le compilateur augmente l'intérêt d'utiliser la \gls{PGO}.
+				\paragraph*{}
+					Tout comme \gls{RWLS}, \gls{MASC} été grandement optimisé au fil de sont développement, il serait trop long de détailler toutes les modifications, je ne mentionnerais donc que la \gls{PGO} qui est un moyen simple d'optimiser un programme sans modification du code mais qui est étrangement peut connu.
+				\paragraph*{}
+					Cette optimisation se fait en 2 passes, la première consiste à compiler le programme en l'instrumentant pour générer des statistiques de passage dans les différentes section du code, puis de lancer le programme dans un cas d'utilisation représentatif pour générer ces statistiques. Elles permettent notamment d'identifier les parties du code dite ``chaudes'' ou le programme passe beaucoup de temps.
+				\paragraph*{}
+					Enfin la deuxième passe consiste à compiler le programme une nouvelle fois en utilisant les statistiques précédemment générées pour placer les zones chaudes du code dans une section \texttt{.text.hot} du binaire afin d'améliorer la localité du code de ces sections. On voit facilement l'intérêt d'avoir le code le plus utilisé au même endroit pour un programme qui passe 99\% de son temps dans un une variante d'un algorithme mémétique qui représente moins de 1\% du code présent dans le binaire.
+				\paragraph*{}
+					Concrètement la mise en place de la \gls{PGO} sur le cluster \gls{HPC} se fait par le une double compilation avec \textit{gcc}\footnote{voir \url{https://gcc.gnu.org/onlinedocs/gcc/Optimize-Options.html}} dans les scripts utilisés pour les benchmarks, la première compilation se fait avec le flag \texttt{-fprofile-generate}, puis le programme est lancé quelques secondes avec en paramètres les croisements qui seront utilisés. Ensuite le programme est de nouveau compilé, cette fois ci avec le flag \texttt{-fprofile-use} avant d'être lancé pour la résolution finale. Cette technique permet d'autres optimisations importantes en jouant sur les probabilités utilisées par la prédiction de branche du processeur par exemple mais je ne les détaillerais pas ici.
 	\printbibliography[heading=bibintoc]{}
 	\printglossary[type=\acronymtype,nogroupskip=true,title=Lexique,toctitle=Lexique]{}
 	\chapter*{Annexes}\addcontentsline{toc}{chapter}{Annexes}\markboth{Annexes}{}

@@ -22,3 +22,42 @@
 \makeatletter
 \newcommand{\customlabel}[2]{\def\@currentlabel{#2}\label{#1}}
 \makeatother
+
+% Table plot
+\newcommand{\tableplot}[1]{%
+	\raisebox{-2pt}{%
+		\resizebox{25pt}{9pt}{%
+			\begin{tikzpicture}%
+				\begin{axis}[%
+					ybar,%
+					width=1000pt,%
+					%height=55pt,%
+			  		bar width=0.75,%
+					xmin=0,%
+					ymin=0,%
+					enlargelimits=0,%
+			  		axis lines=none,%
+			  		xtick=\empty,%
+			  		ytick=\empty,%
+				]%
+				\foreach \x [count=\xi] in {#1}
+				{
+					\ifthenelse{\isodd\xi}{
+						\addplot+[
+							black,
+							fill=black,
+							bar shift=-0.5
+						] coordinates{(\xi,\x)};
+					}{
+						\addplot+[
+							gray,
+							fill=gray,
+							bar shift=-0.5
+						] coordinates{(\xi,\x)};
+					}
+				}
+				\end{axis}
+			\end{tikzpicture}%
+		}%
+	}%
+}

@@ -1,0 +1,39 @@
+%!TEX program = lualatex
+\documentclass[11pt,class=book]{standalone}
+\input{packages}
+\input{common}
+
+\begin{document}
+	\begin{tikzpicture}[
+		x=1pt,
+		y=1pt,
+		%/utils/exec={\sffamily},
+		font=\fontsize{9pt}{9.5pt}\selectfont,
+		%>={Triangle[length=4,width=3]},
+		%decoration={snake,segment length=5,amplitude=0.7},
+	]
+		\begin{axis}[
+			width=13cm,
+			height=7.5cm,
+			xlabel={Nombre de sous-ensembles de l'instance},
+			ylabel={Temps de résolution (s)},
+			xmin=0, xmax=45,
+			ymin=0, ymax=2500,
+			legend style={
+				cells={
+					anchor=west
+				},
+				legend pos=north west,
+			},
+		]
+			\addplot[smooth,color=cyan,mark=*] table{data/exhaustive_search_g3.data};
+			\addlegendentry{Recherche exhaustive}
+			\addplot[
+				green,
+				domain=0:40,
+				samples=400,
+			]{4.114961289*10^(-9) * (e^(0.693072216*x) + 1};
+			\addlegendentry{\(4.114961289.10^{-9}\left(e^{0.693072216x} + 1\right)\)}
+		\end{axis}
+	\end{tikzpicture}
+\end{document}

@@ -19,41 +19,6 @@
 		\def\ycenter{0}
 		\newcount\cyclecount \cyclecount=-1
 		\newcount\ind \ind=-1
-		\foreach \percent/\name/\label in {
-			49.47/.hpp\slash.tpp/47,
-			25.26/.cpp/24,
-			10.53/.tex/10,
-			5.26/.cmake/5,
-			5.26/.cmd/5,
-			3.16/.sh/3,
-			1.05/.md/1,
-		}{
-			\ifx\percent\empty
-			\else % If \percent is empty, do nothing
-				\global\advance\cyclecount by 1 % Advance cyclecount
-				\global\advance\ind by 1 % Advance list index
-				\ifnum7<\cyclecount % If cyclecount is larger than list
-					\global\cyclecount=0 % reset cyclecount
-					\global\ind=0 % reset list index
-				\fi
-				\pgfmathparse{\cyclelist[\the\ind]} % Get color from cycle list
-				\edef\color{\pgfmathresult} % and store as \color
-				% Draw angle and set labels
-				\draw[fill={\color!50},draw={\color}] (\xcenter, \ycenter) -- ++(\angle:\radius) arc (\angle:\angle+\percent*3.6:\radius) -- cycle;
-				\node[xshift=\xcenter,yshift=\ycenter] at (\angle+0.5*\percent*3.6:0.7*\radius) {\label};
-				\node[xshift=\xcenter,yshift=\ycenter,pin=\angle+0.5*\percent*3.6:\name] at (\angle+0.5*\percent*3.6:\radius) {};
-				\pgfmathparse{\angle+\percent*3.6} % Advance angle
-				\xdef\angle{\pgfmathresult} % and store in \angle
-			\fi
-		};
-		\node[
-			xshift=\xcenter,
-			yshift=\ycenter,
-			anchor=north,
-			text centered,
-			text width=150
-		] at (0,-80) {Fichiers composant le projet par type};
-
 		\def\xcenter{200}
 		\def\ycenter{0}
 		\global\cyclecount=-1
@@ -87,12 +52,5 @@
 				\xdef\angle{\pgfmathresult} % and store in \angle
 			\fi
 		};
-		\node[
-			xshift=\xcenter,
-			yshift=\ycenter,
-			anchor=north,
-			text centered,
-			text width=150
-		] at (0,-80) {Répartition des lignes de code par type de fichier};
 	\end{tikzpicture}
 \end{document}

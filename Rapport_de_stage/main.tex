@@ -68,25 +68,9 @@
 		\section{L'\acrshort{UHA}}
 			\subsection{Composition}
 				\paragraph*{}
-					L'\gls{UHA} est une université française composée de 5 campus sur 2 villes~\cite{UHA_Organisation}, les campus Illberg, Collines et Fonderie à Mulhouse et les campus Biopôle et Grillenbreit à Colmar.
+					L'\gls{UHA} est une université française composée de 5 campus sur 2 villes~\cite{UHA_Organisation}, les campus Illberg, Collines et Fonderie à Mulhouse et les campus Biopôle et Grillenbreit à Colmar. Elle compte 4 facultés, la \gls{FLSH}, la \gls{FSESJ}, la \gls{FST} et la \gls{FMA}.
 				\paragraph*{}
-					Elle compte 4 facultés:
-					\begin{itemize}
-						\item La \gls{FLSH} à Mulhouse
-						\item La \gls{FSESJ} à Mulhouse
-						\item La \gls{FST} à Mulhouse
-						\item La \gls{FMA} à Colmar
-					\end{itemize}
-				\paragraph*{}
-					Ainsi que 2 écoles d'ingénieurs et 2 \gls{IUT}:
-					\begin{itemize}
-						\item L'\gls{ENSCMu}
-						\item L'\gls{ENSISA}
-						\item L'\gls{IUT} de Mulhouse
-						\item L'\gls{IUT} de Colmar
-					\end{itemize}
-				\paragraph*{}
-					De plus, plusieurs services de formation et certifications lui sont rattachés (voir annexe \ref{sec:uha_formation}).
+					Elle compte aussi 2 écoles d'ingénieurs, l'\gls{ENSCMu} et l'\gls{ENSISA}, 2 \gls{IUT}, un à Mulhouse et un à Colmar et plusieurs services de formation et certifications lui sont rattachés (voir annexe \ref{sec:uha_formation}).
 			\subsection{Formations}
 				\paragraph*{}
 					L'\gls{UHA} compte, en 2019, 10\,366 étudiants dont 286 doctorants répartis dans plus de 170 formations dans 4 domaines~\cite{UHA_Chiffre_cles}:
@@ -106,7 +90,6 @@
 						\item 2 pour le pôle Sciences pour l'Ingénieur
 						\item 8 pour le pôle Sciences Humaines et Sociales
 					\end{itemize}
-				\paragraph*{}
 					Durant le stage j'ai rejoint l'\gls{IRIMAS} qui est l'un des 2 laboratoires du pôle Sciences pour l'Ingénieur.
 		\section{L'\acrshort{IRIMAS}}
 			\subsection{Organisation}
@@ -147,7 +130,7 @@
 					\begin{figure}[H]
 						\centering%
 						\includegraphics[width=1\textwidth]{irimas_organigramme}%
-						\caption{Organigramme de l'\acrshort{IRIMAS} en 2009~\cite{IRIMAS_Organigramme}}%
+						\caption{Organigramme de l'\acrshort{IRIMAS} en 2019~\cite{IRIMAS_Organigramme}}%
 						\label{fig:irimas_organigramme}%
 					\end{figure}
 				\paragraph*{}
@@ -160,9 +143,9 @@
 				\paragraph*{}
 					Une métaheuristique est un ensemble de concepts pouvant être utilisés pour définir des méthodes heuristiques pouvant être appliquées à un large éventail de problèmes différents, souvent des problèmes d'optimisation difficile. En d'autres termes, une métaheuristique peut être considérée comme un cadre algorithmique général qui peut être appliqué à différents problèmes d'optimisation avec relativement peu de modifications pour les adapter à un problème spécifique.
 				\paragraph*{}
-					``Le premier groupe de travail s'intéresse à l'algorithmique pour l'intelligence artificielle en développant de nouveaux algorithmes hybrides (basés sur des métaheuristiques à base d'agents intégrant des méthodes d'apprentissage) pour résoudre des problèmes d'optimisation mono-objectif ou multi-objectif de natures continues, discrètes et combinatoires, avec la prise en compte de l'aspect dynamique dans certains cas. L'adaptation et l'implémentation de ces futurs algorithmes hybrides sur des clusters hétérogènes de machines GPU sont également étudiées.''~\cite{IRIMAS_OMeGA}
+					Selon \cite{IRIMAS_OMeGA}, le groupe travaillant sur le premier axe de recherche s'intéresse à l'algorithmique pour l'intelligence artificielle en développant de nouveaux algorithmes hybrides pour résoudre des problèmes d'optimisation mono-objectif ou multi-objectif de natures continues, discrètes et combinatoires, en prenant en compte l'aspect dynamique quand cela est nécessaire. Ils étudient également l'adaptation et l'implémentation de ces futurs algorithmes hybrides sur des clusters hétérogènes de machines GPU.
 				\paragraph*{}
-					``L'activité du second groupe s'inscrit dans le thème d'analyse de données visuelles et géométriques (images, vidéo, nuages de points, courbes, etc.). Dans le cadre de cette thématique, ils développent des algorithmes et des concepts pour résoudre des problèmes de nature géométrique qui apparaissent dans de nombreuses disciplines de l'informatique [\ldots] ainsi que des techniques d'extraction d'information dans des données visuelles pour répondre à des problématiques de visualisation et d'analyses de scènes.''~\cite{IRIMAS_OMeGA}
+					Le groupe qui s'intéresse au deuxième axe de recherche travaille sur l'analyse de données visuelles et géométriques (images, vidéo, nuages de points, courbes,\ldots). Pour répondre à des problématiques de visualisation et d'analyses de scènes, ils développent des algorithmes et des concepts pour résoudre des problèmes de nature géométrique qui apparaissent dans de nombreuses disciplines de l'informatique ainsi que des techniques d'extraction d'information dans des données visuelles.
 				\paragraph*{}
 					Laurent Moalic, qui a proposé le sujet de ce stage (détaillé dans la partie \ref{sec:presentation_stage}), est membre de l'équipe \gls{OMeGA}, le sujet proposé, ainsi que ces travaux en général, s'inscrivent dans l'axe Optimisation par Métaheuristiques du laboratoire.
 	\chapter{Présentation du stage}\label{sec:presentation_stage}
@@ -209,47 +192,62 @@
 				\end{figure}
 				\paragraph*{}
 					En général les instances de \gls{SCP} sont définies par une matrice d'incidence \(A = \left(a_{i,j}\right)\) de taille \(m \times n\) avec
-					\[\forall i \in \{1,\ldots,m\},\ \forall j \in \{1,\ldots,n\},\ a_{i,j} = \left\{
+					\begin{equation}
+						\forall i \in \{1,\ldots,m\},\ \forall j \in \{1,\ldots,n\},\ a_{i,j} = \left\{
 						\begin{array}{ll}
 							1 & \text{si } u_i \in s_j \\
 							0 & \text{sinon}
 						\end{array}
-					\right.\]
+						\right.
+					\end{equation}
 					\(a_{i,j} = 1\) signifiant donc que le point \(u_i\) est couvert par le sous-ensemble \(s_j\), ainsi qu'un vecteur coût \(n\)-dimensionnel \(c = \left(c_j\right)\) avec \(\forall j \in N\), \(c_j\) le coût du sous-ensemble \(j\).
 				\paragraph*{}
 					Les solutions sont quant à elles définies par un vecteur \(n\)-dimensionnel \(x = \left(x_j\right)\) avec
-					\[\forall j \in \{1,\ldots,n\},\ x_j = \left\{
-						\begin{array}{ll}
-							1 & \text{si } u_i \text{ fait parti de la solution}\\
-							0 & \text{sinon}
-						\end{array}
-					\right.\]
+					\begin{equation}
+						\forall j \in \{1,\ldots,n\},\ x_j = \left\{
+							\begin{array}{ll}
+								1 & \text{si } u_i \text{ fait parti de la solution}\\
+								0 & \text{sinon}
+							\end{array}
+						\right.
+					\end{equation}
 					le coût de la solution étant égal à
-					\[\sum_{j \in \{1,\ldots,n\}}{c_j x_j}\]
+					\begin{equation}
+						\sum_{j \in \{1,\ldots,n\}}{c_j x_j}
+					\end{equation}
 					et la solution étant valide si
-					\[\forall i \in \{1,\ldots,m\}\ ,\sum_{j \in \{1,\ldots,n\}}{a_{ij}x_j} \ge 1\]
+					\begin{equation}
+						\forall i \in \{1,\ldots,m\}\ ,\sum_{j \in \{1,\ldots,n\}}{a_{ij}x_j} \ge 1
+					\end{equation}
 				\paragraph*{}
 					Par exemple, l'instance suivante, définie par la matrice d'incidence \(A\) et le vecteur coût \(c\) a comme solution optimale le vecteur \(x\):
-					\[
-					\begin{blockarray}{ccccccccc}
-						& s_1 & s_2 & s_3 & s_4 & s_5 & s_6 & s_7\\
-						\begin{block}{c(ccccccc)c}
-							    & 0 & 1 & 1 & 0 & 0 & 0 & 1 & u_1\\
-							    & 0 & 0 & 1 & 0 & 1 & 1 & 0 & u_2\\
-							A = & 1 & 1 & 0 & 1 & 0 & 1 & 0 & u_3\\
-							    & 0 & 0 & 0 & 0 & 1 & 1 & 1 & u_3\\
-							    & 1 & 0 & 1 & 0 & 0 & 0 & 1 & u_4\\
-						\end{block}
-						\\
-						\begin{block}{c(ccccccc)c}
-							c = & 3 & 1 & 2 & 4 & 1 & 2 & 1 &\\
-						\end{block}
-						\\
-						\begin{block}{c(ccccccc)c}
-							x = & 0 & 1 & 1 & 0 & 0 & 0 & 1 &\\
-						\end{block}
-					\end{blockarray}
-					\]
+					\BAnewcolumntype{m}{>{\centering\arraybackslash\hspace{0pt}}p{15pt}}%
+					\begin{equation}
+						\begin{blockarray}{ccccccccc}
+							& s_1 & s_2 & s_3 & s_4 & s_5 & s_6 & s_7\\
+							\begin{block}{c(mmmmmmm)c}
+								    & 0 & 1 & 1 & 0 & 0 & 0 & 1 & u_1\\
+								    & 0 & 0 & 1 & 0 & 1 & 1 & 0 & u_2\\
+								A = & 1 & 1 & 0 & 1 & 0 & 1 & 0 & u_3\\
+								    & 0 & 0 & 0 & 0 & 1 & 1 & 1 & u_3\\
+								    & 1 & 0 & 1 & 0 & 0 & 0 & 1 & u_4\\
+							\end{block}
+						\end{blockarray}
+					\end{equation}
+					\begin{equation}
+						\begin{blockarray}{ccccccccc}
+							\begin{block}{c(mmmmmmm)c}
+								c = & 3 & 1 & 2 & 4 & 1 & 2 & 1 &\\
+							\end{block}
+						\end{blockarray}
+					\end{equation}
+					\begin{equation}
+						\begin{blockarray}{ccccccccc}
+							\begin{block}{c(mmmmmmm)c}
+								x = & 0 & 1 & 1 & 0 & 0 & 0 & 1 &\\
+							\end{block}
+						\end{blockarray}
+					\end{equation}
 				\paragraph*{}
 					Il est à noter que, bien que le \gls{USCP} soit un cas particulier du \gls{SCP}, du fait de l'information réduite de par l'absence de poids pour les sous-ensembles, il est généralement considéré que le \gls{USCP} est plus difficile à résoudre que le \gls{SCP}~\cite{Yelbay2015}.
 		\section{Objectifs du stage}
@@ -266,7 +264,7 @@
 					Après cela viendra la phase de réglage ou il faudra alterner entre benchmarks, optimisation logicielle et variation des paramètres et composants de l'algorithme afin optimiser son efficacité. Une fois les réglages terminés, une étude comparative de la performance de l'algorithme sera réalisée.
 			\subsection{Objectifs supplémentaires}
 				\paragraph*{}
-					Après que la première version notre algorithme ai été conçue et implémentée (voir section \ref{sec:memetic_algorithm} pour le détail des différentes versions de l'algorithme), elle a commencé à obtenir de bon résultats, il a donc été décidé de soumettre à la conférence \acrshort{ROADEF2020} qui est le ``\acrlong{ROADEF2020}''~\cite{ROADEF2020}.
+					Après que la première version de notre algorithme ait été conçue et implémentée (voir section \ref{sec:memetic_algorithm} pour le détail des différentes versions de l'algorithme) et que des bon résultats ont été obtenus, il a été décidé de soumettre à la conférence \acrshort{ROADEF2020} qui est le ``\acrlong{ROADEF2020}''~\cite{ROADEF2020}.
 				\paragraph*{}
 					La deuxième version de l'algorithme a été développée et a servi pour la soumission à \acrshort{ROADEF2020}, les résultats de cette nouvelle version étant encore meilleurs et apportant une contribution assez significative, il a été décidé de soumettre à la conférence \acrshort{LION14} qui est la ``\acrlong{LION14}''~\cite{LION14}.
 				\paragraph*{}
@@ -328,15 +326,15 @@
 				\paragraph*{}
 					Le déroulement général du stage est visible sur la figure \ref{fig:planning} qui représente les grandes périodes du stage, les évènements importants qui ont influencé le stage et la répartition de mon temps entre les activités principales:
 					\begin{itemize}
-						\item La lecture d'articles scientifique et de documentation: la review de la littérature initiale, la documentation des librairies utilisées pour le développement des programmes, la documentation pour l'utilisation du cluster \gls{HPC},\ldots
+						\item La lecture d'articles scientifique et de documentation: la revue de la littérature initiale, la documentation des librairies utilisées pour le développement des programmes, la documentation pour l'utilisation du cluster \gls{HPC},\ldots
 						\item La programmation du \solver{}: les éléments de base lié au \gls{USCP}, le parsage et la réduction des instances, l'algorithme \gls{RWLS}, l'algorithme Mémétique\ldots
 						\item La programmation du \printer{}: la lecture des données générées par le \solver{}, la traitement des données, la réalisation de statistiques, la génération de tables et de documents,\ldots
 						\item La rédaction: documentation pour les programmes et les instances et les benchmark, les différentes soumissions aux conférences,\ldots
 					\end{itemize}
 				\paragraph*{}
-					Le stage a commencé par une review de la littérature (détaillée dans la section \ref{sec:review_litterature}) en partant d'articles déjà repérés par Matthieu et de l'article \citetitle{Kritter2019} de \citeauthor{Kritter2019} publié en \citeyear{Kritter2019}, le \gls{OCP} dont traite l'article se réduisant au \gls{USCP}, l'article passe en revue toutes les méthodes efficaces pour résoudre le \gls{SCP} et le \gls{USCP}.
+					Le stage a commencé par une revue de la littérature (détaillée dans la section \ref{sec:review_litterature}) en partant d'articles déjà repérés par Matthieu et de l'article \citetitle{Kritter2019} de \citeauthor{Kritter2019} publié en \citeyear{Kritter2019}, le \gls{OCP} dont traite l'article se réduisant au \gls{USCP}, l'article passe en revue toutes les méthodes efficaces pour résoudre le \gls{SCP} et le \gls{USCP}.
 				\paragraph*{}
-					Cette review de la littérature mena, au cours de la 2\textsuperscript{ème} semaine de stage, au choix de \gls{RWLS} comme recherche locale pour notre algorithme mémétique. Après la première implémentation de \gls{RWLS} (voir section \ref{sec:impl_RWLS}) et ma demande d'accès au cluster \gls{HPC}, au cours de la 6\textsuperscript{ème} semaine de stage, j'ai décidé de séparer le code en 3 cibles (1 librairie et 2 programmes):
+					Cette revue de la littérature mena, au cours de la 2\textsuperscript{ème} semaine de stage, au choix de \gls{RWLS} comme recherche locale pour notre algorithme mémétique. Après la première implémentation de \gls{RWLS} (voir section \ref{sec:impl_RWLS}) et ma demande d'accès au cluster \gls{HPC}, au cours de la 6\textsuperscript{ème} semaine de stage, j'ai décidé de séparer le code en 3 cibles (1 librairie et 2 programmes):
 					\begin{itemize}
 						\item \common{}: Librairie qui contient les structures de données nécessaire à la manipulation, la lecture et l'écriture des instances du \gls{USCP}, contient aussi les informations relatives aux instances de banchmark classique du \gls{USCP} ainsi que des fonctions et classes utilitaires (formatage, logging,\ldots)
 						\item \solver{}: Programme en ligne de commande pour la résolution du \gls{USCP}, il implémente différentes méthodes de résolution (greedy, \gls{RWLS}, algorithme Mémétique). Il prend en entrée les instances à résoudre, les méthodes à utiliser et les paramètres de ces méthodes. Il génère des rapports d'exécution contenant les informations relative aux résolutions réalisées (solution trouvée, durée et étapes de résolution effectué au moment où la solution a été trouvée,\ldots)
@@ -363,12 +361,12 @@
 				\paragraph*{}
 					La 23\textsuperscript{ème}, et dernière, semaine du stage est dédié à la rédaction des différents rapports demandés par l'\gls{UTBM} et l'\gls{UQAC} ainsi que la réalisation de benchmarks finaux de la dernière version du \solver{}.
 	\chapter{Travail réalisé}\label{sec:work}
-		\section{Review de la littérature}\label{sec:review_litterature}
+		\section{Revue de la littérature}\label{sec:review_litterature}
 			\subsection{État de l'art}
 				\paragraph*{}
 					La première étape du stage a été de réaliser un état de l'art, pour cela j'ai analysé la littérature en lien avec le \gls{USCP} en partant de l'article \citetitle{Kritter2019}, écrit par des membres du laboratoire et un ensembles d'articles déjà repérés par Matthieu. Parmi ces articles, certains présentent des recherches locales, afin d'en sélectionner une pour l'hybridation de notre algorithme Mémétique, certains présentent des algorithmes génétiques, afin de repérer les différents opérateurs de croisement efficaces pour le \gls{USCP} et le dernier présente des procédures de réduction.
 				\paragraph*{\citetitle{Kritter2019} de \citeauthor{Kritter2019} (\citeyear{Kritter2019})~\cite{Kritter2019}\\}
-					Cet article est une review de la littérature très complète sur le \gls{OCP} ainsi que sur le \gls{SCP} et le \gls{USCP}. Il reprend la majorité des approches utilisées sur le \gls{SCP}, regroupe tous les résultats obtenus par les auteurs de ces différents algorithmes et identifie les plus efficaces. Il indique ainsi que l'approche la plus efficace pour le \gls{USCP} est à ce jour l'algorithme \gls{RWLS} proposé par \citeauthor{Gao2015} en \citeyear{Gao2015}~\cite{Gao2015}, ce dernier atteignant ou améliorant les \gls{BKS} de toutes les instances de benchmark classiques hors \instance{RAIL} à l'exception des instances \instance{C.1-4} pour lesquelles l'algorithme de \citeauthor{Akhter2015}~\cite{Akhter2015} trouve des résultats étonnamment meilleurs jamais atteint par personne d'autre. Les instances \instance{C.1-4} étant très simples à résoudre je pense personnellement a une erreur de la part de \citeauthor{Akhter2015} mais je ne peux pas en être sûr.\\
+					Cet article est une revue de la littérature très complète sur le \gls{OCP} ainsi que sur le \gls{SCP} et le \gls{USCP}. Il reprend la majorité des approches utilisées sur le \gls{SCP}, regroupe tous les résultats obtenus par les auteurs de ces différents algorithmes et identifie les plus efficaces. Il indique ainsi que l'approche la plus efficace pour le \gls{USCP} est à ce jour l'algorithme \gls{RWLS} proposé par \citeauthor{Gao2015} en \citeyear{Gao2015}~\cite{Gao2015}, ce dernier atteignant ou améliorant les \gls{BKS} de toutes les instances de benchmark classiques hors \instance{RAIL} à l'exception des instances \instance{C.1-4} pour lesquelles l'algorithme de \citeauthor{Akhter2015}~\cite{Akhter2015} trouve des résultats étonnamment meilleurs jamais atteint par personne d'autre. Les instances \instance{C.1-4} étant très simples à résoudre je pense personnellement a une erreur de la part de \citeauthor{Akhter2015} mais je ne peux pas en être sûr.\\
 					L'article donne les références pour l'algorithme greedy pondéré classique~\cite{Chvatal1979}, pour la réduction des instances~\cite{Beasley1987}, pour de nombreux algorithmes génétiques (voir articles suivants). Il présente toutes les instances de benchmark classiques, leur caractéristiques et leurs \gls{BKS}.
 				\paragraph*{\citetitle{Gao2015} de \citeauthor{Gao2015} (\citeyear{Gao2015})~\cite{Gao2015}\\}
 					Cet article présente l'algorithme \acrfull{RWLS} qui est une heuristique pour le \gls{USCP} qui réunit 3 composants dans une recherche locale:
@@ -400,22 +398,34 @@
 				\paragraph*{}
 					Ainsi, les sous-ensembles qui font partie de la solution ont des scores négatifs, les sous-ensembles ne faisant pas partie de la solution ont des scores positifs et les sous-ensembles inutiles pour la solution ont des scores nuls. Ce qui signifie que le sous-ensemble inclut dans la solution avec le meilleur score est le moins utile a la solution et que le sous-ensemble non-inclut dans la solution avec le meilleur score serait le plus utile à ajouter à la solution.
 				\paragraph*{}
-					\gls{RWLS} commence par générer une solution greedy, puis fonctionne par étapes de manière itérative, les étapes peuvent se découper en sous-étapes comme suit:
-					\begin{enumerate}[label=(\arabic*)]
-						\item\customlabel{it:RWLS1}{(1)}\tikzremember{RWLS1}tant que la solution est valide:
-							\begin{enumerate}[label=(\alph*)]
-								\item\customlabel{it:RWLS1a}{(1.a)}\tikzremember{RWLS1a}enregistrer la solution comme la meilleure rencontrée jusqu'à présent
-								\item\customlabel{it:RWLS1b}{(1.b)}\tikzremember{RWLS1b}\textbf{retirer} le sous-ensemble avec le meilleur score de la solution
-							\end{enumerate}
-						\item\customlabel{it:RWLS2}{(2)}\tikzremember{RWLS2}\textbf{retirer} le sous-ensemble avec le meilleur score de la solution
-						\item\customlabel{it:RWLS3}{(3)}\tikzremember{RWLS3}sélectionner aléatoirement un élément non-couvert
-						\item\customlabel{it:RWLS4}{(4)}\tikzremember{RWLS4}\textbf{ajouter} le sous-ensemble avec le meilleur score couvrant cet élément (les stratégies tabou empêchant de boucler)
-						\item\customlabel{it:RWLS5}{(5)}\tikzremember{RWLS5}rendre le sous ensemble ajouté tabou et incrémenter le nombre d'étapes
-					\end{enumerate}
-					\begin{tikzpicture}[remember picture,overlay,x=1pt,y=1pt]
-						\draw[->,>=Latex,dashed] ($(RWLS5)+(-25,0)$) -- ++(-12.5,0) |- ($(RWLS1)+(-25,0)$);
-						\draw[->,>=Latex,dashed] ($(RWLS1b)+(-25,0)$) -| ($(RWLS1)+(-12.5,-7.5)$);
-					\end{tikzpicture}
+					\gls{RWLS} commence par générer une solution greedy, puis fonctionne par étapes de manière itérative, les étapes sont découpées en sous-étapes tel que représenté sur la figure \ref{fig:rwls_alg}.
+					\begin{figure}[H]
+						\begin{tikzpicture}[
+							remember picture,
+							x=1pt,
+							y=1pt,
+							/utils/exec={\sffamily},
+							font=\fontsize{10.5pt}{9.5pt}\selectfont,
+						]
+							\node[text width=\textwidth] at (0,0) {%
+								\begin{enumerate}[label=(\arabic*)]
+									\item\customlabel{it:RWLS1}{(1)}\tikzremember{RWLS1}tant que la solution est valide:
+										\begin{enumerate}[label=(\alph*)]
+											\item\customlabel{it:RWLS1a}{(1.a)}\tikzremember{RWLS1a}enregistrer la solution comme la meilleure rencontrée jusqu'à présent
+											\item\customlabel{it:RWLS1b}{(1.b)}\tikzremember{RWLS1b}\textbf{retirer} le sous-ensemble avec le meilleur score de la solution
+										\end{enumerate}
+									\item\customlabel{it:RWLS2}{(2)}\tikzremember{RWLS2}\textbf{retirer} le sous-ensemble avec le meilleur score de la solution
+									\item\customlabel{it:RWLS3}{(3)}\tikzremember{RWLS3}sélectionner aléatoirement un élément non-couvert
+									\item\customlabel{it:RWLS4}{(4)}\tikzremember{RWLS4}\textbf{ajouter} le sous-ensemble avec le meilleur score couvrant cet élément (les stratégies tabou empêchant de boucler)
+									\item\customlabel{it:RWLS5}{(5)}\tikzremember{RWLS5}rendre le sous ensemble ajouté tabou et incrémenter le nombre d'étapes
+								\end{enumerate}
+							};
+							\draw[->,>=Latex,dashed] ($(RWLS5)+(-25,0)$) -- ++(-12.5,0) |- ($(RWLS1)+(-25,0)$);
+							\draw[->,>=Latex,dashed] ($(RWLS1b)+(-25,0)$) -| ($(RWLS1)+(-12.5,-7.5)$);
+						\end{tikzpicture}%
+						\caption{Algorithme de \acrshort{RWLS}}%
+						\label{fig:rwls_alg}%
+					\end{figure}
 				\paragraph*{}
 					\gls{RWLS} réalise cette boucle jusqu'à ce que la limite d'étapes soit atteinte, le nombre d'étapes est le seul critère d'arrêt mais il peut être remplacé par une limite de temps. \gls{RWLS} travaille avec une solution non valide qui compte 1 sous-ensemble de moins que la meilleure rencontrée, pour cela la sous-étape \ref{it:RWLS1} commence par retirer des sous-ensembles jusqu'à atteindre une solution non valide. Si la meilleure solution trouvée est composé de \(k\) sous-ensembles, alors \gls{RWLS} descendra à \(k - 1\) sous-ensembles avec la sous-étape \ref{it:RWLS1}, puis commencera à changer des sous-ensembles avec les sous-étapes \ref{it:RWLS2} et \ref{it:RWLS4} jusqu'à obtenir une solution valide a \(k - 1\) sous-ensembles qui deviendra la nouvelle meilleure solution en rebouclant sur la sous-étape \ref{it:RWLS1}. L'algorithme repose donc sur une alternance de 2 opérations, \textbf{retirer} aux sous-étapes \ref{it:RWLS1b} et \ref{it:RWLS2} et \textbf{ajouter} à la sous-étape \ref{it:RWLS4}.
 				\paragraph*{}
@@ -743,7 +753,7 @@
 				Comme souvent avec les expériences professionnelles, ce stage montre l'importance et l'efficacité du travail d'équipe, si j'avais été seul le projet ne serais sans doute jamais arrivé à ces résultats. La combinaison des expériences est très efficace, j'ai apporté mes compétences en \Cpp{} et en développement logiciel et les membres du laboratoire ont apportés leurs compétences en recherche et développement d'algorithmes.
 	\chapter*{Conclusion}\addcontentsline{toc}{chapter}{Conclusion}
 		\paragraph*{}
-			L'objectif initial du stage était de développer un algorithme mémétique à deux individus pour le \gls{USCP}, une review de la littérature a menée au choix de \gls{RWLS} comme recherche locale, \gls{RWLS} a été implémenté, l'algorithme mémétique a été développé en utilisant \gls{RWLS} et amélioré à plusieurs reprises jusqu'à atteindre sa version finale: \gls{MASC}. Il donne de très bon résultats sur les instances de benchmark classique et permet même d'améliorer plusieurs \gls{BKS}. Je pense donc pouvoir considérer l'objectif du stage comme atteint.
+			L'objectif initial du stage était de développer un algorithme mémétique à deux individus pour le \gls{USCP}, une revue de la littérature a menée au choix de \gls{RWLS} comme recherche locale, \gls{RWLS} a été implémenté, l'algorithme mémétique a été développé en utilisant \gls{RWLS} et amélioré à plusieurs reprises jusqu'à atteindre sa version finale: \gls{MASC}. Il donne de très bon résultats sur les instances de benchmark classique et permet même d'améliorer plusieurs \gls{BKS}. Je pense donc pouvoir considérer l'objectif du stage comme atteint.
 		\paragraph*{}
 			Parmi les réalisations finales du stage on compte le développement d'un solveur pour le \gls{USCP} ainsi que d'un programme de traitement des résultats de ce solveur, mais aussi la réalisation de 2 soumissions à des conférences. La première à la conférence nationale \acrshort{ROADEF2020} a été acceptée et la deuxième à la conférence internationale \acrshort{LION14} est en cours d'évaluation.
 		\paragraph*{}

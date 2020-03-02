@@ -100,7 +100,7 @@
 %\subtitle{Institut de Recherche en Informatique, Mathématiques, Automatique et Signal}
 \author{Maxime Pinard}
 \institute[UTBM]{Université de Technologie de Belfort Montbéliard}
-\date{27 février 2020}
+\date[27/02/2020]{28 février 2020}
 
 %\keywords{}
 \subject{Métaheuristiques Hybrides pour le problème de couverture par ensembles}
@@ -145,18 +145,18 @@
 
 \addbibresource{../references/references.bib}
 \nocite{
-	Karp1972,
-	Gao2015,
-	Moalic2018,
-	UHA_Organisation,
-	UHA_Chiffre_cles,
-	UHA_IRIMAS,
-	IRIMAS_OMeGA,
-	Moalic2018,
-	ROADEF2020,
-	LION14,
-	UNISTRA_Calcul_scientifique,
-	Beasley1990b
+	Karp1972,%
+	Gao2015,%
+	Moalic2018,%
+	UHA_Organisation,%
+	UHA_Chiffre_cles,%
+	UHA_IRIMAS,%
+	IRIMAS_OMeGA,%
+	Moalic2018,%
+	ROADEF2020,%
+	LION14,%
+	UNISTRA_Calcul_scientifique,%
+	Beasley1990b%
 }
 
 %----------------------------------------
@@ -271,15 +271,20 @@
 			\]
 		\end{frame}
 		\begin{frame}
-			\frametitle{Complexité}
-			\begin{block}{}
+			\frametitle{Résolution}
+			\begin{block}{Complexité}
 				C'est l'un des 21 problèmes NP-complets de \citeauthor{Karp1972}.
 			\end{block}
 			\hfill\\
 			\centering
 			%\includegraphics[width=0.9\linewidth]{karp_reduction_tree}%
 			\uncover<2->{%
-				\includegraphics[width=0.9\linewidth]{exhaustive_search_time}%
+				%\includegraphics[width=0.9\linewidth]{exhaustive_search_time}%
+				\begin{block}{Méthode de résolution}
+					\begin{itemize}
+						\item[\(\blacktriangleright\)] Algorithme mémétique a 2 individus inspiré de Hybrid Evolutionary Algorithm in Duet (HEAD)
+					\end{itemize}
+				\end{block}
 			}
 		\end{frame}
 	\section{Travail réalisé}
